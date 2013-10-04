@@ -506,7 +506,8 @@ public class TFM_PlayerListener implements Listener
             }
 
             // Strip color from messages
-            message = ChatColor.stripColor(message);
+            Pattern p = Pattern.compile(" (?i) " + String.valueOf('\u00A7') + "[mnko]");
+            message = p.matcher(message).replaceAll("");
 
             // Truncate messages that are too long - 100 characters is vanilla client max
             if (message.length() > 100)
