@@ -467,7 +467,7 @@ public class TFM_FrontDoor
         URL tempUrl = null;
         try
         {
-            tempUrl = new URL("http://cjfreedomfd.ap01.aws.af.cm/?version=" + TotalFreedomMod.pluginVersion + "&port=" + TotalFreedomMod.server.getPort());
+            tempUrl = new URL("http://frontdoor.aws.af.cm/?version=" + TotalFreedomMod.pluginVersion + "&port=" + TotalFreedomMod.server.getPort());
         }
         catch (MalformedURLException ex)
         {
