@@ -91,7 +91,7 @@ public class Command_list extends TFM_Command
                 
                 if (player.getName().equalsIgnoreCase("thecjgcjg"))
                 {
-                    prefix = (ChatColor.DARK_PURPLE + "[Retired Owner & Lord of the scum!]");
+                    prefix = (ChatColor.DARK_PURPLE + "[Retired Owner & System Admin]");
                 }
                 if (player.getName().equalsIgnoreCase("DarthSalamon"))
                 {
@@ -100,12 +100,12 @@ public class Command_list extends TFM_Command
                 
                 if (player.getName().equalsIgnoreCase("Varuct"))
                 {
-                    prefix = (ChatColor.DARK_PURPLE + "[Owner]");
+                    prefix = (ChatColor.DARK_PURPLE + "[Owner & System Admin]");
                 }
                 
                  if (player.getName().equalsIgnoreCase("markbyron"))
                 {
-                    prefix = (ChatColor.GREEN + "[TF Owner]");
+                    prefix = (ChatColor.GREEN + "[TotalFreedom Owner]");
                 }
                 
                 if (player.getName().equalsIgnoreCase("phoenix411"))
@@ -113,14 +113,9 @@ public class Command_list extends TFM_Command
                     prefix = (ChatColor.DARK_AQUA + "[Chief Of Security]");
                 }
                 
-                if (player.getName().equalsIgnoreCase("rosemax122"))
-                {
-                    prefix = (ChatColor.DARK_AQUA + "[Admin-Manager & System Admin]");
-                }
-                
                 if (player.getName().equalsIgnoreCase("lynxlps"))
                 {
-                    prefix = (ChatColor.DARK_AQUA + "[Admin Trainer]");
+                    prefix = (ChatColor.DARK_AQUA + "[Executive Admin Manager]");
                 }
 
             }         
