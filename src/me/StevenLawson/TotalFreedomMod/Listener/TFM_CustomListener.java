@@ -1,4 +1,3 @@
-/*
 package me.StevenLawson.TotalFreedomMod.Listener;
 
 import me.StevenLawson.TotalFreedomMod.TFM_Superadmin;
@@ -24,4 +23,3 @@ public class TFM_CustomListener implements Listener
         }
     }
 }
-*/
