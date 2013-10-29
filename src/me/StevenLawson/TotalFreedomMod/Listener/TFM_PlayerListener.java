@@ -293,7 +293,7 @@ public class TFM_PlayerListener implements Listener
         {
             return;
         }
-        
+
         if (!TFM_DonatorWorld.getInstance().validateMovement(event))
         {
             return;
