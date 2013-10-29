@@ -30,7 +30,7 @@ public class TFM_ServerListener implements Listener
     // Comment this method out if you want to compile this without a custom CraftBukkit.
     // Just make sure that enable-command-block=false in server.properties.
     // -Madgeek
-    @EventHandler(priority = EventPriority.NORMAL)
+   /* @EventHandler(priority = EventPriority.NORMAL)
     public void onCommandBlockSet(org.bukkit.event.server.CommandBlockSetEvent event)
     {
         Player player = event.getPlayer();
@@ -59,7 +59,7 @@ public class TFM_ServerListener implements Listener
                 }
             }
         }
-    }
+    } */
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void onRemoteServerCommand(RemoteServerCommandEvent event)
@@ -79,7 +79,7 @@ public class TFM_ServerListener implements Listener
         }
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+   /* @EventHandler(priority = EventPriority.HIGHEST)
     public void onServerPing(ServerListPingEvent event)
     {
         event.setMotd(TFM_Util.randomChatColor() + "CJ" + TFM_Util.randomChatColor() + "Freedom " + ChatColor.DARK_GRAY + "-" + TFM_Util.randomChatColor() + " CraftBukkit v" + TFM_ServerInterface.getVersion());
@@ -100,7 +100,7 @@ public class TFM_ServerListener implements Listener
         {
             event.setMotd(ChatColor.RED + "Server is full.");
         }
-    }
+    }*/
 
     private static class TFM_ServerListener_DummyCommandSender implements CommandSender
     {
