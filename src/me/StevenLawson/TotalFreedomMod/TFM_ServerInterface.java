@@ -239,6 +239,8 @@ public class TFM_ServerInterface
                 return;
             }
 
+
+
             for (String testPlayer : TotalFreedomMod.permbanned_players)
             {
                 if (testPlayer.equalsIgnoreCase(username))
