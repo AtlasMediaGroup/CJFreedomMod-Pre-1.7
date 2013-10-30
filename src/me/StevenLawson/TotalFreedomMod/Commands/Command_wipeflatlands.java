@@ -13,7 +13,7 @@ public class Command_wipeflatlands extends TFM_Command
     @Override
     public boolean run(final CommandSender sender, Player sender_p, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
     {
-        TFM_Util.setSavedFlag("do_wipe_flatlands", true);
+       /* TFM_Util.setSavedFlag("do_wipe_flatlands", true);
 
         TFM_Util.bcastMsg("Server is going offline for flatlands wipe.", ChatColor.GRAY);
 
@@ -24,6 +24,10 @@ public class Command_wipeflatlands extends TFM_Command
 
         server.shutdown();
 
+        return true; */
+        
+        TFM_Util.playerMsg(sender, "Please log into the panel to execute a flatlands wipe.");
+        
         return true;
     }
 }
