@@ -19,7 +19,7 @@ public class Module_list extends TFM_HTTPD_Module
 
         final Player[] onlinePlayers = Bukkit.getOnlinePlayers();
 
-        body.append("<p>There are ").append(onlinePlayers.length).append("/").append(Bukkit.getMaxPlayers()).append(" players online:</p>\r\n");
+        body.append("<p>There are currently ").append(onlinePlayers.length).append("/").append(Bukkit.getMaxPlayers()).append(" players online:</p>\r\n");
 
         body.append("<ul>\r\n");
 
@@ -28,6 +28,7 @@ public class Module_list extends TFM_HTTPD_Module
             String prefix = "";
             if (TFM_SuperadminList.isUserSuperadmin(player))
             {
+                              
                 if (TFM_SuperadminList.isSeniorAdmin(player))
                 {
                     prefix = "[SrA]";
@@ -35,16 +36,45 @@ public class Module_list extends TFM_HTTPD_Module
                 else
                 {
                     prefix = "[SA]";
-                }
-
+                }                
+                
                 if (TFM_Util.DEVELOPERS.contains(player.getName()))
                 {
                     prefix = "[Dev]";
                 }
-
-                if (player.getName().equals("markbyron"))
+                
+                if (player.getName().equalsIgnoreCase("wild1145"))
                 {
-                    prefix = "[Owner]";
+                    prefix =  "[Chief Developer & System Admin]";
+                }
+                
+                if (player.getName().equalsIgnoreCase("thecjgcjg"))
+                {
+                    prefix = "[Retired Owner & System Admin]";
+                }
+                if (player.getName().equalsIgnoreCase("DarthSalamon"))
+                {
+                    prefix = "[System Admin & TFM Guru]";
+                }
+                
+                if (player.getName().equalsIgnoreCase("Varuct"))
+                {
+                    prefix = "[Owner & System Admin]";
+                }
+                
+                 if (player.getName().equalsIgnoreCase("markbyron"))
+                {
+                    prefix = "[TotalFreedom Owner]";
+                }
+                
+                if (player.getName().equalsIgnoreCase("phoenix411"))
+                {
+                    prefix = "[Chief Of Security]";
+                }
+                
+                if (player.getName().equalsIgnoreCase("lynxlps"))
+                {
+                    prefix = "[Executive Admin Manager]";
                 }
             }
             else
