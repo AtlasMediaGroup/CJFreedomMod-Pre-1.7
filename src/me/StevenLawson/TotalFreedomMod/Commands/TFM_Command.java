@@ -4,7 +4,7 @@ import java.util.List;
 import me.StevenLawson.TotalFreedomMod.TFM_Log;
 import me.StevenLawson.TotalFreedomMod.TFM_PlayerData;
 import me.StevenLawson.TotalFreedomMod.TFM_SuperadminList;
-import me.StevenLawson.TotalFreedomMod.TFM_DonatorList;
+import me.StevenLawson.TotalFreedomMod.CJFM_DonatorList;
 import me.StevenLawson.TotalFreedomMod.TFM_Util;
 import me.StevenLawson.TotalFreedomMod.TotalFreedomMod;
 import org.bukkit.ChatColor;
@@ -70,11 +70,11 @@ public abstract class TFM_Command
                 is_senior = TFM_SuperadminList.isSeniorAdmin(this.commandSender);
             }
             
-            boolean is_donator = TFM_DonatorList.isUserDonator(this.commandSender);
+            boolean is_donator = CJFM_DonatorList.isUserDonator(this.commandSender);
             boolean is_srdonator = false;
             if (is_donator)
             {
-                is_srdonator = TFM_DonatorList.isSeniorDonator(this.commandSender);
+                is_srdonator = CJFM_DonatorList.isSeniorDonator(this.commandSender);
             }
 
             AdminLevel level = permissions.level();

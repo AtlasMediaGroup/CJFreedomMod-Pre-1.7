@@ -260,8 +260,8 @@ public class TotalFreedomMod extends JavaPlugin
     {
         try
         {
-            TFM_DonatorList.backupSavedList();
-            TFM_DonatorList.loadDonatorList();
+            CJFM_DonatorList.backupSavedList();
+            CJFM_DonatorList.loadDonatorList();
         }
         catch (Exception ex)
         {

@@ -3,7 +3,7 @@ package me.StevenLawson.TotalFreedomMod.Commands;
 import java.util.ArrayList;
 import java.util.List;
 import me.StevenLawson.TotalFreedomMod.TFM_SuperadminList;
-import me.StevenLawson.TotalFreedomMod.TFM_DonatorList;
+import me.StevenLawson.TotalFreedomMod.CJFM_DonatorList;
 import me.StevenLawson.TotalFreedomMod.TFM_Util;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;
@@ -127,7 +127,7 @@ public class Command_list extends TFM_Command
                 }
             }
 
-            boolean userDonator = TFM_DonatorList.isUserDonator(player);
+            boolean userDonator = CJFM_DonatorList.isUserDonator(player);
 
             if (listFilter == ListFilter.SHOW_DONATORS && !userDonator)
             {
@@ -136,7 +136,7 @@ public class Command_list extends TFM_Command
 
             if (userDonator)
             {
-                if (TFM_DonatorList.isSeniorDonator(player))
+                if (CJFM_DonatorList.isSeniorDonator(player))
                 {
                     prefix = (ChatColor.LIGHT_PURPLE + "[Senior-Donator]");
                 }
@@ -147,7 +147,7 @@ public class Command_list extends TFM_Command
 
             }
 
-            boolean usersradminDonator = TFM_DonatorList.isUserDonator(player) && TFM_SuperadminList.isUserSuperadmin(player);
+            boolean usersradminDonator = CJFM_DonatorList.isUserDonator(player) && TFM_SuperadminList.isUserSuperadmin(player);
 
             if (listFilter == ListFilter.SHOW_DONATORS && !usersradminDonator)
             {
@@ -156,7 +156,7 @@ public class Command_list extends TFM_Command
 
             if (usersradminDonator)
             {
-                if (TFM_DonatorList.isSeniorDonator(player) && TFM_SuperadminList.isSeniorAdmin(player))
+                if (CJFM_DonatorList.isSeniorDonator(player) && TFM_SuperadminList.isSeniorAdmin(player))
                 {
                     prefix = (ChatColor.LIGHT_PURPLE + "[Sra + Senior Donator]");
                 }
@@ -167,7 +167,7 @@ public class Command_list extends TFM_Command
 
             }
 
-            boolean useradminDonator = TFM_DonatorList.isUserDonator(player) && TFM_SuperadminList.isUserSuperadmin(player);
+            boolean useradminDonator = CJFM_DonatorList.isUserDonator(player) && TFM_SuperadminList.isUserSuperadmin(player);
 
             if (listFilter == ListFilter.SHOW_DONATORS && !useradminDonator)
             {

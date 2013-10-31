@@ -1,7 +1,7 @@
 package me.StevenLawson.TotalFreedomMod.Commands;
 
 import me.StevenLawson.TotalFreedomMod.TFM_DonatorWorld;
-import me.StevenLawson.TotalFreedomMod.TFM_DonatorList;
+import me.StevenLawson.TotalFreedomMod.CJFM_DonatorList;
 import me.StevenLawson.TotalFreedomMod.TFM_Util;
 import me.StevenLawson.TotalFreedomMod.TotalFreedomMod;
 import org.bukkit.World;
@@ -217,7 +217,7 @@ public class Command_donatorworld extends TFM_Command
 
     private void assertCommandPerms(CommandSender sender, Player sender_p) throws PermissionDeniedException
     {
-        if (!(sender instanceof Player) || sender_p == null || !TFM_DonatorList.isUserDonator(sender))
+        if (!(sender instanceof Player) || sender_p == null || !CJFM_DonatorList.isUserDonator(sender))
         {
             throw new PermissionDeniedException(TotalFreedomMod.MSG_NO_PERMS);
         }

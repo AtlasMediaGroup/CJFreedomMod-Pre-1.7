@@ -1,7 +1,7 @@
 package me.StevenLawson.TotalFreedomMod.Commands;
 
 import me.StevenLawson.TotalFreedomMod.TFM_Donator;
-import me.StevenLawson.TotalFreedomMod.TFM_DonatorList;
+import me.StevenLawson.TotalFreedomMod.CJFM_DonatorList;
 import me.StevenLawson.TotalFreedomMod.TFM_Util;
 import me.StevenLawson.TotalFreedomMod.TotalFreedomMod;
 import org.apache.commons.lang.StringUtils;
@@ -22,7 +22,7 @@ public class Command_donator extends TFM_Command
         {
             if (args[0].equals("list"))
             {
-                playerMsg("Donators: " + StringUtils.join(TFM_DonatorList.getDonatorNames(), ", "), ChatColor.GOLD);
+                playerMsg("Donators: " + StringUtils.join(CJFM_DonatorList.getDonatorNames(), ", "), ChatColor.GOLD);
             }
             else
             {
@@ -43,19 +43,19 @@ public class Command_donator extends TFM_Command
         {
             if (args[0].equalsIgnoreCase("info"))
             {
-                if (!TFM_DonatorList.isUserDonator(sender))
+                if (!CJFM_DonatorList.isUserDonator(sender))
                 {
                     playerMsg(TotalFreedomMod.MSG_NO_PERMS);
                     return true;
                 }
 
-                TFM_Donator donator = TFM_DonatorList.getDonatorEntry(args[1].toLowerCase());
+                TFM_Donator donator = CJFM_DonatorList.getDonatorEntry(args[1].toLowerCase());
 
                 if (donator == null)
                 {
                     try
                     {
-                        donator = TFM_DonatorList.getDonatorEntry(getPlayer(args[1]).getName().toLowerCase());
+                        donator = CJFM_DonatorList.getDonatorEntry(getPlayer(args[1]).getName().toLowerCase());
                     }
                     catch (PlayerNotFoundException ex)
                     {
@@ -97,7 +97,7 @@ public class Command_donator extends TFM_Command
                 }
                 catch (PlayerNotFoundException ex)
                 {
-                    TFM_Donator donator = TFM_DonatorList.getDonatorEntry(args[1].toLowerCase());
+                    TFM_Donator donator = CJFM_DonatorList.getDonatorEntry(args[1].toLowerCase());
                     if (donator != null)
                     {
                         donator_name = donator.getName();
@@ -112,12 +112,12 @@ public class Command_donator extends TFM_Command
                 if (p != null)
                 {
                     TFM_Util.adminAction(sender.getName(), "Adding " + p.getName() + " to the donators list.", true);
-                    TFM_DonatorList.addDonator(p);
+                    CJFM_DonatorList.addDonator(p);
                 }
                 else if (donator_name != null)
                 {
                     TFM_Util.adminAction(sender.getName(), "Adding " + donator_name + " to the donators list.", true);
-                    TFM_DonatorList.addDonator(donator_name);
+                    CJFM_DonatorList.addDonator(donator_name);
                 }
             }
             else if (args[0].equalsIgnoreCase("delete") || args[0].equalsIgnoreCase("del") || args[0].equalsIgnoreCase("remove"))
@@ -138,14 +138,14 @@ public class Command_donator extends TFM_Command
                 {
                 }
 
-                if (!TFM_DonatorList.getDonatorNames().contains(target_name.toLowerCase()))
+                if (!CJFM_DonatorList.getDonatorNames().contains(target_name.toLowerCase()))
                 {
                     playerMsg("Donator not found: " + target_name);
                     return true;
                 }
 
                 TFM_Util.adminAction(sender.getName(), "Removing " + target_name + " from the donator list", true);
-                TFM_DonatorList.removeDonator(target_name);
+                CJFM_DonatorList.removeDonator(target_name);
             }
             else
             {

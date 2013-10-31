@@ -79,12 +79,12 @@ public final class TFM_DonatorWorld extends TFM_CustomWorld
 
     public boolean addGuest(Player guest, Player supervisor)
     {
-        if (guest == supervisor || TFM_DonatorList.isUserDonator(guest))
+        if (guest == supervisor || CJFM_DonatorList.isUserDonator(guest))
         {
             return false;
         }
 
-        if (TFM_DonatorList.isUserDonator(supervisor))
+        if (CJFM_DonatorList.isUserDonator(supervisor))
         {
             guestList.put(guest, supervisor);
             wipeAccessCache();
@@ -194,11 +194,11 @@ public final class TFM_DonatorWorld extends TFM_CustomWorld
         Boolean cached = accessCache.get(player);
         if (cached == null)
         {
-            boolean canAccess = TFM_DonatorList.isUserDonator(player);
+            boolean canAccess = CJFM_DonatorList.isUserDonator(player);
             if (!canAccess)
             {
                 Player supervisor = guestList.get(player);
-                canAccess = supervisor != null && supervisor.isOnline() && TFM_DonatorList.isUserDonator(supervisor);
+                canAccess = supervisor != null && supervisor.isOnline() && CJFM_DonatorList.isUserDonator(supervisor);
                 if (!canAccess)
                 {
                     guestList.remove(player);

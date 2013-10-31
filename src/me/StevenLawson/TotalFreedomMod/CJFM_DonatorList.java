@@ -17,7 +17,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.util.FileUtil;
 
-public class TFM_DonatorList
+public class CJFM_DonatorList
 {
     private static Map<String, TFM_Donator> donatorList = new HashMap<String, TFM_Donator>();
     private static List<String> donatorNames = new ArrayList<String>();
@@ -25,7 +25,7 @@ public class TFM_DonatorList
     private static List<String> seniorDonatorNames = new ArrayList<String>();
     private static int clean_threshold_hours = 24 * 7; // 1 Week
 
-    private TFM_DonatorList()
+    private CJFM_DonatorList()
     {
         throw new AssertionError();
     }
