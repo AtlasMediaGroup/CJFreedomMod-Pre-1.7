@@ -428,7 +428,7 @@ public class TFM_Util
             }
         }
         
-        TFM_Donator donator_entry = CJFM_DonatorList.getDonatorEntry(sender.getName());
+        CJFM_Donator donator_entry = CJFM_DonatorList.getDonatorEntry(sender.getName());
 
         if (donator_entry != null)
         {

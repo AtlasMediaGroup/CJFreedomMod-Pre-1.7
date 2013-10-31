@@ -1,6 +1,6 @@
 package me.StevenLawson.TotalFreedomMod.Commands;
 
-import me.StevenLawson.TotalFreedomMod.TFM_Donator;
+import me.StevenLawson.TotalFreedomMod.CJFM_Donator;
 import me.StevenLawson.TotalFreedomMod.CJFM_DonatorList;
 import me.StevenLawson.TotalFreedomMod.TFM_Util;
 import me.StevenLawson.TotalFreedomMod.TotalFreedomMod;
@@ -49,7 +49,7 @@ public class Command_donator extends TFM_Command
                     return true;
                 }
 
-                TFM_Donator donator = CJFM_DonatorList.getDonatorEntry(args[1].toLowerCase());
+                CJFM_Donator donator = CJFM_DonatorList.getDonatorEntry(args[1].toLowerCase());
 
                 if (donator == null)
                 {
@@ -97,7 +97,7 @@ public class Command_donator extends TFM_Command
                 }
                 catch (PlayerNotFoundException ex)
                 {
-                    TFM_Donator donator = CJFM_DonatorList.getDonatorEntry(args[1].toLowerCase());
+                    CJFM_Donator donator = CJFM_DonatorList.getDonatorEntry(args[1].toLowerCase());
                     if (donator != null)
                     {
                         donator_name = donator.getName();

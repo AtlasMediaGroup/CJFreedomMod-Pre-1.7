@@ -1,6 +1,6 @@
 package me.StevenLawson.TotalFreedomMod.Commands;
 
-import me.StevenLawson.TotalFreedomMod.TFM_DonatorWorld;
+import me.StevenLawson.TotalFreedomMod.CJFM_DonatorWorld;
 import me.StevenLawson.TotalFreedomMod.CJFM_DonatorList;
 import me.StevenLawson.TotalFreedomMod.TFM_Util;
 import me.StevenLawson.TotalFreedomMod.TotalFreedomMod;
@@ -62,7 +62,7 @@ public class Command_donatorworld extends TFM_Command
                     World donatorWorld = null;
                     try
                     {
-                        donatorWorld = TFM_DonatorWorld.getInstance().getWorld();
+                        donatorWorld = CJFM_DonatorWorld.getInstance().getWorld();
                     }
                     catch (Exception ex)
                     {
@@ -75,10 +75,10 @@ public class Command_donatorworld extends TFM_Command
                     }
                     else
                     {
-                        if (TFM_DonatorWorld.getInstance().canAccessWorld(sender_p))
+                        if (CJFM_DonatorWorld.getInstance().canAccessWorld(sender_p))
                         {
                             playerMsg("Going to the DonatorWorld.");
-                            TFM_DonatorWorld.getInstance().sendToWorld(sender_p);
+                            CJFM_DonatorWorld.getInstance().sendToWorld(sender_p);
                         }
                         else
                         {
@@ -94,12 +94,12 @@ public class Command_donatorworld extends TFM_Command
                     {
                         if ("list".equalsIgnoreCase(args[1]))
                         {
-                            playerMsg("DonatorWorld guest list: " + TFM_DonatorWorld.getInstance().guestListToString());
+                            playerMsg("DonatorWorld guest list: " + CJFM_DonatorWorld.getInstance().guestListToString());
                         }
                         else if ("purge".equalsIgnoreCase(args[1]))
                         {
                             assertCommandPerms(sender, sender_p);
-                            TFM_DonatorWorld.getInstance().purgeGuestList();
+                            CJFM_DonatorWorld.getInstance().purgeGuestList();
                             TFM_Util.adminAction(sender.getName(), "DonatorWorld guest list purged.", false);
                         }
                         else
@@ -124,7 +124,7 @@ public class Command_donatorworld extends TFM_Command
                                 return true;
                             }
 
-                            if (player != null && TFM_DonatorWorld.getInstance().addGuest(player, sender_p))
+                            if (player != null && CJFM_DonatorWorld.getInstance().addGuest(player, sender_p))
                             {
                                 TFM_Util.adminAction(sender.getName(), "DonatorWorld guest added: " + player.getName(), false);
                             }
@@ -135,7 +135,7 @@ public class Command_donatorworld extends TFM_Command
                         }
                         else if (TFM_Util.isRemoveCommand(args[1]))
                         {
-                            Player player = TFM_DonatorWorld.getInstance().removeGuest(args[2]);
+                            Player player = CJFM_DonatorWorld.getInstance().removeGuest(args[2]);
                             if (player != null)
                             {
                                 TFM_Util.adminAction(sender.getName(), "DonatorWorld guest removed: " + player.getName(), false);
@@ -159,10 +159,10 @@ public class Command_donatorworld extends TFM_Command
 
                     if (args.length == 2)
                     {
-                        TFM_DonatorWorld.TimeOfDay timeOfDay = TFM_DonatorWorld.TimeOfDay.getByAlias(args[1]);
+                        CJFM_DonatorWorld.TimeOfDay timeOfDay = CJFM_DonatorWorld.TimeOfDay.getByAlias(args[1]);
                         if (timeOfDay != null)
                         {
-                            TFM_DonatorWorld.getInstance().setTimeOfDay(timeOfDay);
+                            CJFM_DonatorWorld.getInstance().setTimeOfDay(timeOfDay);
                             playerMsg("DonatorWorld time set to: " + timeOfDay.name());
                         }
                         else
@@ -183,10 +183,10 @@ public class Command_donatorworld extends TFM_Command
 
                     if (args.length == 2)
                     {
-                        TFM_DonatorWorld.WeatherMode weatherMode = TFM_DonatorWorld.WeatherMode.getByAlias(args[1]);
+                        CJFM_DonatorWorld.WeatherMode weatherMode = CJFM_DonatorWorld.WeatherMode.getByAlias(args[1]);
                         if (weatherMode != null)
                         {
-                            TFM_DonatorWorld.getInstance().setWeatherMode(weatherMode);
+                            CJFM_DonatorWorld.getInstance().setWeatherMode(weatherMode);
                             playerMsg("DonatorWorld weather set to: " + weatherMode.name());
                         }
                         else

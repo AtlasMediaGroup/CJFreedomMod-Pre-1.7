@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.configuration.ConfigurationSection;
 
-public class TFM_Donator
+public class CJFM_Donator
 {
     private final String name;
     private final String custom_login_message;
@@ -15,7 +15,7 @@ public class TFM_Donator
     private Date last_login;
     private boolean is_activated;
 
-    public TFM_Donator(String name, List<String> ips, Date last_login, String custom_login_message, boolean is_senior_donator, List<String> console_aliases, boolean is_activated)
+    public CJFM_Donator(String name, List<String> ips, Date last_login, String custom_login_message, boolean is_senior_donator, List<String> console_aliases, boolean is_activated)
     {
         this.name = name.toLowerCase();
         this.ips = ips;
@@ -26,7 +26,7 @@ public class TFM_Donator
         this.is_activated = is_activated;
     }
 
-    public TFM_Donator(String name, ConfigurationSection section)
+    public CJFM_Donator(String name, ConfigurationSection section)
     {
         this.name = name.toLowerCase();
         this.ips = section.getStringList("ips");

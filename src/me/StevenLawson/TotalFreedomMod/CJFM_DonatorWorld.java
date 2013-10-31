@@ -15,7 +15,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public final class TFM_DonatorWorld extends TFM_CustomWorld
+public final class CJFM_DonatorWorld extends TFM_CustomWorld
 {
     private static final long CACHE_CLEAR_FREQUENCY = 30L * 1000L; //30 seconds, milliseconds
     private static final long TP_COOLDOWN_TIME = 500L; //0.5 seconds, milliseconds
@@ -30,7 +30,7 @@ public final class TFM_DonatorWorld extends TFM_CustomWorld
     private WeatherMode weatherMode = WeatherMode.OFF;
     private TimeOfDay timeOfDay = TimeOfDay.INHERIT;
 
-    private TFM_DonatorWorld()
+    private CJFM_DonatorWorld()
     {
     }
 
@@ -331,13 +331,13 @@ public final class TFM_DonatorWorld extends TFM_CustomWorld
         }
     }
 
-    public static TFM_DonatorWorld getInstance()
+    public static CJFM_DonatorWorld getInstance()
     {
         return TFM_DonatorWorldHolder.INSTANCE;
     }
 
     private static class TFM_DonatorWorldHolder
     {
-        private static final TFM_DonatorWorld INSTANCE = new TFM_DonatorWorld();
+        private static final CJFM_DonatorWorld INSTANCE = new CJFM_DonatorWorld();
     }
 }

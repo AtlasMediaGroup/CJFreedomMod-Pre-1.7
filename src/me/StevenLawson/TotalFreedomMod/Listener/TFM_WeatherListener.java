@@ -1,7 +1,7 @@
 package me.StevenLawson.TotalFreedomMod.Listener;
 
 import me.StevenLawson.TotalFreedomMod.TFM_AdminWorld;
-import me.StevenLawson.TotalFreedomMod.TFM_DonatorWorld;
+import me.StevenLawson.TotalFreedomMod.CJFM_DonatorWorld;
 import me.StevenLawson.TotalFreedomMod.TFM_ConfigEntry;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -21,7 +21,7 @@ public class TFM_WeatherListener implements Listener
                 return;
             }
             
-            if (event.getWorld() == TFM_DonatorWorld.getInstance().getWorld() && TFM_DonatorWorld.getInstance().getWeatherMode() != TFM_DonatorWorld.WeatherMode.OFF)
+            if (event.getWorld() == CJFM_DonatorWorld.getInstance().getWorld() && CJFM_DonatorWorld.getInstance().getWeatherMode() != CJFM_DonatorWorld.WeatherMode.OFF)
             {
                 return;
             }
@@ -47,7 +47,7 @@ public class TFM_WeatherListener implements Listener
                 return;
             }
             
-            if (event.getWorld() == TFM_DonatorWorld.getInstance().getWorld() && TFM_DonatorWorld.getInstance().getWeatherMode() != TFM_DonatorWorld.WeatherMode.OFF)
+            if (event.getWorld() == CJFM_DonatorWorld.getInstance().getWorld() && CJFM_DonatorWorld.getInstance().getWeatherMode() != CJFM_DonatorWorld.WeatherMode.OFF)
             {
                 return;
             }

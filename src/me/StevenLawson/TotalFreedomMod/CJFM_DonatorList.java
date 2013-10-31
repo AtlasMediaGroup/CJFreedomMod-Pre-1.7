@@ -19,7 +19,7 @@ import org.bukkit.util.FileUtil;
 
 public class CJFM_DonatorList
 {
-    private static Map<String, TFM_Donator> donatorList = new HashMap<String, TFM_Donator>();
+    private static Map<String, CJFM_Donator> donatorList = new HashMap<String, CJFM_Donator>();
     private static List<String> donatorNames = new ArrayList<String>();
     private static List<String> donatorIPs = new ArrayList<String>();
     private static List<String> seniorDonatorNames = new ArrayList<String>();
@@ -58,7 +58,7 @@ public class CJFM_DonatorList
 
                 for (String donator_name : section.getKeys(false))
                 {
-                    TFM_Donator donator = new TFM_Donator(donator_name, section.getConfigurationSection(donator_name));
+                    CJFM_Donator donator = new CJFM_Donator(donator_name, section.getConfigurationSection(donator_name));
                     donatorList.put(donator_name.toLowerCase(), donator);
                 }
             }
@@ -88,13 +88,13 @@ public class CJFM_DonatorList
         donatorIPs.clear();
         seniorDonatorNames.clear();
 
-        Iterator<Entry<String, TFM_Donator>> it = donatorList.entrySet().iterator();
+        Iterator<Entry<String, CJFM_Donator>> it = donatorList.entrySet().iterator();
         while (it.hasNext())
         {
-            Entry<String, TFM_Donator> pair = it.next();
+            Entry<String, CJFM_Donator> pair = it.next();
 
             String donator_name = pair.getKey().toLowerCase();
-            TFM_Donator donator = pair.getValue();
+            CJFM_Donator donator = pair.getValue();
 
             if (donator.isActivated())
             {
@@ -132,13 +132,13 @@ public class CJFM_DonatorList
 
             config.set("clean_threshold_hours", clean_threshold_hours);
 
-            Iterator<Entry<String, TFM_Donator>> it = donatorList.entrySet().iterator();
+            Iterator<Entry<String, CJFM_Donator>> it = donatorList.entrySet().iterator();
             while (it.hasNext())
             {
-                Entry<String, TFM_Donator> pair = it.next();
+                Entry<String, CJFM_Donator> pair = it.next();
 
                 String donator_name = pair.getKey().toLowerCase();
-                TFM_Donator donator = pair.getValue();
+                CJFM_Donator donator = pair.getValue();
 
                 config.set("donators." + donator_name + ".ips", TFM_Util.removeDuplicates(donator.getIps()));
                 config.set("donators." + donator_name + ".last_login", TFM_Util.dateToString(donator.getLastLogin()));
@@ -156,7 +156,7 @@ public class CJFM_DonatorList
         }
     }
 
-    public static TFM_Donator getDonatorEntry(String donator_name)
+    public static CJFM_Donator getDonatorEntry(String donator_name)
     {
         donator_name = donator_name.toLowerCase();
 
@@ -170,18 +170,18 @@ public class CJFM_DonatorList
         }
     }
 
-    public static TFM_Donator getDonatorEntry(Player p)
+    public static CJFM_Donator getDonatorEntry(Player p)
     {
         return getDonatorEntry(p.getName().toLowerCase());
     }
 
-    public static TFM_Donator getDonatorEntryByIP(String ip)
+    public static CJFM_Donator getDonatorEntryByIP(String ip)
     {
-        Iterator<Entry<String, TFM_Donator>> it = donatorList.entrySet().iterator();
+        Iterator<Entry<String, CJFM_Donator>> it = donatorList.entrySet().iterator();
         while (it.hasNext())
         {
-            Entry<String, TFM_Donator> pair = it.next();
-            TFM_Donator donator = pair.getValue();
+            Entry<String, CJFM_Donator> pair = it.next();
+            CJFM_Donator donator = pair.getValue();
             if (donator.getIps().contains(ip))
             {
                 return donator;
@@ -192,7 +192,7 @@ public class CJFM_DonatorList
 
     public static void updateLastLogin(Player p)
     {
-        TFM_Donator donator_entry = getDonatorEntry(p);
+        CJFM_Donator donator_entry = getDonatorEntry(p);
         if (donator_entry != null)
         {
             donator_entry.setLastLogin(new Date());
@@ -222,7 +222,7 @@ public class CJFM_DonatorList
             return seniorDonatorNames.contains(user_name);
         }
 
-        TFM_Donator donator_entry = getDonatorEntry((Player) user);
+        CJFM_Donator donator_entry = getDonatorEntry((Player) user);
         if (donator_entry != null)
         {
             return donator_entry.isSeniorDonator();
@@ -289,7 +289,7 @@ public class CJFM_DonatorList
 
                 if (match_ip != null)
                 {
-                    TFM_Donator donator_entry = getDonatorEntryByIP(match_ip);
+                    CJFM_Donator donator_entry = getDonatorEntryByIP(match_ip);
 
                     if (donator_entry != null)
                     {
@@ -339,7 +339,7 @@ public class CJFM_DonatorList
 
             if (donatorList.containsKey(donator_name))
             {
-                TFM_Donator donator = donatorList.get(donator_name);
+                CJFM_Donator donator = donatorList.get(donator_name);
                 donator.setActivated(true);
                 donator.getIps().addAll(ips);
                 donator.setLastLogin(new Date());
@@ -351,7 +351,7 @@ public class CJFM_DonatorList
                 boolean is_senior_donator = false;
                 List<String> console_aliases = new ArrayList<String>();
 
-                TFM_Donator donator = new TFM_Donator(donator_name, ips, last_login, custom_login_message, is_senior_donator, console_aliases, true);
+                CJFM_Donator donator = new CJFM_Donator(donator_name, ips, last_login, custom_login_message, is_senior_donator, console_aliases, true);
                 donatorList.put(donator_name.toLowerCase(), donator);
             }
 
@@ -384,7 +384,7 @@ public class CJFM_DonatorList
 
             if (donatorList.containsKey(donator_name))
             {
-                TFM_Donator donator = donatorList.get(donator_name);
+                CJFM_Donator donator = donatorList.get(donator_name);
                 donator.setActivated(false);
                 saveDonatorList();
             }
@@ -407,7 +407,7 @@ public class CJFM_DonatorList
             return true;
         }
 
-        TFM_Donator donator_entry = getDonatorEntry(donator_name);
+        CJFM_Donator donator_entry = getDonatorEntry(donator_name);
         if (donator_entry != null)
         {
             return donator_entry.getIps().contains(ip);
