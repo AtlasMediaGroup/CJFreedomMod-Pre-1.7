@@ -1,7 +1,9 @@
-package me.StevenLawson.TotalFreedomMod;
+package me.RyanWild.CJFreedomMod;
 
 import java.util.Date;
 import java.util.List;
+import me.StevenLawson.TotalFreedomMod.TFM_Log;
+import me.StevenLawson.TotalFreedomMod.TFM_Util;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.configuration.ConfigurationSection;
 

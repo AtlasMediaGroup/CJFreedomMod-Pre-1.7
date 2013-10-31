@@ -1,11 +1,18 @@
-package me.StevenLawson.TotalFreedomMod;
+package me.RyanWild.CJFreedomMod;
 
+import me.RyanWild.CJFreedomMod.CJFM_DonatorList;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import me.StevenLawson.TotalFreedomMod.CleanroomChunkGenerator;
+import me.StevenLawson.TotalFreedomMod.TFM_ConfigEntry;
+import me.StevenLawson.TotalFreedomMod.TFM_CustomWorld;
+import me.StevenLawson.TotalFreedomMod.TFM_GameRuleHandler;
+import me.StevenLawson.TotalFreedomMod.TFM_Log;
+import me.StevenLawson.TotalFreedomMod.TotalFreedomMod;
 import org.apache.commons.lang3.StringUtils;
 import org.bukkit.*;
 import org.bukkit.block.Block;

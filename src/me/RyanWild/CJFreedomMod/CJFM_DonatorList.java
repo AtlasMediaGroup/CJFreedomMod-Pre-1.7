@@ -1,5 +1,6 @@
-package me.StevenLawson.TotalFreedomMod;
+package me.RyanWild.CJFreedomMod;
 
+import me.RyanWild.CJFreedomMod.CJFM_Donator;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,6 +10,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import me.StevenLawson.TotalFreedomMod.TFM_Log;
+import me.StevenLawson.TotalFreedomMod.TFM_Util;
+import me.StevenLawson.TotalFreedomMod.TotalFreedomMod;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
