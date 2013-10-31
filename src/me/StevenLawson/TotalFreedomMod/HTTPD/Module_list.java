@@ -96,6 +96,6 @@ public class Module_list extends TFM_HTTPD_Module
     @Override
     public String getTitle()
     {
-        return "Total Freedom - Online Users";
+        return "CJFreedom - Current Online Users";
     }
 }

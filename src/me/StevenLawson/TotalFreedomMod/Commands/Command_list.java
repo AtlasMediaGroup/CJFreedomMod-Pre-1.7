@@ -41,7 +41,7 @@ public class Command_list extends TFM_Command
             {
                 listFilter = ListFilter.SHOW_ADMINS;
             }
-            
+
             if (args[0].equalsIgnoreCase("-d"))
             {
                 listFilter = ListFilter.SHOW_DONATORS;
@@ -51,7 +51,7 @@ public class Command_list extends TFM_Command
         StringBuilder onlineStats = new StringBuilder();
         StringBuilder onlineUsers = new StringBuilder();
 
-        onlineStats.append(ChatColor.BLUE).append("There are ").append(ChatColor.RED).append(server.getOnlinePlayers().length);
+        onlineStats.append(ChatColor.BLUE).append("There are currently ").append(ChatColor.RED).append(server.getOnlinePlayers().length);
         onlineStats.append(ChatColor.BLUE).append(" out of a maximum ").append(ChatColor.RED).append(server.getMaxPlayers());
         onlineStats.append(ChatColor.BLUE).append(" players online.");
 
@@ -66,8 +66,8 @@ public class Command_list extends TFM_Command
             }
 
             String prefix = "";
-            
-             
+
+
             if (userSuperadmin)
             {
                 if (TFM_SuperadminList.isSeniorAdmin(player))
@@ -77,18 +77,18 @@ public class Command_list extends TFM_Command
                 else
                 {
                     prefix = (ChatColor.AQUA + "[SA]");
-                }                
-                
+                }
+
                 if (TFM_Util.DEVELOPERS.contains(player.getName()))
                 {
                     prefix = (ChatColor.DARK_PURPLE + "[Dev]");
                 }
-                
+
                 if (player.getName().equalsIgnoreCase("wild1145"))
                 {
                     prefix = (ChatColor.DARK_GREEN + "[Chief Developer & System Admin]");
                 }
-                
+
                 if (player.getName().equalsIgnoreCase("thecjgcjg"))
                 {
                     prefix = (ChatColor.DARK_PURPLE + "[Retired Owner & System Admin]");
@@ -97,44 +97,43 @@ public class Command_list extends TFM_Command
                 {
                     prefix = (ChatColor.DARK_PURPLE + "[System Admin & TFM Guru]");
                 }
-                
+
                 if (player.getName().equalsIgnoreCase("Varuct"))
                 {
                     prefix = (ChatColor.DARK_PURPLE + "[Owner & System Admin]");
                 }
-                
-                 if (player.getName().equalsIgnoreCase("markbyron"))
+
+                if (player.getName().equalsIgnoreCase("markbyron"))
                 {
                     prefix = (ChatColor.GREEN + "[TotalFreedom Owner]");
                 }
-                
+
                 if (player.getName().equalsIgnoreCase("phoenix411"))
                 {
                     prefix = (ChatColor.DARK_AQUA + "[Chief Of Security]");
                 }
-                
+
                 if (player.getName().equalsIgnoreCase("lynxlps"))
                 {
                     prefix = (ChatColor.DARK_AQUA + "[Executive Admin Manager]");
                 }
 
-            }         
+            }
             else
-            
             {
                 if (player.isOp())
                 {
                     prefix = (ChatColor.RED + "[OP]");
                 }
-            }          
-            
-             boolean userDonator = TFM_DonatorList.isUserDonator(player);
+            }
+
+            boolean userDonator = TFM_DonatorList.isUserDonator(player);
 
             if (listFilter == ListFilter.SHOW_DONATORS && !userDonator)
             {
                 continue;
             }
-             
+
             if (userDonator)
             {
                 if (TFM_DonatorList.isSeniorDonator(player))
@@ -144,17 +143,17 @@ public class Command_list extends TFM_Command
                 else
                 {
                     prefix = (ChatColor.DARK_AQUA + "[Donator]");
-                }  
+                }
 
-            }    
-            
+            }
+
             boolean usersradminDonator = TFM_DonatorList.isUserDonator(player) && TFM_SuperadminList.isUserSuperadmin(player);
 
             if (listFilter == ListFilter.SHOW_DONATORS && !usersradminDonator)
             {
                 continue;
             }
-             
+
             if (usersradminDonator)
             {
                 if (TFM_DonatorList.isSeniorDonator(player) && TFM_SuperadminList.isSeniorAdmin(player))
@@ -164,17 +163,17 @@ public class Command_list extends TFM_Command
                 else
                 {
                     prefix = (ChatColor.DARK_AQUA + "[Sra + Donator]");
-                }  
+                }
 
-            } 
-            
+            }
+
             boolean useradminDonator = TFM_DonatorList.isUserDonator(player) && TFM_SuperadminList.isUserSuperadmin(player);
 
             if (listFilter == ListFilter.SHOW_DONATORS && !useradminDonator)
             {
                 continue;
             }
-             
+
             if (useradminDonator)
             {
                 if (TFM_SuperadminList.isSeniorAdmin(player))
@@ -184,10 +183,10 @@ public class Command_list extends TFM_Command
                 else
                 {
                     prefix = (ChatColor.DARK_AQUA + "[Sa + Donator]");
-                }  
+                }
 
-            } 
-                
+            }
+
 
             player_names.add(prefix + player.getName() + ChatColor.WHITE);
         }
