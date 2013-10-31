@@ -138,8 +138,6 @@ public class TFM_ServerInterface
 
     public static void handlePlayerLogin(PlayerLoginEvent event)
     {
-        // this should supersede all other onPlayerLogin authentication on the TFM server.
-        // when using the TFM CraftBukkit, CraftBukkit itself should not do any of its own authentication.
 
         final Server server = TotalFreedomMod.plugin.getServer();
 
@@ -154,7 +152,8 @@ public class TFM_ServerInterface
 
         if (username.trim().length() <= 2)
         {
-            event.disallow(PlayerLoginEvent.Result.KICK_OTHER, "Your username is too short (must be at least 3 characters long).");
+            event.disallow(PlayerLoginEvent.Result.KICK_OTHER,
+                    "Your username is too short (must be at least 3 characters long).");
             return;
         }
         else if (Pattern.compile("[^a-zA-Z0-9\\-\\.\\_]").matcher(username).find())
@@ -163,7 +162,8 @@ public class TFM_ServerInterface
             return;
         }
 
-        // not safe to use TFM_Util.isUserSuperadmin for player logging in because player.getAddress() will return a null until after player login.
+        // not safe to use TFM_Util.isUserSuperadmin for player logging in because p.getAddress()
+        // will return a null until after player login.
         boolean isSuperadmin;
         if (server.getOnlineMode())
         {
@@ -295,8 +295,21 @@ public class TFM_ServerInterface
                 }
             }
         }
-        else
+        else // if user is superadmin
         {
+            // force-allow superadmins to log in
+            event.allow();
+
+         /*   if (isIPBanned(Player_Ip))
+            {
+                unbanIP(userip);
+            }*/
+
+            if (isNameBanned(username))
+            {
+                unbanUsername(username);
+            }
+
             for (Player testPlayer : server.getOnlinePlayers())
             {
                 if (testPlayer.getName().equalsIgnoreCase(username))
@@ -305,18 +318,21 @@ public class TFM_ServerInterface
                 }
             }
 
-            boolean canKick = true; // if the server is full of superadmins, however unlikely that might be, this will prevent an infinite loop.
-            while (server.getOnlinePlayers().length >= server.getMaxPlayers() && canKick)
+            if (server.getOnlinePlayers().length >= server.getMaxPlayers())
             {
-                canKick = false;
-                for (Player testPlayer : server.getOnlinePlayers())
+                for (Player op : server.getOnlinePlayers())
                 {
-                    if (!TFM_SuperadminList.isUserSuperadmin(testPlayer))
+                    if (!TFM_SuperadminList.isUserSuperadmin(op))
                     {
-                        canKick = true;
-                        testPlayer.kickPlayer("You have been kicked to free up room for an admin.");
-                        break;
+                        op.kickPlayer("You have been kicked to free up space for an admin");
+                        return;
                     }
+                }
+
+                // if the server is full of superadmins, however unlikely that might be, this will prevent an infinite loop.
+                if (server.getOnlinePlayers().length >= server.getMaxPlayers())
+                {
+                    event.disallow(PlayerLoginEvent.Result.KICK_FULL, "Sorry, this server is full");
                 }
             }
 
