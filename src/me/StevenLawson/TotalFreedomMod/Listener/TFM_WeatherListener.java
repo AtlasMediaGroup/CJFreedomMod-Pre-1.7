@@ -1,7 +1,7 @@
 package me.StevenLawson.TotalFreedomMod.Listener;
 
 import me.StevenLawson.TotalFreedomMod.TFM_AdminWorld;
-import me.RyanWild.CJFreedomMod.CJFM_DonatorWorld;
+import me.RyanWild.CJFreedomMod.Donator.CJFM_DonatorWorld;
 import me.StevenLawson.TotalFreedomMod.TFM_ConfigEntry;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;

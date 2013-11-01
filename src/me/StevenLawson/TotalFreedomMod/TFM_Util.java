@@ -1,7 +1,7 @@
 package me.StevenLawson.TotalFreedomMod;
 
-import me.RyanWild.CJFreedomMod.CJFM_DonatorList;
-import me.RyanWild.CJFreedomMod.CJFM_Donator;
+import me.RyanWild.CJFreedomMod.Donator.CJFM_DonatorList;
+import me.RyanWild.CJFreedomMod.Donator.CJFM_Donator;
 import java.io.*;
 import java.lang.reflect.Field;
 import java.net.URL;

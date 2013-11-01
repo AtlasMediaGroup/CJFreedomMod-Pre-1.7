@@ -1,6 +1,6 @@
 package me.StevenLawson.TotalFreedomMod.Listener;
 
-import me.RyanWild.CJFreedomMod.CJFM_DonatorWorld;
+import me.RyanWild.CJFreedomMod.Donator.CJFM_DonatorWorld;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;

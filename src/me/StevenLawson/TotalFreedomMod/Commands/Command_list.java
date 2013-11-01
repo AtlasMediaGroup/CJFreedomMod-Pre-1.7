@@ -3,7 +3,7 @@ package me.StevenLawson.TotalFreedomMod.Commands;
 import java.util.ArrayList;
 import java.util.List;
 import me.StevenLawson.TotalFreedomMod.TFM_SuperadminList;
-import me.RyanWild.CJFreedomMod.CJFM_DonatorList;
+import me.RyanWild.CJFreedomMod.Donator.CJFM_DonatorList;
 import me.StevenLawson.TotalFreedomMod.TFM_Util;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;

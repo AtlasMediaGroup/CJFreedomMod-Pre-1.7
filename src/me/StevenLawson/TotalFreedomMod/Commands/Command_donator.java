@@ -1,7 +1,7 @@
 package me.StevenLawson.TotalFreedomMod.Commands;
 
-import me.RyanWild.CJFreedomMod.CJFM_Donator;
-import me.RyanWild.CJFreedomMod.CJFM_DonatorList;
+import me.RyanWild.CJFreedomMod.Donator.CJFM_Donator;
+import me.RyanWild.CJFreedomMod.Donator.CJFM_DonatorList;
 import me.StevenLawson.TotalFreedomMod.TFM_Util;
 import me.StevenLawson.TotalFreedomMod.TotalFreedomMod;
 import org.apache.commons.lang.StringUtils;
