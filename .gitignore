@@ -3,8 +3,8 @@
 /dist/
 /build/
 manifest.mf
-#/src/donator.yml
-#/src/me/RyanWild/*
+/src/donator.yml
+/src/me/RyanWild/*
 
 # OS generated files
 .DS_Store
