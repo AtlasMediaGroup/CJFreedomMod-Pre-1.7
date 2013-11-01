@@ -53,6 +53,8 @@ public enum TFM_ConfigEntry
     TWITTERBOT_SECRET(String.class, "twitterbot_secret"),
     TWITTERBOT_URL(String.class, "twitterbot_url"),
     HTTPD_PUBLIC_FOLDER(String.class, "httpd_public_folder"),
+    PANEL_URL(String.class, "panel_url"),
+    PANEL_API_KEY(String.class, "panel_api_key"),
     //
     BLOCKED_COMMANDS(List.class, "blocked_commands"),
     HOST_SENDER_NAMES(List.class, "host_sender_names"),
