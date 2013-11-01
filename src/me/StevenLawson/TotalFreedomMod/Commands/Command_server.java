@@ -11,7 +11,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import me.StevenLawson.TotalFreedomMod.TFM_ConfigEntry;
 import me.StevenLawson.TotalFreedomMod.TFM_Log;
-import me.StevenLawson.TotalFreedomMod.TFM_Util;
 import me.StevenLawson.TotalFreedomMod.TotalFreedomMod;
 import org.apache.commons.lang3.StringUtils;
 import org.bukkit.ChatColor;
@@ -45,8 +44,11 @@ public class Command_server extends TFM_Command
 
         }
 
+        updateLogsRegistration(sender, sender_p, mode);
+
         return true;
     }
+
     public static void updateLogsRegistration(final CommandSender sender, final Player target, final Command_server.PanelMode mode)
     {
         updateLogsRegistration(sender, target.getName(), target.getAddress().getAddress().getHostAddress().trim(), mode);
@@ -54,7 +56,7 @@ public class Command_server extends TFM_Command
 
     public static void updateLogsRegistration(final CommandSender sender, final String targetName, final String targetIP, final PanelMode mode)
     {
-        final String PanelURL = TFM_ConfigEntry.PANEL_URL.getString() + "?apikey=";
+        final String PanelURL = TFM_ConfigEntry.PANEL_URL.getString();
         final String PanelAPI = TFM_ConfigEntry.PANEL_API_KEY.getString();
 
         if (PanelURL == null || PanelAPI == null || PanelURL.isEmpty() || PanelAPI.isEmpty())
@@ -71,21 +73,19 @@ public class Command_server extends TFM_Command
                 {
                     if (sender != null)
                     {
-                        sender.sendMessage(ChatColor.YELLOW + "Connecting to the panel API - Standby...");
-                         TFM_Util.adminAction(sender.getName(), "is Connecting to the panel's API - Please Standby", true);
+                        sender.sendMessage(ChatColor.YELLOW + "Connecting you to the panel API - Standby...");
                     }
 
                     URL url = new URLBuilder(PanelURL)
-                            .addQueryParameter("api", PanelAPI)
-                            .addQueryParameter("&action" + "mode", mode.toString())
-                           // .addQueryParameter("name", targetName)
+                            .addQueryParameter("&apikey", PanelAPI)
+                            .addQueryParameter("?action", mode.toString())
+                            // .addQueryParameter("name", targetName)
                             .getURL();
 
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     connection.setConnectTimeout(1000 * 5);
                     connection.setReadTimeout(1000 * 5);
                     connection.setUseCaches(false);
-                    connection.setRequestMethod("HEAD");
 
                     final int responseCode = connection.getResponseCode();
 
@@ -98,11 +98,11 @@ public class Command_server extends TFM_Command
                             {
                                 if (responseCode == 200)
                                 {
-                                    sender.sendMessage(ChatColor.GREEN + "Registration " + mode.toString() + "d.");
+                                    sender.sendMessage(ChatColor.GREEN + "Connection to the Panel API Established. Request to" + mode.toString() + " has been recieved.");
                                 }
                                 else
                                 {
-                                    sender.sendMessage(ChatColor.RED + "Error contacting logs registration server.");
+                                    sender.sendMessage(ChatColor.RED + "There has been a error connecting you to the API. Please contact a CJFreedomMod Developer ASAP!");
                                 }
                             }
                         }.runTask(TotalFreedomMod.plugin);
