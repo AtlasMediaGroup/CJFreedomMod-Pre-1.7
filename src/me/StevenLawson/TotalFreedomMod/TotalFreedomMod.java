@@ -1,6 +1,6 @@
 package me.StevenLawson.TotalFreedomMod;
 
-import me.RyanWild.CJFreedomMod.Donator.CJFM_DonatorList;
+import me.RyanWild.CJFreedomMod.CJFM_DonatorList;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
