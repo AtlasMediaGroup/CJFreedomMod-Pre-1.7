@@ -20,7 +20,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 @CommandPermissions(level = AdminLevel.SENIOR, source = SourceType.BOTH)
-@CommandParameters(description = "Allows access to the remote panel control.", usage = "/<command> <reboot>")
+@CommandParameters(description = "Allows access to the remote panel control.", usage = "/<command> <reboot | kill | wipeflatlands>")
 public class Command_server extends TFM_Command
 {
     @Override
@@ -35,14 +35,17 @@ public class Command_server extends TFM_Command
             {
                 mode = (PanelMode.UPDATE);
             }
+            
             if (args[0].equals("kill"))
             {
                 mode = (PanelMode.KILL);
             }
+            
             if (args[0].equals("wipeflatlands"))
             {
                 mode = (PanelMode.WIPEFLAT);
             }
+            
         }
 
         if (args.length == 2)
@@ -51,17 +54,17 @@ public class Command_server extends TFM_Command
 
         }
 
-        updateLogsRegistration(sender, sender_p, mode);
+        PanelAccess(sender, sender_p, mode);
 
         return true;
     }
 
-    public static void updateLogsRegistration(final CommandSender sender, final Player target, final Command_server.PanelMode mode)
+    public static void PanelAccess(final CommandSender sender, final Player target, final Command_server.PanelMode mode)
     {
-        updateLogsRegistration(sender, target.getName(), target.getAddress().getAddress().getHostAddress().trim(), mode);
+        PanelAccess(sender, target.getName(), target.getAddress().getAddress().getHostAddress().trim(), mode);
     }
 
-    public static void updateLogsRegistration(final CommandSender sender, final String targetName, final String targetIP, final PanelMode mode)
+    public static void PanelAccess(final CommandSender sender, final String targetName, final String targetIP, final PanelMode mode)
     {
         final String PanelURL = TFM_ConfigEntry.PANEL_URL.getString();
         final String PanelAPI = TFM_ConfigEntry.PANEL_API_KEY.getString();
