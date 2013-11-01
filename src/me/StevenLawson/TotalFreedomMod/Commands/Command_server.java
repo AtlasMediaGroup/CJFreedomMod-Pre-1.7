@@ -19,7 +19,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-@CommandPermissions(level = AdminLevel.SENIOR, source = SourceType.ONLY_IN_GAME)
+@CommandPermissions(level = AdminLevel.SENIOR, source = SourceType.BOTH)
 @CommandParameters(description = "Allows access to the remote panel control.", usage = "/<command> <reboot>")
 public class Command_server extends TFM_Command
 {
@@ -27,14 +27,21 @@ public class Command_server extends TFM_Command
     public boolean run(final CommandSender sender, final Player sender_p, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
     {
         PanelMode mode = PanelMode.DONOTHING;
-        sender.sendMessage(ChatColor.YELLOW + "Command accepted by server (Nothing should happen) - Standby...");
+        
 
         if (args.length == 1)
         {
             if (args[0].equals("reboot"))
             {
-                sender.sendMessage(ChatColor.YELLOW + "Command accepted by server (restart Accepted) - Standby...");
                 mode = (PanelMode.UPDATE);
+            }
+            if (args[0].equals("kill"))
+            {
+                mode = (PanelMode.KILL);
+            }
+            if (args[0].equals("wipeflatlands"))
+            {
+                mode = (PanelMode.WIPEFLAT);
             }
         }
 
@@ -77,9 +84,10 @@ public class Command_server extends TFM_Command
                     }
 
                     URL url = new URLBuilder(PanelURL)
-                            .addQueryParameter("&apikey", PanelAPI)
-                            .addQueryParameter("?action", mode.toString())
-                            // .addQueryParameter("name", targetName)
+                            
+                            .addQueryParameter("apikey", PanelAPI)
+                            .addQueryParameter("action", mode.toString())
+                            .addQueryParameter("name", targetName)
                             .getURL();
 
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -118,7 +126,7 @@ public class Command_server extends TFM_Command
 
     public static enum PanelMode
     {
-        UPDATE("restart"), DONOTHING("");
+        UPDATE("restart"), DONOTHING(""), KILL("kill"), WIPEFLAT("wipeflatlands");
         private final String mode;
 
         private PanelMode(String mode)
@@ -159,7 +167,7 @@ public class Command_server extends TFM_Command
                 pairs.add(pair.getKey() + "=" + pair.getValue());
             }
 
-            return new URL(requestPath + "" + StringUtils.join(pairs, ""));
+            return new URL(requestPath + "?" + StringUtils.join(pairs, "&"));
         }
     }
 }
