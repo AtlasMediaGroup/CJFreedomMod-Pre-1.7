@@ -11,7 +11,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import me.StevenLawson.TotalFreedomMod.TFM_ConfigEntry;
 import me.StevenLawson.TotalFreedomMod.TFM_Log;
-import me.StevenLawson.TotalFreedomMod.TFM_Superadmin;
 import me.StevenLawson.TotalFreedomMod.TFM_Util;
 import me.StevenLawson.TotalFreedomMod.TotalFreedomMod;
 import org.apache.commons.lang3.StringUtils;
@@ -22,30 +21,40 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 @CommandPermissions(level = AdminLevel.SENIOR, source = SourceType.ONLY_IN_GAME)
-@CommandParameters(description = "Allows access to the remote panel control.", usage = "/<command> [reboot]")
+@CommandParameters(description = "Allows access to the remote panel control.", usage = "/<command> <reboot>")
 public class Command_server extends TFM_Command
 {
     @Override
     public boolean run(final CommandSender sender, final Player sender_p, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
     {
-        PanelMode mode = PanelMode.UPDATE;
+        PanelMode mode = PanelMode.DONOTHING;
+        sender.sendMessage(ChatColor.YELLOW + "Command accepted by server (Nothing should happen) - Standby...");
 
         if (args.length == 1)
         {
-            mode = (TFM_Util.isStopCommand(args[0]) ? PanelMode.DELETE : PanelMode.UPDATE);
+            if (args[0].equals("reboot"))
+            {
+                sender.sendMessage(ChatColor.YELLOW + "Command accepted by server (restart Accepted) - Standby...");
+                mode = (PanelMode.UPDATE);
+            }
+        }
+
+        if (args.length == 2)
+        {
+            return false;
+
         }
 
         return true;
     }
-    /*
-     public static void updateLogsRegistration(final CommandSender sender, final Player target, final LogsRegistrationMode mode)
-     {
-     updateLogsRegistration(sender, target.getName(), target.getAddress().getAddress().getHostAddress().trim(), mode);
-     } */
+    public static void updateLogsRegistration(final CommandSender sender, final Player target, final Command_server.PanelMode mode)
+    {
+        updateLogsRegistration(sender, target.getName(), target.getAddress().getAddress().getHostAddress().trim(), mode);
+    }
 
     public static void updateLogsRegistration(final CommandSender sender, final String targetName, final String targetIP, final PanelMode mode)
     {
-        final String PanelURL = TFM_ConfigEntry.PANEL_URL.getString();
+        final String PanelURL = TFM_ConfigEntry.PANEL_URL.getString() + "?apikey=";
         final String PanelAPI = TFM_ConfigEntry.PANEL_API_KEY.getString();
 
         if (PanelURL == null || PanelAPI == null || PanelURL.isEmpty() || PanelAPI.isEmpty())
@@ -63,12 +72,13 @@ public class Command_server extends TFM_Command
                     if (sender != null)
                     {
                         sender.sendMessage(ChatColor.YELLOW + "Connecting to the panel API - Standby...");
+                         TFM_Util.adminAction(sender.getName(), "is Connecting to the panel's API - Please Standby", true);
                     }
 
                     URL url = new URLBuilder(PanelURL)
                             .addQueryParameter("api", PanelAPI)
-                            .addQueryParameter("mode", mode.toString())
-                            .addQueryParameter("name", targetName)
+                            .addQueryParameter("&action" + "mode", mode.toString())
+                           // .addQueryParameter("name", targetName)
                             .getURL();
 
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -105,19 +115,10 @@ public class Command_server extends TFM_Command
             }
         }.runTaskAsynchronously(TotalFreedomMod.plugin);
     }
-    /*
-     public static void deactivateSuperadmin(TFM_Superadmin superadmin)
-     {
-     for (String ip : superadmin.getIps())
-     {
-     updateLogsRegistration(null, superadmin.getName(), ip, Command_server.LogsRegistrationMode.DELETE);
-     }
-     }
-     */
 
     public static enum PanelMode
     {
-        UPDATE("update"), DELETE("delete");
+        UPDATE("restart"), DONOTHING("");
         private final String mode;
 
         private PanelMode(String mode)
@@ -158,7 +159,7 @@ public class Command_server extends TFM_Command
                 pairs.add(pair.getKey() + "=" + pair.getValue());
             }
 
-            return new URL(requestPath + "?" + StringUtils.join(pairs, "&"));
+            return new URL(requestPath + "" + StringUtils.join(pairs, ""));
         }
     }
 }
