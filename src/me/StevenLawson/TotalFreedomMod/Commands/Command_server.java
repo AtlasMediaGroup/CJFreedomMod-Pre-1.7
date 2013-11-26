@@ -28,6 +28,11 @@ public class Command_server extends TFM_Command
     {
         PanelMode mode = PanelMode.DONOTHING;
         
+        if (args.length == 0)
+        {
+            return false;
+        }
+
 
         if (args.length == 1)
         {
@@ -35,17 +40,17 @@ public class Command_server extends TFM_Command
             {
                 mode = (PanelMode.UPDATE);
             }
-            
+
             if (args[0].equals("kill"))
             {
                 mode = (PanelMode.KILL);
             }
-            
+
             if (args[0].equals("wipeflatlands"))
             {
                 mode = (PanelMode.WIPEFLAT);
             }
-            
+
         }
 
         if (args.length == 2)
@@ -87,7 +92,6 @@ public class Command_server extends TFM_Command
                     }
 
                     URL url = new URLBuilder(PanelURL)
-                            
                             .addQueryParameter("apikey", PanelAPI)
                             .addQueryParameter("action", mode.toString())
                             .addQueryParameter("name", targetName)
@@ -109,11 +113,27 @@ public class Command_server extends TFM_Command
                             {
                                 if (responseCode == 200)
                                 {
-                                    sender.sendMessage(ChatColor.GREEN + "Connection to the Panel API Established. Request to" + mode.toString() + " has been recieved.");
+                                    sender.sendMessage(ChatColor.RED + "The Panel API Access status is UNKNOWN - Contact a CJFreedomMod developer ASAP!");
+                                }
+                                else if (responseCode == 123)
+                                {
+                                    sender.sendMessage(ChatColor.GREEN + "Connection to the Panel API Established. Request to " + mode.toString() + " has been recieved.");
+                                }
+                                else if (responseCode == 201)
+                                {
+                                    sender.sendMessage(ChatColor.GREEN + "A connection to the panel has been established! An action is now required.");
+                                }
+                                else if (responseCode == 121)
+                                {
+                                    sender.sendMessage(ChatColor.RED + "The API has been disabled on the Webserver. Please contact a CJFreedomMod Developer ASAP! ");
+                                }
+                                else if (responseCode == 122)
+                                {
+                                    sender.sendMessage(ChatColor.RED + "The Key located in the servers properties file does not mach the key located on the webserver - Please contact a CJFreedomMod developer ASAP!");
                                 }
                                 else
                                 {
-                                    sender.sendMessage(ChatColor.RED + "There has been a error connecting you to the API. Please contact a CJFreedomMod Developer ASAP!");
+                                    sender.sendMessage(ChatColor.RED + "There has been a General error conncting to the API - Contact a CJFreedomMod Developer ASAP");
                                 }
                             }
                         }.runTask(TotalFreedomMod.plugin);
@@ -129,7 +149,7 @@ public class Command_server extends TFM_Command
 
     public static enum PanelMode
     {
-        UPDATE("restart"), DONOTHING(""), KILL("kill"), WIPEFLAT("wipeflatlands");
+        UPDATE("restart"), DONOTHING("donothing"), KILL("kill"), WIPEFLAT("wipeflatlands");
         private final String mode;
 
         private PanelMode(String mode)
