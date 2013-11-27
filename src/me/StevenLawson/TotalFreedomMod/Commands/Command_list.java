@@ -110,12 +110,12 @@ public class Command_list extends TFM_Command
 
                 if (player.getName().equalsIgnoreCase("phoenix411"))
                 {
-                    prefix = (ChatColor.DARK_AQUA + "[Chief Of Security]");
+                    prefix = (ChatColor.DARK_AQUA + "[Chief Of Security & Acting Super admin Manager]");
                 }
 
-                if (player.getName().equalsIgnoreCase("lynxlps"))
+                if (player.getName().equalsIgnoreCase("ninjablue1"))
                 {
-                    prefix = (ChatColor.DARK_AQUA + "[Executive Admin Manager]");
+                    prefix = (ChatColor.DARK_AQUA + "[Admin Trainer]");
                 }
 
             }
