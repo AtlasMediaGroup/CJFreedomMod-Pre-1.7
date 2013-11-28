@@ -14,9 +14,9 @@ public class Command_cjfm extends TFM_Command
     public boolean run(CommandSender sender, Player sender_p, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
     {
         
-        playerMsg(String.format("Version " + ChatColor.BLUE + "%s.%s" + ChatColor.BLUE + ", built %s.", TotalFreedomMod.pluginVersion, TotalFreedomMod.buildNumber, TotalFreedomMod.buildDate), ChatColor.GOLD);
-        playerMsg("Created by Madgeek1450 and DarthSalamon, Later worked on by Wild1145 for CJFreedom.", ChatColor.GOLD);
-        playerMsg("Visit " + ChatColor.AQUA + "http://www.thecjgcjg.com" + ChatColor.GREEN + " for more information.", ChatColor.GREEN);
+        playerMsg(String.format("Version " + ChatColor.BLUE + "%s.%s" + ChatColor.BLUE + ", built %s.\n"
+            + ChatColor.GOLD + "Created by Madgeek1450 and DarthSalamon, later worked on by Wild1145 for CJFreedom.\n"
+            + ChatColor.GREEN + "Visit " + ChatColor.AQUA + "http://www.thecjgcjg.com" + ChatColor.GREEN + " for more information.", TotalFreedomMod.pluginVersion, TotalFreedomMod.buildNumber, TotalFreedomMod.buildDate));
 
         return true;
     }
