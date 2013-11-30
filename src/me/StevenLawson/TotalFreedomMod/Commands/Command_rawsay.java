@@ -15,7 +15,22 @@ public class Command_rawsay extends TFM_Command
     {
         if (args.length > 0)
         {
-            TFM_Util.bcastMsg(TFM_Util.colorize(StringUtils.join(args, " ")));
+            if (args[0] == "-a")
+            {
+                for (Player admins : Bukkit.getOnlinePlayers())
+                {
+                    if (TFM_SuperAdminList.isUserSuperAdmin(admins))
+                    {
+                        TFM_Util.bcastMsg(TFM_Util.colorize(StringUtils.join(args, " ")));
+                    }
+                }
+            }
+            else
+            {
+                TFM_Util.bcastMsg(TFM_Util.colorize(StringUtils.join(args, " ")));
+            }
+            
+            
         }
 
         return true;
