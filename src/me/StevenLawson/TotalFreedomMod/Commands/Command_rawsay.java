@@ -1,6 +1,7 @@
 package me.StevenLawson.TotalFreedomMod.Commands;
 
 import me.StevenLawson.TotalFreedomMod.TFM_Util;
+import me.StevenLawson.TotalFreedomMod.TFM_SuperadminList;
 import org.apache.commons.lang3.StringUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -15,11 +16,11 @@ public class Command_rawsay extends TFM_Command
     {
         if (args.length > 0)
         {
-            if (args[0] == "-a")
+            if (args[0].equals("-a"))
             {
-                for (Player admins : Bukkit.getOnlinePlayers())
+                for (Player player : server.getOnlinePlayers())
                 {
-                    if (TFM_SuperAdminList.isUserSuperAdmin(admins))
+                    if (TFM_SuperadminList.isUserSuperadmin(player))
                     {
                         TFM_Util.bcastMsg(TFM_Util.colorize(StringUtils.join(args, " ")));
                     }
@@ -29,8 +30,8 @@ public class Command_rawsay extends TFM_Command
             {
                 TFM_Util.bcastMsg(TFM_Util.colorize(StringUtils.join(args, " ")));
             }
-            
-            
+
+
         }
 
         return true;
