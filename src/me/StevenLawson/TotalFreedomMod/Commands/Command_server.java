@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import me.StevenLawson.TotalFreedomMod.TFM_ConfigEntry;
 import me.StevenLawson.TotalFreedomMod.TFM_Log;
+import me.StevenLawson.TotalFreedomMod.TFM_Util;
 import me.StevenLawson.TotalFreedomMod.TotalFreedomMod;
 import org.apache.commons.lang3.StringUtils;
 import org.bukkit.ChatColor;
@@ -38,17 +39,31 @@ public class Command_server extends TFM_Command
         {
             if (args[0].equals("reboot"))
             {
-                mode = (PanelMode.UPDATE);
+                TFM_Util.bcastMsg(ChatColor.RED + "The server is going offline for a restart!");
+                mode = (PanelMode.REBOOT);
             }
 
             if (args[0].equals("kill"))
             {
+                TFM_Util.bcastMsg(ChatColor.RED + "Server is being killed and then started again!");
                 mode = (PanelMode.KILL);
             }
 
             if (args[0].equals("wipeflatlands"))
             {
+                TFM_Util.bcastMsg(ChatColor.RED + "The server is going offline for a flatlands wipe");
                 mode = (PanelMode.WIPEFLAT);
+            }
+            
+            if (args[0].equals("essentialwipe"))
+            {
+                TFM_Util.bcastMsg(ChatColor.RED + "The server is going offline for a essentials userdata wipe");
+                mode = (PanelMode.ESSWIPE);
+            }
+            
+            if (args[0].equals("test"))
+            {
+                mode = (PanelMode.TEST);
             }
 
         }
@@ -88,7 +103,7 @@ public class Command_server extends TFM_Command
                 {
                     if (sender != null)
                     {
-                        sender.sendMessage(ChatColor.YELLOW + "Connecting you to the panel API - Standby...");
+                        sender.sendMessage(ChatColor.YELLOW + "Connecting you to the panel API - Please Standby...");
                     }
 
                     URL url = new URLBuilder(PanelURL)
@@ -149,7 +164,7 @@ public class Command_server extends TFM_Command
 
     public static enum PanelMode
     {
-        UPDATE("restart"), DONOTHING("donothing"), KILL("kill"), WIPEFLAT("wipeflatlands");
+        REBOOT("restart"), DONOTHING("donothing"), KILL("kill"), WIPEFLAT("wipeflatlands"), ESSWIPE("clearuserdata"), TEST("tester");
         private final String mode;
 
         private PanelMode(String mode)
