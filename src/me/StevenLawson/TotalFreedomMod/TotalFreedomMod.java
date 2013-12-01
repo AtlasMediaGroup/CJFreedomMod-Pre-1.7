@@ -1,5 +1,6 @@
 package me.StevenLawson.TotalFreedomMod;
 
+import me.RyanWild.CJFreedomMod.CJFM_DonatorList;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -31,6 +32,7 @@ public class TotalFreedomMod extends JavaPlugin
     public static final long SERVICE_CHECKER_RATE = 120L;
     //
     public static final String SUPERADMIN_FILE = "superadmin.yml";
+    public static final String DONATOR_FILE = "donator.yml";
     public static final String PERMBAN_FILE = "permban.yml";
     public static final String PROTECTED_AREA_FILE = "protectedareas.dat";
     public static final String SAVED_FLAGS_FILE = "savedflags.dat";
@@ -80,6 +82,7 @@ public class TotalFreedomMod extends JavaPlugin
         TFM_Log.info("Version: " + TotalFreedomMod.pluginVersion + "." + TotalFreedomMod.buildNumber + " by Madgeek1450 and DarthSalamon");
 
         loadSuperadminConfig();
+        loadDonatorConfig();
         loadPermbanConfig();
 
         TFM_UserList.getInstance(plugin);
@@ -264,6 +267,19 @@ public class TotalFreedomMod extends JavaPlugin
         catch (Exception ex)
         {
             TFM_Log.severe("Error loading superadmin list: " + ex.getMessage());
+        }
+    }
+
+    public static void loadDonatorConfig()
+    {
+        try
+        {
+            CJFM_DonatorList.backupSavedList();
+            CJFM_DonatorList.loadDonatorList();
+        }
+        catch (Exception ex)
+        {
+            TFM_Log.severe("Error loading donator list: " + ex.getMessage());
         }
     }
 

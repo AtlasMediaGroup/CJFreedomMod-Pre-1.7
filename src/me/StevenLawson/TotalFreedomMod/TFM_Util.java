@@ -1,5 +1,7 @@
 package me.StevenLawson.TotalFreedomMod;
 
+import me.RyanWild.CJFreedomMod.CJFM_DonatorList;
+import me.RyanWild.CJFreedomMod.CJFM_Donator;
 import java.io.*;
 import java.lang.reflect.Field;
 import java.net.URL;
@@ -45,7 +47,8 @@ public class TFM_Util
     public static final Map<String, EntityType> mobtypes = new HashMap<String, EntityType>();
     public static final List<String> STOP_COMMANDS = Arrays.asList("stop", "off", "end", "halt", "die");
     public static final List<String> REMOVE_COMMANDS = Arrays.asList("del", "delete", "rem", "remove");
-    public static final List<String> DEVELOPERS = Arrays.asList("Madgeek1450", "DarthSalamon", "AcidicCyanide", "wild1145", "HeXeRei452", "xXWilee999Xx");
+    public static final List<String> DEVELOPERS = Arrays.asList("Madgeek1450", "DarthSalamon", "wild1145", "paldiu", "mirohagberg");
+    public static final List<String> SYSADMINS = Arrays.asList("wild1145", "Varuct", "thecjgcjg", "DarthSalamon");
     private static final Random RANDOM = new Random();
     public static String DATE_STORAGE_FORMAT = "EEE, d MMM yyyy HH:mm:ss Z";
     public static final Map<String, ChatColor> CHAT_COLOR_NAMES = new HashMap<String, ChatColor>();
@@ -453,13 +456,45 @@ public class TFM_Util
             }
         }
 
-        if (sender.isOp())
-        {
-            return "an " + ChatColor.DARK_GREEN + "OP" + ChatColor.AQUA + ".";
-        }
+        CJFM_Donator donator_entry = CJFM_DonatorList.getDonatorEntry(sender.getName());
 
-        return "a " + ChatColor.GREEN + "non-OP" + ChatColor.AQUA + ".";
-    }
+        if (donator_entry != null)
+        {
+            if (donator_entry.isActivated())
+            {
+                String custom_login_message = donator_entry.getCustomLoginMessage();
+
+                if (custom_login_message != null)
+                {
+                    if (!custom_login_message.isEmpty())
+                    {
+                        return ChatColor.translateAlternateColorCodes('&', custom_login_message);
+                    }
+                }
+
+                if (donator_entry.isSeniorDonator())
+                {
+                    return "a " + ChatColor.LIGHT_PURPLE + "Senior Donator" + ChatColor.AQUA + ".";
+                }
+                else
+                {
+                    return "a " + ChatColor.GOLD + "Standard Donator" + ChatColor.AQUA + ".";
+                    }
+             }
+         }
+                    {
+                        if (sender.isOp())
+                        {
+                            return "an " + ChatColor.DARK_GREEN + "OP" + ChatColor.AQUA + ".";
+                        }
+                    }
+
+                    return "a " + ChatColor.GREEN + "non-OP" + ChatColor.AQUA + ".";
+                }
+
+    
+
+    
 
     public static Date parseDateOffset(String time)
     {
@@ -811,6 +846,10 @@ public class TFM_Util
             {
                 prefix = ChatColor.DARK_PURPLE + "(Dev)";
             }
+            if (SYSADMINS.contains(sender.getName()))
+            {
+                prefix = ChatColor.DARK_GREEN + "(Sys-Admin)";
+            }
         }
         return prefix + ChatColor.WHITE;
     }
@@ -926,7 +965,7 @@ public class TFM_Util
         }
     }
 
-    enum EjectMethod
+     enum EjectMethod
     {
         STRIKE_ONE, STRIKE_TWO, STRIKE_THREE;
     }

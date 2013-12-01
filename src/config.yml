@@ -191,3 +191,8 @@ autokick_enabled: true
 autokick_threshold: 0.9
 # autokick_time - Time, in seconds, after which a player should be kicked when inactive
 autokick_time: 120
+
+# API Access
+panel_api_key: 'KEY_HERE'
+panel_url: 'http://www.mywebsite.com/panel/scripts/api.php'
+#Include everything up to where the API Is actually needed to add, like shown above!.
