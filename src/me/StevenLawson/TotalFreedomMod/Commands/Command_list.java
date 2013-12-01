@@ -3,6 +3,7 @@ package me.StevenLawson.TotalFreedomMod.Commands;
 import java.util.ArrayList;
 import java.util.List;
 import me.StevenLawson.TotalFreedomMod.TFM_SuperadminList;
+import me.StevenLawson.TotalFreedomMod.TFM_Superadmin;
 import me.RyanWild.CJFreedomMod.CJFM_DonatorList;
 import me.StevenLawson.TotalFreedomMod.TFM_Util;
 import net.minecraft.util.org.apache.commons.lang3.StringUtils;
@@ -70,50 +71,54 @@ public class Command_list extends TFM_Command
 
             if (userSuperadmin)
             {
-                if (TFM_SuperadminList.isSeniorAdmin(player))
+                final TFM_Superadmin entry = TFM_SuperadminList.getAdminEntry(player.getName());
+                if (entry != null && !entry.isSeniorAdmin() && entry.isTelnetAdmin())
+                {
+                    prefix = (ChatColor.DARK_GREEN + "[STA]");
+                }
+                else if (TFM_SuperadminList.isSeniorAdmin(player))
                 {
                     prefix = (ChatColor.LIGHT_PURPLE + "[SrA]");
                 }
-                else
+                else if (TFM_SuperadminList.isUserSuperadmin(player))
                 {
-                    prefix = (ChatColor.AQUA + "[SA]");
+                    prefix = (ChatColor.GOLD + "[SA]");
                 }
-
-                if (TFM_Util.DEVELOPERS.contains(player.getName()))
+                else if (TFM_Util.DEVELOPERS.contains(player.getName()))
                 {
                     prefix = (ChatColor.DARK_PURPLE + "[Dev]");
                 }
 
-                if (player.getName().equalsIgnoreCase("wild1145"))
+                else if (player.getName().equalsIgnoreCase("wild1145"))
                 {
                     prefix = (ChatColor.DARK_GREEN + "[Chief Developer & System Admin]");
                 }
 
-                if (player.getName().equalsIgnoreCase("thecjgcjg"))
+                else if (player.getName().equalsIgnoreCase("thecjgcjg"))
                 {
                     prefix = (ChatColor.DARK_PURPLE + "[Retired Owner & System Admin]");
                 }
-                if (player.getName().equalsIgnoreCase("DarthSalamon"))
+                else if (player.getName().equalsIgnoreCase("DarthSalamon"))
                 {
                     prefix = (ChatColor.DARK_PURPLE + "[System Admin & TFM Guru]");
                 }
 
-                if (player.getName().equalsIgnoreCase("Varuct"))
+                else if (player.getName().equalsIgnoreCase("Varuct"))
                 {
                     prefix = (ChatColor.DARK_PURPLE + "[Owner & System Admin]");
                 }
 
-                if (player.getName().equalsIgnoreCase("markbyron"))
+                else if (player.getName().equalsIgnoreCase("markbyron"))
                 {
                     prefix = (ChatColor.GREEN + "[TotalFreedom Owner]");
                 }
 
-                if (player.getName().equalsIgnoreCase("phoenix411"))
+                else if (player.getName().equalsIgnoreCase("phoenix411"))
                 {
                     prefix = (ChatColor.DARK_AQUA + "[Chief Of Security & Acting Super admin Manager]");
                 }
 
-                if (player.getName().equalsIgnoreCase("ninjablue1"))
+                else  if (player.getName().equalsIgnoreCase("ninjablue1"))
                 {
                     prefix = (ChatColor.DARK_AQUA + "[Admin Trainer]");
                 }

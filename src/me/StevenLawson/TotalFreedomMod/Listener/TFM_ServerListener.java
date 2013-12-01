@@ -79,7 +79,7 @@ public class TFM_ServerListener implements Listener
         }
     }
 
-   /* @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onServerPing(ServerListPingEvent event)
     {
         event.setMotd(TFM_Util.randomChatColor() + "CJ" + TFM_Util.randomChatColor() + "Freedom " + ChatColor.DARK_GRAY + "-" + TFM_Util.randomChatColor() + " CraftBukkit v" + TFM_ServerInterface.getVersion());
@@ -100,7 +100,7 @@ public class TFM_ServerListener implements Listener
         {
             event.setMotd(ChatColor.RED + "Server is full.");
         }
-    }*/
+    }
 
     private static class TFM_ServerListener_DummyCommandSender implements CommandSender
     {
