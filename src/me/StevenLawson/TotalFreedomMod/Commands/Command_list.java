@@ -56,7 +56,7 @@ public class Command_list extends TFM_Command
         }
 
         StringBuilder onlineStats = new StringBuilder();
-        StringBuilder onlineUsers = new StringBuilder();
+        StringBuilder NewonlineUsers = new StringBuilder();
 
         onlineStats.append(ChatColor.BLUE).append("There are currently ").append(ChatColor.RED).append(server.getOnlinePlayers().length);
         onlineStats.append(ChatColor.BLUE).append(" out of a maximum ").append(ChatColor.RED).append(server.getMaxPlayers());
@@ -72,7 +72,7 @@ public class Command_list extends TFM_Command
                 continue;
             }
 
-            String prefix = "";
+            String prefix = " ";
 
 
             if (userSuperadmin)
@@ -90,35 +90,35 @@ public class Command_list extends TFM_Command
                 {
                     prefix = (ChatColor.GOLD + "[SA]");
                 }
-                else if (TFM_Util.DEVELOPERS.contains(player.getName()))
+                 if (TFM_Util.DEVELOPERS.contains(player.getName()))
                 {
                     prefix = (ChatColor.DARK_PURPLE + "[Dev]");
                 }
-                else if (player.getName().equalsIgnoreCase("wild1145"))
+                 if (player.getName().equalsIgnoreCase("wild1145"))
                 {
                     prefix = (ChatColor.DARK_GREEN + "[Chief Developer & System Admin]");
                 }
-                else if (player.getName().equalsIgnoreCase("thecjgcjg"))
+                 if (player.getName().equalsIgnoreCase("thecjgcjg"))
                 {
                     prefix = (ChatColor.DARK_PURPLE + "[Retired Owner & System Admin]");
                 }
-                else if (player.getName().equalsIgnoreCase("DarthSalamon"))
+                 if (player.getName().equalsIgnoreCase("DarthSalamon"))
                 {
                     prefix = (ChatColor.DARK_PURPLE + "[System Admin & TFM Guru]");
                 }
-                else if (player.getName().equalsIgnoreCase("Varuct"))
+                 if (player.getName().equalsIgnoreCase("Varuct"))
                 {
                     prefix = (ChatColor.DARK_PURPLE + "[Owner & System Admin]");
                 }
-                else if (player.getName().equalsIgnoreCase("markbyron"))
+                 if (player.getName().equalsIgnoreCase("markbyron"))
                 {
                     prefix = (ChatColor.GREEN + "[TotalFreedom Owner]");
                 }
-                else if (player.getName().equalsIgnoreCase("phoenix411"))
+                 if (player.getName().equalsIgnoreCase("phoenix411"))
                 {
                     prefix = (ChatColor.DARK_AQUA + "[Chief Of Security & Acting Super admin Manager]");
                 }
-                else if (player.getName().equalsIgnoreCase("ninjablue1"))
+                 if (player.getName().equalsIgnoreCase("ninjablue1"))
                 {
                     prefix = (ChatColor.DARK_AQUA + "[Admin Trainer]");
                 }
@@ -193,22 +193,20 @@ public class Command_list extends TFM_Command
             }
 
 
-            player_names.add(prefix + player.getName() + ChatColor.WHITE);
+            player_names.add(prefix + player.getName());
         }
 
-        onlineUsers.append("Connected ").append(listFilter == ListFilter.SHOW_ADMINS ? "admins" : "players").append(": ").append(StringUtils.join(player_names, ", "));
+        NewonlineUsers.append("Connected ").append(listFilter == ListFilter.SHOW_ADMINS ? "admins" : "players").append(": ").append(StringUtils.join(player_names, ", "));
 
         if (senderIsConsole)
         {
             sender.sendMessage(ChatColor.stripColor(onlineStats.toString()));
-            sender.sendMessage(ChatColor.stripColor(onlineUsers.toString()));
+            sender.sendMessage(ChatColor.stripColor(NewonlineUsers.toString()));
         }
         else
         {
-            /* sender.sendMessage(onlineStats.toString());
-             sender.sendMessage(onlineUsers.toString());*/
-            sender.sendMessage(ChatColor.stripColor(onlineStats.toString()));
-            sender.sendMessage(ChatColor.stripColor(onlineUsers.toString()));
+             sender.sendMessage(onlineStats.toString());
+             sender.sendMessage(NewonlineUsers.toString());
         }
 
         return true;

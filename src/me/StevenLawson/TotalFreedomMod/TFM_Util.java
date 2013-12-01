@@ -436,7 +436,7 @@ public class TFM_Util
                 {
                     if (!loginMessage.isEmpty())
                     {
-                        return ChatColor.translateAlternateColorCodes('&', loginMessage);
+                        return TFM_Util.randomChatColor() + (loginMessage);
                     }
                 }
 
