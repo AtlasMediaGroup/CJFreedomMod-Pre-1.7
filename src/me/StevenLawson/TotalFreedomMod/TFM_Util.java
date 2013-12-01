@@ -417,44 +417,41 @@ public class TFM_Util
         }
     }
 
-    public static String getRank(CommandSender sender)
+      public static String getRank(CommandSender sender)
     {
         if (TFM_SuperadminList.isSuperadminImpostor(sender))
         {
             return "an " + ChatColor.YELLOW + ChatColor.UNDERLINE + "impostor" + ChatColor.RESET + ChatColor.AQUA + "!";
         }
 
-        TFM_Superadmin entry = TFM_SuperadminList.getAdminEntry(sender.getName());
+        final TFM_Superadmin entry = TFM_SuperadminList.getAdminEntry(sender.getName());
 
-        if (entry != null)
+        if (entry != null && entry.isActivated())
         {
-            if (entry.isActivated())
+            String loginMessage = entry.getCustomLoginMessage();
+
+            if (loginMessage != null)
             {
-                String loginMessage = entry.getCustomLoginMessage();
-
-                if (loginMessage != null)
+                if (!loginMessage.isEmpty())
                 {
-                    if (!loginMessage.isEmpty())
-                    {
-                        return TFM_Util.randomChatColor() + (loginMessage);
-                    }
-                }
-
-                if (!entry.isSeniorAdmin() && entry.isTelnetAdmin())
-                {
-                    return "a " + ChatColor.DARK_GREEN + "Super Telnet Admin" + ChatColor.AQUA + ".";
-                }
-
-                if (entry.isSeniorAdmin())
-                {
-                    return "a " + ChatColor.LIGHT_PURPLE + "Senior Admin" + ChatColor.AQUA + ".";
-                }
-                else
-                {
-                    return "a " + ChatColor.GOLD + "Super Admin" + ChatColor.AQUA + ".";
+                    return ChatColor.translateAlternateColorCodes('&', loginMessage);
                 }
             }
+
+            if (entry.isSeniorAdmin())
+            {
+                return "a " + ChatColor.LIGHT_PURPLE + "Senior Admin" + ChatColor.AQUA + ".";
+            }
+            else if (entry.isTelnetAdmin())
+            {
+                return "a " + ChatColor.DARK_GREEN + "Super Telnet Admin" + ChatColor.AQUA + ".";
+            }
+            else
+            {
+                return "a " + ChatColor.GOLD + "Super Admin" + ChatColor.AQUA + ".";
+            }
         }
+        
 
         CJFM_Donator donator_entry = CJFM_DonatorList.getDonatorEntry(sender.getName());
 
@@ -481,19 +478,17 @@ public class TFM_Util
                     return "a " + ChatColor.GOLD + "Standard Donator" + ChatColor.AQUA + ".";
                     }
              }
-         }
-                    {
-                        if (sender.isOp())
-                        {
-                            return "an " + ChatColor.DARK_GREEN + "OP" + ChatColor.AQUA + ".";
-                        }
-                    }
+         } 
+        
+        if (sender.isOp())
+        {
+            return "an " + ChatColor.DARK_GREEN + "OP" + ChatColor.AQUA + ".";
+        }
 
-                    return "a " + ChatColor.GREEN + "non-OP" + ChatColor.AQUA + ".";
-                }
-
+        return "a " + ChatColor.GREEN + "non-OP" + ChatColor.AQUA + ".";
+    }
     
-
+    
     
 
     public static Date parseDateOffset(String time)

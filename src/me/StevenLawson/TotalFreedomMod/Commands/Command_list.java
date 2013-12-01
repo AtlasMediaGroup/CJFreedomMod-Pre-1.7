@@ -56,7 +56,7 @@ public class Command_list extends TFM_Command
         }
 
         StringBuilder onlineStats = new StringBuilder();
-        StringBuilder NewonlineUsers = new StringBuilder();
+        StringBuilder onlineUsers = new StringBuilder();
 
         onlineStats.append(ChatColor.BLUE).append("There are currently ").append(ChatColor.RED).append(server.getOnlinePlayers().length);
         onlineStats.append(ChatColor.BLUE).append(" out of a maximum ").append(ChatColor.RED).append(server.getMaxPlayers());
@@ -100,7 +100,7 @@ public class Command_list extends TFM_Command
                 }
                  if (player.getName().equalsIgnoreCase("thecjgcjg"))
                 {
-                    prefix = (ChatColor.DARK_PURPLE + "[Retired Owner & System Admin]");
+                    prefix = (ChatColor.DARK_PURPLE + "[Retired Owner, Lord of the nubs & Probably AFK]");
                 }
                  if (player.getName().equalsIgnoreCase("DarthSalamon"))
                 {
@@ -116,7 +116,7 @@ public class Command_list extends TFM_Command
                 }
                  if (player.getName().equalsIgnoreCase("phoenix411"))
                 {
-                    prefix = (ChatColor.DARK_AQUA + "[Chief Of Security & Acting Super admin Manager]");
+                    prefix = (ChatColor.DARK_RED + "[Chief Of Security & Acting Super admin Manager]");
                 }
                  if (player.getName().equalsIgnoreCase("ninjablue1"))
                 {
@@ -196,17 +196,19 @@ public class Command_list extends TFM_Command
             player_names.add(prefix + player.getName());
         }
 
-        NewonlineUsers.append("Connected ").append(listFilter == ListFilter.SHOW_ADMINS ? "admins" : "players").append(": ").append(StringUtils.join(player_names, ", "));
+         onlineUsers.append("Connected ");
+        onlineUsers.append(listFilter == Command_list.ListFilter.SHOW_ADMINS ? "admins: " : "players: ");
+        onlineUsers.append(StringUtils.join(player_names, ChatColor.WHITE + ", "));
 
         if (senderIsConsole)
         {
             sender.sendMessage(ChatColor.stripColor(onlineStats.toString()));
-            sender.sendMessage(ChatColor.stripColor(NewonlineUsers.toString()));
+            sender.sendMessage(ChatColor.stripColor(onlineUsers.toString()));
         }
         else
         {
              sender.sendMessage(onlineStats.toString());
-             sender.sendMessage(NewonlineUsers.toString());
+             sender.sendMessage(onlineUsers.toString());
         }
 
         return true;
