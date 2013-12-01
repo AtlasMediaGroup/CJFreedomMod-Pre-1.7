@@ -1,4 +1,4 @@
-clean_threshold_hours: 800
+clean_threshold_hours: 850
 donators:
   darthsalamon:
     ips:
