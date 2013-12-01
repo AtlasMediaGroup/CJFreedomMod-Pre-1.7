@@ -1,4 +1,4 @@
-package me.RyanWild.CJFreedomMod;
+/*package me.RyanWild.CJFreedomMod;
 
 import java.io.IOException;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
