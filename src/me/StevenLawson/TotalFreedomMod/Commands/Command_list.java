@@ -24,6 +24,12 @@ public class Command_list extends TFM_Command
     @Override
     public boolean run(CommandSender sender, Player sender_p, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
     {
+
+        if (args.length > 1)
+        {
+            return false;
+        }
+
         if (TFM_Util.isFromHostConsole(sender.getName()))
         {
             List<String> player_names = new ArrayList<String>();
@@ -88,12 +94,10 @@ public class Command_list extends TFM_Command
                 {
                     prefix = (ChatColor.DARK_PURPLE + "[Dev]");
                 }
-
                 else if (player.getName().equalsIgnoreCase("wild1145"))
                 {
                     prefix = (ChatColor.DARK_GREEN + "[Chief Developer & System Admin]");
                 }
-
                 else if (player.getName().equalsIgnoreCase("thecjgcjg"))
                 {
                     prefix = (ChatColor.DARK_PURPLE + "[Retired Owner & System Admin]");
@@ -102,23 +106,19 @@ public class Command_list extends TFM_Command
                 {
                     prefix = (ChatColor.DARK_PURPLE + "[System Admin & TFM Guru]");
                 }
-
                 else if (player.getName().equalsIgnoreCase("Varuct"))
                 {
                     prefix = (ChatColor.DARK_PURPLE + "[Owner & System Admin]");
                 }
-
                 else if (player.getName().equalsIgnoreCase("markbyron"))
                 {
                     prefix = (ChatColor.GREEN + "[TotalFreedom Owner]");
                 }
-
                 else if (player.getName().equalsIgnoreCase("phoenix411"))
                 {
                     prefix = (ChatColor.DARK_AQUA + "[Chief Of Security & Acting Super admin Manager]");
                 }
-
-                else  if (player.getName().equalsIgnoreCase("ninjablue1"))
+                else if (player.getName().equalsIgnoreCase("ninjablue1"))
                 {
                     prefix = (ChatColor.DARK_AQUA + "[Admin Trainer]");
                 }
@@ -205,8 +205,10 @@ public class Command_list extends TFM_Command
         }
         else
         {
-            sender.sendMessage(onlineStats.toString());
-            sender.sendMessage(onlineUsers.toString());
+            /* sender.sendMessage(onlineStats.toString());
+             sender.sendMessage(onlineUsers.toString());*/
+            sender.sendMessage(ChatColor.stripColor(onlineStats.toString()));
+            sender.sendMessage(ChatColor.stripColor(onlineUsers.toString()));
         }
 
         return true;
