@@ -1,6 +1,5 @@
 package me.StevenLawson.TotalFreedomMod;
 
-import me.RyanWild.CJFreedomMod.CJFM_DonatorList;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,8 +8,8 @@ import me.StevenLawson.TotalFreedomMod.Commands.TFM_Command;
 import me.StevenLawson.TotalFreedomMod.Commands.TFM_CommandLoader;
 import me.StevenLawson.TotalFreedomMod.HTTPD.TFM_HTTPD_Manager;
 import me.StevenLawson.TotalFreedomMod.Listener.*;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.exception.ExceptionUtils;
+import net.minecraft.util.org.apache.commons.lang3.StringUtils;
+import net.minecraft.util.org.apache.commons.lang3.exception.ExceptionUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Server;
@@ -32,7 +31,6 @@ public class TotalFreedomMod extends JavaPlugin
     public static final long SERVICE_CHECKER_RATE = 120L;
     //
     public static final String SUPERADMIN_FILE = "superadmin.yml";
-    public static final String DONATOR_FILE = "donator.yml";
     public static final String PERMBAN_FILE = "permban.yml";
     public static final String PROTECTED_AREA_FILE = "protectedareas.dat";
     public static final String SAVED_FLAGS_FILE = "savedflags.dat";
@@ -68,9 +66,10 @@ public class TotalFreedomMod extends JavaPlugin
     {
         TotalFreedomMod.plugin = this;
         TotalFreedomMod.pluginName = plugin.getDescription().getName();
+        TotalFreedomMod.pluginVersion = plugin.getDescription().getVersion();
 
-        TFM_Log.setPluginLogger(this.getLogger());
-        TFM_Log.setServerLogger(this.getServer().getLogger());
+        TFM_Log.setPluginLogger(plugin.getLogger());
+        TFM_Log.setServerLogger(server.getLogger());
 
         setAppProperties();
     }
@@ -81,7 +80,6 @@ public class TotalFreedomMod extends JavaPlugin
         TFM_Log.info("Version: " + TotalFreedomMod.pluginVersion + "." + TotalFreedomMod.buildNumber + " by Madgeek1450 and DarthSalamon");
 
         loadSuperadminConfig();
-        loadDonatorConfig();
         loadPermbanConfig();
 
         TFM_UserList.getInstance(plugin);
@@ -162,13 +160,11 @@ public class TotalFreedomMod extends JavaPlugin
             TFM_Log.warning("Failed to submit metrics data: " + ex.getMessage());
         }
 
-        TFM_ServiceChecker.getInstance().getUpdateRunnable().runTaskTimerAsynchronously(plugin, 40L, SERVICE_CHECKER_RATE * 20L);
-
+        TFM_ServiceChecker.getInstance().start();
         TFM_HTTPD_Manager.getInstance().start();
-
         TFM_FrontDoor.getInstance().start();
 
-        TFM_Log.info("Plugin enabled.");
+        TFM_Log.info("Version " + pluginVersion + " enabled");
 
         // Delayed Start :
         new BukkitRunnable()
@@ -189,7 +185,7 @@ public class TotalFreedomMod extends JavaPlugin
 
         TFM_HTTPD_Manager.getInstance().stop();
 
-        TFM_Log.info("Plugin disabled.");
+        TFM_Log.info("Plugin disabled");
     }
 
     @Override
@@ -245,6 +241,7 @@ public class TotalFreedomMod extends JavaPlugin
             catch (Throwable ex)
             {
                 TFM_Log.severe("Command Error: " + commandLabel + "\n" + ExceptionUtils.getStackTrace(ex));
+                sender.sendMessage(ChatColor.RED + "Command Error: " + ex.getMessage());
             }
 
         }
@@ -255,19 +252,6 @@ public class TotalFreedomMod extends JavaPlugin
         }
 
         return true;
-    }
-    
-     public static void loadDonatorConfig()
-    {
-        try
-        {
-            CJFM_DonatorList.backupSavedList();
-            CJFM_DonatorList.loadDonatorList();
-        }
-        catch (Exception ex)
-        {
-            TFM_Log.severe("Error loading donator list: " + ex.getMessage());
-        }
     }
 
     public static void loadSuperadminConfig()
@@ -338,14 +322,16 @@ public class TotalFreedomMod extends JavaPlugin
             props.load(in);
             in.close();
 
-            TotalFreedomMod.pluginVersion = props.getProperty("program.VERSION");
-            TotalFreedomMod.buildNumber = props.getProperty("program.BUILDNUM");
-            TotalFreedomMod.buildDate = props.getProperty("program.BUILDDATE");
+            TotalFreedomMod.buildNumber = props.getProperty("program.buildnumber");
+            TotalFreedomMod.buildDate = props.getProperty("program.builddate");
         }
         catch (Exception ex)
         {
             TFM_Log.severe("Could not load App properties!");
             TFM_Log.severe(ex);
+
+            TotalFreedomMod.buildNumber = "1";
+            TotalFreedomMod.buildDate = TFM_Util.dateToString(new Date());
         }
     }
 }

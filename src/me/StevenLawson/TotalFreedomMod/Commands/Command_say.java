@@ -1,7 +1,7 @@
 package me.StevenLawson.TotalFreedomMod.Commands;
 
 import me.StevenLawson.TotalFreedomMod.TFM_Util;
-import org.apache.commons.lang3.StringUtils;
+import net.minecraft.util.org.apache.commons.lang3.StringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -29,7 +29,7 @@ public class Command_say extends TFM_Command
 
                 for (Player player : server.getOnlinePlayers())
                 {
-                    player.kickPlayer("Server is going offline, come back in a few minutes.");
+                    player.kickPlayer("Server is going offline, come back in about 20 seconds.");
                 }
 
                 server.shutdown();

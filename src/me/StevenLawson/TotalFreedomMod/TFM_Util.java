@@ -1,7 +1,5 @@
 package me.StevenLawson.TotalFreedomMod;
 
-import me.RyanWild.CJFreedomMod.CJFM_DonatorList;
-import me.RyanWild.CJFreedomMod.CJFM_Donator;
 import java.io.*;
 import java.lang.reflect.Field;
 import java.net.URL;
@@ -12,13 +10,34 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.bukkit.*;
+import net.minecraft.util.org.apache.commons.io.FileUtils;
+
+import net.minecraft.util.org.apache.commons.lang3.StringUtils;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.SkullType;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.Skull;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Boat;
+import org.bukkit.entity.Creature;
+import org.bukkit.entity.EnderCrystal;
+import org.bukkit.entity.EnderSignal;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.ExperienceOrb;
+import org.bukkit.entity.Explosive;
+import org.bukkit.entity.FallingBlock;
+import org.bukkit.entity.Firework;
+import org.bukkit.entity.Item;
+import org.bukkit.entity.Minecart;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 
 public class TFM_Util
 {
@@ -26,8 +45,7 @@ public class TFM_Util
     public static final Map<String, EntityType> mobtypes = new HashMap<String, EntityType>();
     public static final List<String> STOP_COMMANDS = Arrays.asList("stop", "off", "end", "halt", "die");
     public static final List<String> REMOVE_COMMANDS = Arrays.asList("del", "delete", "rem", "remove");
-    public static final List<String> DEVELOPERS = Arrays.asList("Madgeek1450", "DarthSalamon", "wild1145", "paldiu", "mirohagberg");
-     public static final List<String> SYSADMINS = Arrays.asList("wild1145", "Varuct", "thecjgcjg", "DarthSalamon");
+    public static final List<String> DEVELOPERS = Arrays.asList("Madgeek1450", "DarthSalamon", "AcidicCyanide", "wild1145", "HeXeRei452", "xXWilee999Xx");
     private static final Random RANDOM = new Random();
     public static String DATE_STORAGE_FORMAT = "EEE, d MMM yyyy HH:mm:ss Z";
     public static final Map<String, ChatColor> CHAT_COLOR_NAMES = new HashMap<String, ChatColor>();
@@ -419,6 +437,11 @@ public class TFM_Util
                     }
                 }
 
+                if (!entry.isSeniorAdmin() && entry.isTelnetAdmin())
+                {
+                    return "a " + ChatColor.DARK_GREEN + "Super Telnet Admin" + ChatColor.AQUA + ".";
+                }
+
                 if (entry.isSeniorAdmin())
                 {
                     return "a " + ChatColor.LIGHT_PURPLE + "Senior Admin" + ChatColor.AQUA + ".";
@@ -426,33 +449,6 @@ public class TFM_Util
                 else
                 {
                     return "a " + ChatColor.GOLD + "Super Admin" + ChatColor.AQUA + ".";
-                }
-            }
-        }
-        
-        CJFM_Donator donator_entry = CJFM_DonatorList.getDonatorEntry(sender.getName());
-
-        if (donator_entry != null)
-        {
-            if (donator_entry.isActivated())
-            {
-                String custom_login_message = donator_entry.getCustomLoginMessage();
-
-                if (custom_login_message != null)
-                {
-                    if (!custom_login_message.isEmpty())
-                    {
-                        return ChatColor.translateAlternateColorCodes('&', custom_login_message);
-                    }
-                }
-
-                if (donator_entry.isSeniorDonator())
-                {
-                    return "a " + ChatColor.LIGHT_PURPLE + "Senior Donator" + ChatColor.AQUA + ".";
-                }
-                else
-                {
-                    return "a " + ChatColor.GOLD + "Standard Donator" + ChatColor.AQUA + ".";
                 }
             }
         }
@@ -798,21 +794,22 @@ public class TFM_Util
         }
         else
         {
-            if (TFM_SuperadminList.isSeniorAdmin(sender))
+            TFM_Superadmin entry = TFM_SuperadminList.getAdminEntry(sender.getName());
+            if (!entry.isSeniorAdmin() && entry.isTelnetAdmin())
+            {
+                prefix = ChatColor.DARK_GREEN + "(STA)";
+            }
+            else if (TFM_SuperadminList.isSeniorAdmin(sender))
             {
                 prefix = ChatColor.LIGHT_PURPLE + "(SrA)";
             }
             else
             {
-                prefix = ChatColor.AQUA + "(SA)";
+                prefix = ChatColor.GOLD + "(SA)";
             }
             if (DEVELOPERS.contains(sender.getName()))
             {
                 prefix = ChatColor.DARK_PURPLE + "(Dev)";
-            }
-            if (SYSADMINS.contains(sender.getName()))
-            {
-                prefix = ChatColor.DARK_GREEN + "(Sys-Admin)";
             }
         }
         return prefix + ChatColor.WHITE;
