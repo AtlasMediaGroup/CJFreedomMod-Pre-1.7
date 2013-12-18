@@ -34,6 +34,7 @@ public class TFM_PlayerListener implements Listener
 {
     private static final List<String> BLOCKED_MUTED_CMDS = Arrays.asList(StringUtils.split("say,me,msg,m,tell,r,reply,mail,email", ","));
     private static final int MSG_PER_HEARTBEAT = 10;
+    private static final List<String> adminCommands = Arrays.asList(StringUtils.split("gtfo,ban,kick,smite,tban,noob,orbit,doom,saconfig,stfu", ","));
 
     @EventHandler(priority = EventPriority.HIGH)
     public void onPlayerInteract(PlayerInteractEvent event)
@@ -271,6 +272,12 @@ public class TFM_PlayerListener implements Listener
     {
         TFM_AdminWorld.getInstance().validateMovement(event);
         CJFM_DonatorWorld.getInstance().validateMovement(event);
+    }
+    
+    @EventHandler(priority = EventPriority.HIGH)
+    public void chatBotEvent(AsyncPlayerChatEvent event)
+    {
+        //to add later
     }
 
     @EventHandler(priority = EventPriority.NORMAL)
