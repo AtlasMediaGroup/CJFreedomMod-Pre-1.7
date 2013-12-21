@@ -814,7 +814,7 @@ public class TFM_Util
             }
         }
     }
-
+    
     public static String getPrefix(CommandSender sender, boolean senderIsConsole)
     {
         String prefix;
