@@ -247,7 +247,7 @@ public class TFM_ServerInterface
             {
                 if (TFM_Util.fuzzyIpMatch(testIp, ip, 4))
                 {
-                    event.disallow(Result.KICK_OTHER, ChatColor.RED + "Your IP address is permanently banned from this server.\nRelease procedures are available at http://bit.ly/TF_PermBan");
+                    event.disallow(Result.KICK_OTHER, ChatColor.RED + "Your IP address is permanently banned from this server.\nRelease procedures are available at http://www.thecjgcjg.com");
                     return;
                 }
             }
@@ -257,7 +257,7 @@ public class TFM_ServerInterface
             {
                 if (testPlayer.equalsIgnoreCase(username))
                 {
-                    event.disallow(Result.KICK_OTHER, ChatColor.RED + "Your username is permanently banned from this server.\nRelease procedures are available at Http://www.thecjgcjg.com ");
+                    event.disallow(Result.KICK_OTHER, ChatColor.RED + "Your username is permanently banned from this server.\nRelease procedures are available at http://www.thecjgcjg.com ");
                     return;
                 }
             }
@@ -332,7 +332,7 @@ public class TFM_ServerInterface
                 {
                     if (!TFM_SuperadminList.isUserSuperadmin(player))
                     {
-                        p.kickPlayer("Sorrry but you have been kicked to free up room for an admin.");
+                        p.kickPlayer("Sorry but you have been kicked to free up room for an admin.");
                     }
 
                     if (server.getOnlinePlayers().length < server.getMaxPlayers())
