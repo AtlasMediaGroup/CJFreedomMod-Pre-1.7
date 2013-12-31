@@ -37,9 +37,14 @@ public class Command_gtfo extends TFM_Command
         }
 
         String ban_reason = null;
-        if (args.length >= 2)
+       if (args.length <= 2)
+        {
+            return false;
+        }
+        else if (args.length >= 2)
         {
             ban_reason = StringUtils.join(ArrayUtils.subarray(args, 1, args.length), " ");
+
         }
 
         TFM_Util.bcastMsg(player.getName() + " has been a VERY naughty, naughty boy.", ChatColor.RED);
