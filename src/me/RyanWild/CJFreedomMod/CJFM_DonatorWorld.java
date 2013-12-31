@@ -101,7 +101,7 @@ public final class CJFM_DonatorWorld extends TFM_CustomWorld
         return false;
     }
 
-    public Player removeGuest(Player guest)
+  public Player removeGuest(Player guest)
     {
         Player player = guestList.remove(guest);
         wipeAccessCache();
