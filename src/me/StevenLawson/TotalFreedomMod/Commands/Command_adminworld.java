@@ -133,21 +133,28 @@ public class Command_adminworld extends TFM_Command
                                 playerMsg("Could not add player to guest list.");
                             }
                         }
-                        else if (TFM_Util.isRemoveCommand(args[1]))
+                       else if (TFM_Util.isRemoveCommand(args[1]))
                         {
-                            Player player = TFM_AdminWorld.getInstance().removeGuest(args[2]);
+                            Player player;
+                            try
+                            {
+                                player = getPlayer(args[2]);
+                            }
+                            catch (PlayerNotFoundException ex)
+                            {
+                                sender.sendMessage(ex.getMessage());
+                                return true;
+                            }
+
+                            
                             if (player != null)
                             {
-                                TFM_Util.adminAction(sender.getName(), "AdminWorld guest removed: " + player.getName(), false);
+                                TFM_AdminWorld.getInstance().removeGuest(player);
+
                             }
-                            else
                             {
-                                playerMsg("Can't find guest entry for: " + args[2]);
+                                TFM_Util.adminAction(sender.getName(), "AdminrWorld guest removed: " + player.getName(), false);
                             }
-                        }
-                        else
-                        {
-                            return false;
                         }
                     }
 

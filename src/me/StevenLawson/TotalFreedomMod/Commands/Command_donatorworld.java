@@ -135,25 +135,41 @@ public class Command_donatorworld extends TFM_Command
                         }
                         else if (TFM_Util.isRemoveCommand(args[1]))
                         {
-                            Player player = CJFM_DonatorWorld.getInstance().removeGuest(args[2]);
+                            Player player;
+                            try
+                            {
+                                player = getPlayer(args[2]);
+                            }
+                            catch (PlayerNotFoundException ex)
+                            {
+                                sender.sendMessage(ex.getMessage());
+                                return true;
+                            }
+
+                            
                             if (player != null)
+                            {
+                                CJFM_DonatorWorld.getInstance().removeGuest(player);
+
+                            }
                             {
                                 TFM_Util.adminAction(sender.getName(), "DonatorWorld guest removed: " + player.getName(), false);
                             }
-                            else
-                            {
-                                playerMsg("Can't find guest entry for: " + args[2]);
-                            }
                         }
+                        
                         else
                         {
+                            playerMsg("Could not add player to guest list.");
                             return false;
                         }
-                    }
 
-                    break;
                 }
-                case TIME:
+
+                break;
+            }
+        
+    
+    case TIME:
                 {
                     assertCommandPerms(sender, sender_p);
 
@@ -207,12 +223,16 @@ public class Command_donatorworld extends TFM_Command
                 }
             }
         }
-        catch (PermissionDeniedException ex)
+        catch (PermissionDeniedException ex
+
+    
+    
+        )
         {
             sender.sendMessage(ex.getMessage());
-        }
+    }
 
-        return true;
+return true;
     }
 
     private void assertCommandPerms(CommandSender sender, Player sender_p) throws PermissionDeniedException
@@ -220,14 +240,16 @@ public class Command_donatorworld extends TFM_Command
         if (!(sender instanceof Player) || sender_p == null || !CJFM_DonatorList.isUserDonator(sender))
         {
             throw new PermissionDeniedException(TotalFreedomMod.MSG_NO_PERMS);
-        }
+        
+
+}
     }
 
     private class PermissionDeniedException extends Exception
+{
+    public PermissionDeniedException(String string)
     {
-        public PermissionDeniedException(String string)
-        {
-            super(string);
-        }
+        super(string);
     }
+}
 }
