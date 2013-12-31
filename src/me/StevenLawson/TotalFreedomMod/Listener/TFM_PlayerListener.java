@@ -548,6 +548,14 @@ public class TFM_PlayerListener implements Listener
                 event.setCancelled(true);
                 return;
             }
+            
+            // Check for donatorchat
+            if (playerdata.inDonatorChat())
+            {
+                TFM_Util.donatorChatMessage(player, message, false);
+                event.setCancelled(true);
+                return;
+            }
 
             // Finally, set message
             event.setMessage(message);

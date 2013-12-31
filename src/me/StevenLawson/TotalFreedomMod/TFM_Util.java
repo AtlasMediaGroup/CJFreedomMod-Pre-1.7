@@ -417,7 +417,7 @@ public class TFM_Util
         }
     }
 
-      public static String getRank(CommandSender sender)
+    public static String getRank(CommandSender sender)
     {
         if (TFM_SuperadminList.isSuperadminImpostor(sender))
         {
@@ -451,9 +451,9 @@ public class TFM_Util
                 return "a " + ChatColor.GOLD + "Super Admin" + ChatColor.AQUA + ".";
             }
         }
-        
 
-        CJFM_Donator donator_entry = CJFM_DonatorList.getDonatorEntry(sender.getName());
+
+        final CJFM_Donator donator_entry = CJFM_DonatorList.getDonatorEntry(sender.getName());
 
         if (donator_entry != null)
         {
@@ -476,10 +476,10 @@ public class TFM_Util
                 else
                 {
                     return "a " + ChatColor.GOLD + "Standard Donator" + ChatColor.AQUA + ".";
-                    }
-             }
-         } 
-        
+                }
+            }
+        }
+
         if (sender.isOp())
         {
             return "an " + ChatColor.DARK_GREEN + "OP" + ChatColor.AQUA + ".";
@@ -487,9 +487,6 @@ public class TFM_Util
 
         return "a " + ChatColor.GREEN + "non-OP" + ChatColor.AQUA + ".";
     }
-    
-    
-    
 
     public static Date parseDateOffset(String time)
     {
@@ -814,7 +811,21 @@ public class TFM_Util
             }
         }
     }
-    
+
+    public static void donatorChatMessage(CommandSender sender, String message, boolean senderIsConsole)
+    {
+        String name = sender.getName() + " " + getPrefix(sender, senderIsConsole);
+        TFM_Log.info("[DONATOR] " + name + ": " + message);
+
+        for (Player player : Bukkit.getOnlinePlayers())
+        {
+            if (TFM_SuperadminList.isUserSuperadmin(player) || (CJFM_DonatorList.isUserDonator(player)))
+            {
+                player.sendMessage("[" + ChatColor.DARK_GREEN + "DONATOR" + ChatColor.WHITE + "] " + ChatColor.GOLD + name + ": " + ChatColor.DARK_GREEN + message);
+            }
+        }
+    }
+
     public static String getPrefix(CommandSender sender, boolean senderIsConsole)
     {
         String prefix;
@@ -836,6 +847,14 @@ public class TFM_Util
             else
             {
                 prefix = ChatColor.GOLD + "(SA)";
+            }            
+            if (CJFM_DonatorList.isSeniorDonator(sender))
+            {
+                prefix = ChatColor.DARK_GREEN + "(Sr-Donator)";
+            }
+            else if (CJFM_DonatorList.isUserDonator(sender))
+            {
+                prefix = ChatColor.AQUA + "(Donator)";
             }
             if (DEVELOPERS.contains(sender.getName()))
             {
@@ -845,9 +864,11 @@ public class TFM_Util
             {
                 prefix = ChatColor.DARK_GREEN + "(Sys-Admin)";
             }
+
         }
         return prefix + ChatColor.WHITE;
     }
+
 
     //getField: Borrowed from WorldEdit
     @SuppressWarnings("unchecked")
@@ -960,7 +981,7 @@ public class TFM_Util
         }
     }
 
-     enum EjectMethod
+    enum EjectMethod
     {
         STRIKE_ONE, STRIKE_TWO, STRIKE_THREE;
     }

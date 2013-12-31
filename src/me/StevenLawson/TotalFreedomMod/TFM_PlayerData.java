@@ -49,6 +49,7 @@ public class TFM_PlayerData
     private BukkitTask lockupScheduleId = null;
     private String lastMessage = "";
     private boolean inAdminchat = false;
+    private boolean inDonatorchat = false;
     private boolean allCommandsBlocked = false;
     private Boolean verifiedSuperadminId = null;
     private String lastCommand = "";
@@ -435,6 +436,16 @@ public class TFM_PlayerData
     public boolean inAdminChat()
     {
         return this.inAdminchat;
+    }
+    
+     public void setDonatorChat(boolean inDonatorchat)
+    {
+        this.inDonatorchat = inDonatorchat;
+    }
+
+    public boolean inDonatorChat()
+    {
+        return this.inDonatorchat;
     }
 
     public boolean allCommandsBlocked()
