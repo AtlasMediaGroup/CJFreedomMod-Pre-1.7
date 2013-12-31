@@ -6,7 +6,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-@CommandPermissions(dlevel = DonatorLevel.SENIOR, source = SourceType.ONLY_IN_GAME)
+@CommandPermissions(level = AdminLevel.ALL, dlevel = DonatorLevel.SENIOR, source = SourceType.ONLY_IN_GAME)
 @CommandParameters(description = "Automatically ops user.", usage = "/<command>")
 public class Command_donopme extends TFM_Command
 {
