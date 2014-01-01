@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.regex.Pattern;
+import me.RyanWild.CJFreedomMod.CJFM_DonatorList;
 import me.StevenLawson.TotalFreedomMod.*;
 import me.StevenLawson.TotalFreedomMod.Commands.Command_landmine;
 import me.StevenLawson.TotalFreedomMod.TFM_RollbackManager.RollbackEntry;
@@ -712,7 +713,7 @@ public class TFM_PlayerListener implements Listener
 
             boolean impostor = TFM_SuperadminList.isSuperadminImpostor(player);
 
-            if (impostor || TFM_SuperadminList.isUserSuperadmin(player))
+            if (impostor || TFM_SuperadminList.isUserSuperadmin(player) || CJFM_DonatorList.isUserDonator(player))
             {
                 TFM_Util.bcastMsg(ChatColor.AQUA + player.getName() + " is " + TFM_Util.getRank(player));
 
@@ -740,6 +741,7 @@ public class TFM_PlayerListener implements Listener
 
                     player.setOp(true);
                 }
+                
             }
 
             if (TFM_ConfigEntry.ADMIN_ONLY_MODE.getBoolean())
