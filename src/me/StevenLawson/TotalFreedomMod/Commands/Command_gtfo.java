@@ -37,7 +37,7 @@ public class Command_gtfo extends TFM_Command
         }
 
         String ban_reason = null;
-       if (args.length <= 2)
+       if (args.length <= 1)
         {
             return false;
         }
