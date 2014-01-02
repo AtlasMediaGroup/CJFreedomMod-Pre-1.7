@@ -196,3 +196,12 @@ autokick_time: 120
 panel_api_key: 'KEY_HERE'
 panel_url: 'http://www.mywebsite.com/panel/scripts/api.php'
 #Include everything up to where the API Is actually needed to add, like shown above!.
+
+# MySQL Details
+
+Hostname: 'hostnamehere'
+Port: 3306  
+# Dont change the port unless you know the shit your messing with
+Database: 'database'
+Username: 'myusername'
+Password: 'mysecurepassword'

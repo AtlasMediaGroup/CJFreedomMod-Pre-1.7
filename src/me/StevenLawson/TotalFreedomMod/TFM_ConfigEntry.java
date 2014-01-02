@@ -46,13 +46,21 @@ public enum TFM_ConfigEntry
     HTTPD_PORT(Integer.class, "httpd_port"),
     AUTOKICK_TIME(Integer.class, "autokick_time"),
     //
+    HOSTNAME(String.class, "Hostname"),
+    PORT(Integer.class, "Port"),
+    DATABASE(String.class, "Database"),
+    USER(String.class, "Username"),
+    PASSWORD(String.class, "Password"), 
+    //
     FLATLANDS_GENERATION_PARAMS(String.class, "flatlands_generation_params"),
     LOGS_REGISTER_PASSWORD(String.class, "logs_register_password"),
     LOGS_REGISTER_URL(String.class, "logs_register_url"),
     SERVICE_CHECKER_URL(String.class, "service_checker_url"),
+    //
     TWITTERBOT_SECRET(String.class, "twitterbot_secret"),
     TWITTERBOT_URL(String.class, "twitterbot_url"),
     HTTPD_PUBLIC_FOLDER(String.class, "httpd_public_folder"),
+    //
     PANEL_URL(String.class, "panel_url"),
     PANEL_API_KEY(String.class, "panel_api_key"),
     //
@@ -60,6 +68,7 @@ public enum TFM_ConfigEntry
     HOST_SENDER_NAMES(List.class, "host_sender_names"),
     UNBANNABLE_USERNAMES(List.class, "unbannable_usernames");
     //
+    
     private final Class<?> type;
     private final String configName;
 

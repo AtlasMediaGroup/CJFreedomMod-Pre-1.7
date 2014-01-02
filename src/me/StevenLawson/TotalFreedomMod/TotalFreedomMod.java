@@ -25,6 +25,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import org.mcstats.Metrics;
+import husky.mysql.MySQL;
+import java.sql.*;
 
 public class TotalFreedomMod extends JavaPlugin
 {
@@ -62,6 +64,23 @@ public class TotalFreedomMod extends JavaPlugin
     //
     public static List<String> permbannedPlayers = new ArrayList<String>();
     public static List<String> permbannedIps = new ArrayList<String>();
+    MySQL mySQL;
+    
+    
+    
+     public void updateDatabase(String SQLquery) throws SQLException {
+      Connection c = mySQL.openConnection();
+      Statement statement = c.createStatement();      
+      statement.executeUpdate(SQLquery);
+  }
+  
+  public void getValueFromDB(String SQLquery) throws SQLException {      
+      Connection c = mySQL.openConnection();
+      Statement statement = c.createStatement();
+      ResultSet res = statement.executeQuery(SQLquery);
+      res.next();
+  }
+    
 
     @Override
     public void onLoad()
@@ -88,6 +107,8 @@ public class TotalFreedomMod extends JavaPlugin
         TFM_UserList.getInstance(plugin);
 
         registerEventHandlers();
+        
+         mySQL = new MySQL(plugin, TFM_ConfigEntry.HOSTNAME.getString(), TFM_ConfigEntry.PORT.getString(), TFM_ConfigEntry.DATABASE.getString(), TFM_ConfigEntry.USER.getString(), TFM_ConfigEntry.PASSWORD.getString());  
         
         try
         {
