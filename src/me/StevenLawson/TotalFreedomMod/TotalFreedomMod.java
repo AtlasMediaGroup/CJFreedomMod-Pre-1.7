@@ -368,7 +368,7 @@ public class TotalFreedomMod extends JavaPlugin
             TFM_Log.severe(ex);
 
             TotalFreedomMod.buildNumber = "1";
-            TotalFreedomMod.buildDate = TFM_Util.dateToString(new Date());
+           // TotalFreedomMod.buildDate = TFM_Util.dateToString(new Date());
         }
     }
 }

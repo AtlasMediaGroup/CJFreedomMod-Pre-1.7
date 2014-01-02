@@ -1,5 +1,6 @@
 package me.StevenLawson.TotalFreedomMod.Commands;
 
+import me.StevenLawson.TotalFreedomMod.TFM_Log;
 import me.StevenLawson.TotalFreedomMod.TFM_SuperadminList;
 import me.StevenLawson.TotalFreedomMod.TFM_Util;
 import net.minecraft.util.org.apache.commons.lang3.ArrayUtils;
@@ -9,6 +10,9 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @CommandPermissions(level = AdminLevel.ALL, source = SourceType.BOTH)
 @CommandParameters(description = "Reports a player for a offence for admins to review.", usage = "/<command> <partialname> <reason>")
@@ -17,6 +21,9 @@ public class Command_report extends TFM_Command
     @Override
     public boolean run(CommandSender sender, Player sender_p, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
     {
+        
+          
+        
         if (args.length == 0)
         {
             return false;
@@ -44,6 +51,14 @@ public class Command_report extends TFM_Command
             ban_reason = StringUtils.join(ArrayUtils.subarray(args, 1, args.length), " ");
 
         }
+        
+        String Reported = player.getName();
+        String Reporter = sender.getName();
+        
+        if(player == sender_p) {
+            sender.sendMessage(ChatColor.RED + "Don't try to report yourself, idiot.");
+            return true;
+        }
 
 
         for (Player admins : Bukkit.getOnlinePlayers())
@@ -58,6 +73,19 @@ public class Command_report extends TFM_Command
 
         sender.sendMessage(TFM_Util.colorize("&8[&4CJFreedomMod System&8] &4Your report against &a " + player.getName() + " &4for &2" + ban_reason + " &4has been recieved and a admin will be reviewing it shortly ."));
 
+        
+         SimpleDateFormat sdf = new SimpleDateFormat("dd-M hh:mm");
+        String Time = sdf.format(new Date());
+        try {
+            plugin.updateDatabase("INSERT INTO reports (Reported, Reporter, ban_reason, Time, Status) VALUES ('" + Reported + "', '" + Reporter + "', '" + ban_reason + "', '" + Time + "', 'open');");
+            TFM_Log.info("New Report Added by: " + Reporter);
+        }
+        catch (SQLException ex) {
+            sender.sendMessage("Error submitting report to Database.");
+            TFM_Log.severe(ex);
+        }
+        
+        
         return true;
     }
 }
