@@ -25,6 +25,7 @@ public class TFM_SuperadminList
     private static List<String> superadminNames = new ArrayList<String>();
     private static List<String> superadminIPs = new ArrayList<String>();
     private static List<String> seniorAdminNames = new ArrayList<String>();
+    private static List<String> TelnetAdminNames = new ArrayList<String>();
     private static int cleanThreshold = 24 * 7; // 1 Week in hours
 
     private TFM_SuperadminList()
@@ -252,6 +253,38 @@ public class TFM_SuperadminList
 
         return false;
     }
+    
+    public static boolean isTelnetAdmin(CommandSender user)
+    {
+        return isTelnetAdmin(user, false);
+    }
+
+    public static boolean isTelnetAdmin(CommandSender user, boolean verifySuperadmin)
+    {
+        if (verifySuperadmin)
+        {
+            if (!isUserSuperadmin(user))
+            {
+                return false;
+            }
+        }
+
+        String username = user.getName().toLowerCase();
+
+        if (!(user instanceof Player))
+        {
+            return TelnetAdminNames.contains(username);
+        }
+
+        TFM_Superadmin entry = getAdminEntry((Player) user);
+        if (entry != null)
+        {
+            return entry.isTelnetAdmin();
+        }
+
+        return false;
+    }
+
 
     public static boolean isUserSuperadmin(CommandSender user)
     {

@@ -443,6 +443,7 @@ public class TFM_Util
             if (entry.isSeniorAdmin())
             {
                 return "a " + ChatColor.LIGHT_PURPLE + "Senior Admin" + ChatColor.AQUA + ".";
+                
             }
             else if (entry.isTelnetAdmin())
             {

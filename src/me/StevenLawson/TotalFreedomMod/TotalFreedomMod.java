@@ -88,7 +88,7 @@ public class TotalFreedomMod extends JavaPlugin
         TFM_UserList.getInstance(plugin);
 
         registerEventHandlers();
-
+        
         try
         {
             TFM_Flatlands.getInstance().getWorld();

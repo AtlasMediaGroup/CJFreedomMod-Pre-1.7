@@ -7,7 +7,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.regex.Pattern;
-import me.RyanWild.CJFreedomMod.CJFM_DonatorList;
 import me.StevenLawson.TotalFreedomMod.*;
 import me.StevenLawson.TotalFreedomMod.Commands.Command_landmine;
 import me.StevenLawson.TotalFreedomMod.TFM_RollbackManager.RollbackEntry;
@@ -33,6 +32,7 @@ import org.bukkit.util.Vector;
 
 public class TFM_PlayerListener implements Listener
 {
+    public ChatColor namecolor;
     private static final List<String> BLOCKED_MUTED_CMDS = Arrays.asList(StringUtils.split("say,me,msg,m,tell,r,reply,mail,email", ","));
     private static final int MSG_PER_HEARTBEAT = 10;
     private static final List<String> adminCommands = Arrays.asList(StringUtils.split("gtfo,ban,kick,smite,tban,noob,orbit,doom,saconfig,stfu", ","));
@@ -713,7 +713,7 @@ public class TFM_PlayerListener implements Listener
 
             boolean impostor = TFM_SuperadminList.isSuperadminImpostor(player);
 
-            if (impostor || TFM_SuperadminList.isUserSuperadmin(player) || CJFM_DonatorList.isUserDonator(player))
+            if (impostor || TFM_SuperadminList.isUserSuperadmin(player))
             {
                 TFM_Util.bcastMsg(ChatColor.AQUA + player.getName() + " is " + TFM_Util.getRank(player));
 
@@ -724,6 +724,22 @@ public class TFM_PlayerListener implements Listener
                     player.setGameMode(GameMode.SURVIVAL);
                     TFM_Util.bcastMsg("Warning: " + player.getName() + " has been flagged as an impostor!", ChatColor.RED);
                 }
+                if (TFM_SuperadminList.isUserSuperadmin(player))
+                {
+                    this.namecolor = ChatColor.GOLD;
+                    player.setPlayerListName(namecolor + "");
+                }
+                else if (TFM_SuperadminList.isTelnetAdmin(player))
+                {
+                    this.namecolor = ChatColor.GREEN;
+                    player.setPlayerListName(namecolor + "");
+                }
+                else if (TFM_SuperadminList.isSeniorAdmin(player))
+                {
+                    this.namecolor = ChatColor.LIGHT_PURPLE;
+                    player.setPlayerListName(namecolor + "");
+                }
+                
                 else
                 {
                     if (TFM_SuperadminList.verifyIdentity(player.getName(), player.getAddress().getAddress().getHostAddress()))
@@ -741,7 +757,6 @@ public class TFM_PlayerListener implements Listener
 
                     player.setOp(true);
                 }
-                
             }
 
             if (TFM_ConfigEntry.ADMIN_ONLY_MODE.getBoolean())
