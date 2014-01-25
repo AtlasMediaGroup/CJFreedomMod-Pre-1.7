@@ -47,7 +47,7 @@ public enum TFM_ConfigEntry
     AUTOKICK_TIME(Integer.class, "autokick_time"),
     //
     HOSTNAME(String.class, "Hostname"),
-    PORT(Integer.class, "Port"),
+    PORT(String.class, "Port"),
     DATABASE(String.class, "Database"),
     USER(String.class, "Username"),
     PASSWORD(String.class, "Password"), 

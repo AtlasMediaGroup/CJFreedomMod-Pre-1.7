@@ -84,7 +84,7 @@ public class Command_report extends TFM_Command
         String Time = sdf.format(new Date());
         try
         {
-            TotalFreedomMod.updateDatabase("INSERT INTO reports (Reported, Reporter, ban_reason, Time, Status) VALUES ('" + Reported + "', '" + Reporter + "', '" + ban_reason + "', '" + Time + "', 'open');");
+            plugin.updateDatabase("INSERT INTO reports (Reported, Reporter, ban_reason, Time, Status) VALUES ('" + Reported + "', '" + Reporter + "', '" + ban_reason + "', '" + Time + "', 'open');");
             TFM_Log.info("New Report Added by: " + Reporter);
         }
         catch (SQLException ex)
