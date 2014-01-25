@@ -3,6 +3,7 @@ package me.StevenLawson.TotalFreedomMod.Commands;
 import me.StevenLawson.TotalFreedomMod.TFM_Log;
 import me.StevenLawson.TotalFreedomMod.TFM_SuperadminList;
 import me.StevenLawson.TotalFreedomMod.TFM_Util;
+import me.StevenLawson.TotalFreedomMod.TotalFreedomMod;
 import net.minecraft.util.org.apache.commons.lang3.ArrayUtils;
 import net.minecraft.util.org.apache.commons.lang3.StringUtils;
 import org.bukkit.Bukkit;
@@ -21,9 +22,11 @@ public class Command_report extends TFM_Command
     @Override
     public boolean run(CommandSender sender, Player sender_p, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
     {
-        
-          
-        
+
+
+
+
+
         if (args.length == 0)
         {
             return false;
@@ -39,7 +42,8 @@ public class Command_report extends TFM_Command
             playerMsg(ex.getMessage(), ChatColor.RED);
             return true;
         }
-
+        String Reported = player.getName();
+        String Reporter = sender.getName();
 
         String ban_reason = null;
         if (args.length <= 2)
@@ -51,11 +55,11 @@ public class Command_report extends TFM_Command
             ban_reason = StringUtils.join(ArrayUtils.subarray(args, 1, args.length), " ");
 
         }
-        
-        String Reported = player.getName();
-        String Reporter = sender.getName();
-        
-        if(player == sender_p) {
+
+
+
+        if (player == sender_p)
+        {
             sender.sendMessage(ChatColor.RED + "Don't try to report yourself, idiot.");
             return true;
         }
@@ -65,27 +69,31 @@ public class Command_report extends TFM_Command
         {
             if (TFM_SuperadminList.isUserSuperadmin(admins))
             {
-                admins.sendMessage(TFM_Util.colorize("&8[&4CJFreedomMod System&8] &a" + sender.getName() + " &4has reported &a" + player.getName() + " &4 for &2" + ban_reason + "&4."));
+                admins.sendMessage(TFM_Util.colorize("&8[&4CJFreedomMod System&8] &a" + sender.getName() + " &4has reported &a" + Reported + " &4 for &2" + ban_reason + "&4."));
 
             }
         }
         player.sendMessage(TFM_Util.colorize("&8[&4CJFreedomMod System&8] &4Please note that you have been reported for &2" + ban_reason + " &4and that a admin will be reviewing this shortly ."));
 
-        sender.sendMessage(TFM_Util.colorize("&8[&4CJFreedomMod System&8] &4Your report against &a " + player.getName() + " &4for &2" + ban_reason + " &4has been recieved and a admin will be reviewing it shortly ."));
+        sender.sendMessage(TFM_Util.colorize("&8[&4CJFreedomMod System&8] &4Your report against &a " + Reported + " &4for &2" + ban_reason + " &4has been recieved and a admin will be reviewing it shortly ."));
 
-        
-         SimpleDateFormat sdf = new SimpleDateFormat("dd-M hh:mm");
+
+
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-M hh:mm");
         String Time = sdf.format(new Date());
-        try {
-            plugin.updateDatabase("INSERT INTO reports (Reported, Reporter, ban_reason, Time, Status) VALUES ('" + Reported + "', '" + Reporter + "', '" + ban_reason + "', '" + Time + "', 'open');");
+        try
+        {
+            TotalFreedomMod.updateDatabase("INSERT INTO reports (Reported, Reporter, ban_reason, Time, Status) VALUES ('" + Reported + "', '" + Reporter + "', '" + ban_reason + "', '" + Time + "', 'open');");
             TFM_Log.info("New Report Added by: " + Reporter);
         }
-        catch (SQLException ex) {
+        catch (SQLException ex)
+        {
             sender.sendMessage("Error submitting report to Database.");
             TFM_Log.severe(ex);
         }
-        
-        
+
+
         return true;
     }
 }

@@ -14,8 +14,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import net.minecraft.util.org.apache.commons.io.FileUtils;
 
-import org.kitteh.tag.TagAPI;
-
 import net.minecraft.util.org.apache.commons.lang3.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
