@@ -20,6 +20,7 @@ public class Command_services extends TFM_Command
         {
             playerMsg(service.getFormattedStatus());
         }
+        
         playerMsg("Version" + ChatColor.WHITE + ": " + TFM_ServiceChecker.getInstance().getVersion(), ChatColor.DARK_PURPLE);
         playerMsg("Last Check" + ChatColor.WHITE + ": " + TFM_ServiceChecker.getInstance().getLastCheck(), ChatColor.DARK_PURPLE);
 

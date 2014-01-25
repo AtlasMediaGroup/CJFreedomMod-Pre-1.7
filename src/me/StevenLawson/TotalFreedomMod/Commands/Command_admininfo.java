@@ -20,12 +20,13 @@ public class Command_admininfo extends TFM_Command
         }
         else
         {
-            playerMsg(ChatColor.AQUA + "The following is accurate as of 03/05/2013");
+            playerMsg(ChatColor.AQUA + "The following is accurate as of 25/01/2014");
             playerMsg(ChatColor.AQUA + "To apply for admin you need to go to the forums at http://www.thecjgcjg.com/forum");
             playerMsg(ChatColor.AQUA + "Then read the requirements.");
-            playerMsg(ChatColor.AQUA + "Then if you feel you are ready, make a new thread in the appropriate board.");
-            playerMsg(ChatColor.AQUA + "And fill out the template in the new thread.");
+            playerMsg(ChatColor.AQUA + "Then if you feel you are ready, make a new thread in the Admin Aplications board.");
+            playerMsg(ChatColor.AQUA + "And fill out the template in the NEW thread.");
             playerMsg(ChatColor.RED + "We ask for you not to ask existing admins for recommendations, this will get your application denied.");
+            playerMsg(ChatColor.RED + "DO NOT Lie on your application, this is a way just to get it rejected!");
             playerMsg(ChatColor.AQUA + "Good Luck!");
             return true;
         }
