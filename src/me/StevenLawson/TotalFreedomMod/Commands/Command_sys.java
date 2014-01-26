@@ -1,5 +1,6 @@
 package me.StevenLawson.TotalFreedomMod.Commands;
 
+import me.StevenLawson.TotalFreedomMod.TFM_ConfigEntry;
 import me.StevenLawson.TotalFreedomMod.TFM_ServerInterface;
 import me.StevenLawson.TotalFreedomMod.TFM_Superadmin;
 import me.StevenLawson.TotalFreedomMod.TFM_SuperadminList;
@@ -7,6 +8,7 @@ import me.StevenLawson.TotalFreedomMod.TFM_Util;
 import me.StevenLawson.TotalFreedomMod.TotalFreedomMod;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -39,11 +41,15 @@ public class Command_sys extends TFM_Command
             if (args[0].equalsIgnoreCase("teston"))
             {
                 TFM_Util.adminAction("WARNING: " + sender.getName(), "Has Started Testing on this server.", true);
+                TFM_ConfigEntry.DEVELOPMENT_MODE.setBoolean(true);
+                for (Player player : server.getOnlinePlayers())
+                player.sendMessage(ChatColor.DARK_AQUA + "Warning: CJFreedom is currently in development mode. This means there may be unstable plugin builds on this server, and the server could crash more than normal!");
             }
             
             if (args[0].equalsIgnoreCase("testoff"))
             {
-                TFM_Util.adminAction("COMPLETED: " + sender.getName(), "Has succefully finished server testing", true);
+                TFM_Util.adminAction("FINISHED: " + sender.getName(), "Has finished server side testing", true);
+                TFM_ConfigEntry.DEVELOPMENT_MODE.setBoolean(false);
             }
         }
         else if (args.length == 2)

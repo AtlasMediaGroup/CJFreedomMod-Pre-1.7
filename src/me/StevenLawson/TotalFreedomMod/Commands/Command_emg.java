@@ -38,17 +38,19 @@ public class Command_emg extends TFM_Command
             if (args[0].equalsIgnoreCase("1"))
             {
                 TFM_Util.adminAction("WARNING: " + sender.getName(), "Activating a level 1 security lockdown.", true);
+                TFM_ConfigEntry.EMERGANCY_MODE_OPEN.setBoolean(true);
             }
 
             if (args[0].equalsIgnoreCase("2"))
             {
                 TFM_Util.adminAction("WARNING: " + sender.getName(), "Activating a level 2 security lockdown.", true);
-                TFM_ConfigEntry.EMERGANCY_MODE.setBoolean(true);
+                TFM_ConfigEntry.EMERGANCY_MODE_OPEN.setBoolean(true);
             }
 
             if (args[0].equalsIgnoreCase("3"))
             {
                 TFM_Util.adminAction("WARNING: " + sender.getName(), "Activating a level 3 security lockdown.", true);
+                TFM_ConfigEntry.EMERGANCY_MODE_OPEN.setBoolean(false);
                 TFM_ConfigEntry.EMERGANCY_MODE.setBoolean(true);
                 
             }
@@ -56,6 +58,7 @@ public class Command_emg extends TFM_Command
             if (args[0].equalsIgnoreCase("4"))
             {
                 TFM_Util.adminAction("WARNING: " + sender.getName(), "Activating a level 4 security lockdown.", true);
+                TFM_ConfigEntry.EMERGANCY_MODE_OPEN.setBoolean(false);
                 TFM_ConfigEntry.EMERGANCY_MODE.setBoolean(true);
                 TFM_Util.adminAction("WARNING: " + sender.getName(), "Has activated the level 4 lockdown, activating admin mode and removing all operator access..", true);
                 for (OfflinePlayer player : server.getOperators())
@@ -74,6 +77,7 @@ public class Command_emg extends TFM_Command
             if (args[0].equalsIgnoreCase("5"))
             {
                 TFM_Util.adminAction("WARNING: " + sender.getName(), "Activating a level 5 security lockdown.", true);
+                TFM_ConfigEntry.EMERGANCY_MODE_OPEN.setBoolean(false);
                 TFM_ConfigEntry.EMERGANCY_MODE.setBoolean(true);
                 for (Player player : server.getOnlinePlayers())
                 {
@@ -98,6 +102,7 @@ public class Command_emg extends TFM_Command
             {
                 TFM_Util.adminAction("WARNING: " + sender.getName(), "Security Lockdown Disabled", true);
                 TFM_ConfigEntry.EMERGANCY_MODE.setBoolean(false);
+                TFM_ConfigEntry.EMERGANCY_MODE_OPEN.setBoolean(false);
                 for (Player p : server.getOnlinePlayers())
                 {
                     if (!p.isOp())

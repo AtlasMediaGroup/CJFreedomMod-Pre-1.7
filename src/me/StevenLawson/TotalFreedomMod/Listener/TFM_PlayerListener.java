@@ -777,9 +777,31 @@ public class TFM_PlayerListener implements Listener
                     @Override
                     public void run()
                     {
-                        player.sendMessage(ChatColor.RED + "CJFreedom is currently in emergancy response mode.");
+                        player.sendMessage(ChatColor.RED + "CJFreedom is currently in emergancy response mode - Server Closed.");
                     }
-                }.runTaskLater(TotalFreedomMod.plugin, 20L * 3L);
+                }.runTaskLater(TotalFreedomMod.plugin, 10L * 3L);
+            }
+            if (TFM_ConfigEntry.EMERGANCY_MODE_OPEN.getBoolean())
+            {
+                new BukkitRunnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                        player.sendMessage(ChatColor.RED + "CJFreedom is currently in emergancy response mode - Server Open.");
+                    }
+                }.runTaskLater(TotalFreedomMod.plugin, 10L * 3L);
+            }
+            if (TFM_ConfigEntry.DEVELOPMENT_MODE.getBoolean())
+            {
+                new BukkitRunnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                        player.sendMessage(ChatColor.DARK_AQUA + "Warning: CJFreedom is currently in development mode. This means there may be unstable plugin builds on this server, and the server could crash more than normal!");
+                    }
+                }.runTaskLater(TotalFreedomMod.plugin, 10L * 3L);
             }
         }
         catch (Throwable ex)
