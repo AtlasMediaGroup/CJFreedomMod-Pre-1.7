@@ -5,6 +5,7 @@ import java.util.List;
 public enum TFM_ConfigEntry
 {
     ADMIN_ONLY_MODE(Boolean.class, "admin_only_mode"),
+    EMERGANCY_MODE(Boolean.class, "emergancy_mode"),
     ALLOW_EXPLOSIONS(Boolean.class, "allow_explosions"),
     ALLOW_FIRE_PLACE(Boolean.class, "allow_fire_place"),
     ALLOW_FIRE_SPREAD(Boolean.class, "allow_fire_spread"),

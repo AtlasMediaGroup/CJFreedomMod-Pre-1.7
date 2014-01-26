@@ -4,13 +4,15 @@ import me.StevenLawson.TotalFreedomMod.TFM_ConfigEntry;
 import me.StevenLawson.TotalFreedomMod.TFM_SuperadminList;
 import me.StevenLawson.TotalFreedomMod.TFM_Util;
 import me.StevenLawson.TotalFreedomMod.TotalFreedomMod;
+import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 
 @CommandPermissions(level = AdminLevel.ALL, source = SourceType.BOTH)
-@CommandParameters(description = "System Administration Emergancy", usage = "/<command> <1 |2 |3| 4| Off>>")
+@CommandParameters(description = "System Administration Emergancy", usage = "/<command> <1 | 2 |3 | 4 | 5 | Off>>")
 public class Command_emg extends TFM_Command
 {
     @Override
@@ -36,22 +38,26 @@ public class Command_emg extends TFM_Command
             if (args[0].equalsIgnoreCase("1"))
             {
                 TFM_Util.adminAction("WARNING: " + sender.getName(), "Activating a level 1 security lockdown.", true);
-                TotalFreedomMod.lockdownEnabled = true;
             }
 
             if (args[0].equalsIgnoreCase("2"))
             {
                 TFM_Util.adminAction("WARNING: " + sender.getName(), "Activating a level 2 security lockdown.", true);
-                TFM_ConfigEntry.ADMIN_ONLY_MODE.setBoolean(true);
-
-
+                TFM_ConfigEntry.EMERGANCY_MODE.setBoolean(true);
             }
-            
+
             if (args[0].equalsIgnoreCase("3"))
             {
                 TFM_Util.adminAction("WARNING: " + sender.getName(), "Activating a level 3 security lockdown.", true);
-                TFM_ConfigEntry.ADMIN_ONLY_MODE.setBoolean(true);
-                TFM_Util.adminAction("WARNING: " + sender.getName(), "Has activated the level 3 lockdown, activating admin mode and removing all operator access..", true);
+                TFM_ConfigEntry.EMERGANCY_MODE.setBoolean(true);
+                
+            }
+
+            if (args[0].equalsIgnoreCase("4"))
+            {
+                TFM_Util.adminAction("WARNING: " + sender.getName(), "Activating a level 4 security lockdown.", true);
+                TFM_ConfigEntry.EMERGANCY_MODE.setBoolean(true);
+                TFM_Util.adminAction("WARNING: " + sender.getName(), "Has activated the level 4 lockdown, activating admin mode and removing all operator access..", true);
                 for (OfflinePlayer player : server.getOperators())
                 {
                     player.setOp(false);
@@ -61,18 +67,19 @@ public class Command_emg extends TFM_Command
                         player.getPlayer().sendMessage(TotalFreedomMod.YOU_ARE_NOT_OP);
                     }
                 }
+                
 
             }
 
-            if (args[0].equalsIgnoreCase("4"))
+            if (args[0].equalsIgnoreCase("5"))
             {
-                TFM_Util.adminAction("WARNING: " + sender.getName(), "Activating a level 4 security lockdown.", true);
-                TFM_ConfigEntry.ADMIN_ONLY_MODE.setBoolean(true);
+                TFM_Util.adminAction("WARNING: " + sender.getName(), "Activating a level 5 security lockdown.", true);
+                TFM_ConfigEntry.EMERGANCY_MODE.setBoolean(true);
                 for (Player player : server.getOnlinePlayers())
                 {
                     if (!TFM_SuperadminList.isUserSuperadmin(player))
                     {
-                        player.kickPlayer("Server has initiated a level 4 lockdown. All non super admins have been disconnected..");
+                        player.kickPlayer("Server has initiated a level 5 lockdown. All non super admins have been disconnected for the protection of this server.");
                     }
                 }
                 for (OfflinePlayer player : server.getOperators())
@@ -90,8 +97,7 @@ public class Command_emg extends TFM_Command
             if (args[0].equalsIgnoreCase("off"))
             {
                 TFM_Util.adminAction("WARNING: " + sender.getName(), "Security Lockdown Disabled", true);
-                TotalFreedomMod.lockdownEnabled = false;
-                TFM_ConfigEntry.ADMIN_ONLY_MODE.setBoolean(false);
+                TFM_ConfigEntry.EMERGANCY_MODE.setBoolean(false);
                 for (Player p : server.getOnlinePlayers())
                 {
                     if (!p.isOp())

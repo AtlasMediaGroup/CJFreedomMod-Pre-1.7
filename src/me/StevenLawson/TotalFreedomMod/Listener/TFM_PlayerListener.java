@@ -770,6 +770,17 @@ public class TFM_PlayerListener implements Listener
                     }
                 }.runTaskLater(TotalFreedomMod.plugin, 20L * 3L);
             }
+            if (TFM_ConfigEntry.EMERGANCY_MODE.getBoolean())
+            {
+                new BukkitRunnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                        player.sendMessage(ChatColor.RED + "CJFreedom is currently in emergancy response mode.");
+                    }
+                }.runTaskLater(TotalFreedomMod.plugin, 20L * 3L);
+            }
         }
         catch (Throwable ex)
         {

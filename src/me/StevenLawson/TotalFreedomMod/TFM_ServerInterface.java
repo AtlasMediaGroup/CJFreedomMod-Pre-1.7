@@ -275,6 +275,13 @@ public class TFM_ServerInterface
                 event.disallow(PlayerLoginEvent.Result.KICK_OTHER, "Server is temporarily open to admins only.");
                 return;
             }
+            
+            // Emergancy mode
+           if (TFM_ConfigEntry.EMERGANCY_MODE.getBoolean())
+            {
+                event.disallow(PlayerLoginEvent.Result.KICK_OTHER, "CJFreedom Security Protection is currently enabled and non-admins may not join.");
+                return;
+            }
 
             // Lockdown mode
             if (TotalFreedomMod.lockdownEnabled)
