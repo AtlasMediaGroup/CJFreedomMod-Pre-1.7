@@ -21,8 +21,8 @@ public class Command_potato extends TFM_Command
         StringBuilder output = new StringBuilder();
         Random rand = new Random();
 		
-		String message = ChatColor.YELLOW + "It's dangerous to go alone. Here, take this!\n"
-		+ ChatColor.GREEN + "**+1 potato**\n"
+		String message = ChatColor.YELLOW + "It is dangerous to go alone. Here, take this!\n"
+		+ ChatColor.RED + "** potato +1 **\n"
 		+ ChatColor.ITALIC + "Use it wisely. #" + rand.nextInt(10000);
 
         for (Player player : server.getOnlinePlayers())
