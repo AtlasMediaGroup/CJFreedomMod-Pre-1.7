@@ -88,7 +88,7 @@ public class Command_list extends TFM_Command
                 }
                 else if (TFM_SuperadminList.isUserSuperadmin(player))
                 {
-                    prefix = (ChatColor.GOLD + "[SA]");
+                    prefix = (ChatColor.AQUA + "[SA]");
                 }
                  if (TFM_Util.DEVELOPERS.contains(player.getName()))
                 {

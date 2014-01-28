@@ -29,10 +29,12 @@ import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
+import me.StevenLawson.TotalFreedomMod.TFM_SuperadminList;
+import me.StevenLawson.TotalFreedomMod.TFM_Superadmin;
 
 public class TFM_PlayerListener implements Listener
 {
-    public ChatColor namecolor;
+    public String name;
     private static final List<String> BLOCKED_MUTED_CMDS = Arrays.asList(StringUtils.split("say,me,msg,m,tell,r,reply,mail,email", ","));
     private static final int MSG_PER_HEARTBEAT = 10;
     private static final List<String> adminCommands = Arrays.asList(StringUtils.split("gtfo,ban,kick,smite,tban,noob,orbit,doom,saconfig,stfu", ","));
@@ -274,7 +276,7 @@ public class TFM_PlayerListener implements Listener
         TFM_AdminWorld.getInstance().validateMovement(event);
         CJFM_DonatorWorld.getInstance().validateMovement(event);
     }
-    
+
     @EventHandler(priority = EventPriority.HIGH)
     public void chatBotEvent(AsyncPlayerChatEvent event)
     {
@@ -549,7 +551,7 @@ public class TFM_PlayerListener implements Listener
                 event.setCancelled(true);
                 return;
             }
-            
+
             // Check for donatorchat
             if (playerdata.inDonatorChat())
             {
@@ -703,11 +705,67 @@ public class TFM_PlayerListener implements Listener
     @EventHandler(priority = EventPriority.MONITOR)
     public void onPlayerJoin(PlayerJoinEvent event)
     {
+        final Player player = event.getPlayer();
+
+        final TFM_Superadmin entry = TFM_SuperadminList.getAdminEntry(player.getName());
+        if (entry != null && !entry.isSeniorAdmin() && entry.isTelnetAdmin())
+        {
+            
+             player.setPlayerListName(ChatColor.GREEN + player.getName());
+            
+         /*   if (player.getName().length() < 11)
+            {
+                player.setPlayerListName(ChatColor.GREEN + "[STA] " + player.getName());
+            }
+            else
+            {
+                player.setPlayerListName(ChatColor.GREEN + player.getName());
+            } */
+        }
+        else if (TFM_SuperadminList.isSeniorAdmin(player))
+        {
+            
+            player.setPlayerListName(ChatColor.LIGHT_PURPLE + player.getName());
+           
+            /*if (player.getName().length() < 11)
+            {
+                player.setPlayerListName(ChatColor.LIGHT_PURPLE + "[SRA] " + player.getName());
+            }
+            else
+            {
+                player.setPlayerListName(ChatColor.LIGHT_PURPLE + player.getName());
+            } */
+
+
+        }
+        else if (TFM_SuperadminList.isUserSuperadmin(player))
+        {
+             player.setPlayerListName(ChatColor.GOLD + player.getName());
+
+           /* if (player.getName().length() < 11)
+            {
+                player.setPlayerListName(ChatColor.GOLD + "[SA] " + player.getName());
+            }
+            else
+            {
+                player.setPlayerListName(ChatColor.GOLD + player.getName());
+            } */
+            
+
+        }
+        if (player.getName().equalsIgnoreCase("wild1145"))
+                {
+                   player.setPlayerListName(ChatColor.DARK_PURPLE + "[SYS] Wild1145");
+                }
+
+
         try
         {
-            final Player player = event.getPlayer();
+            //final Player player = event.getPlayer();
             final TFM_PlayerData playerdata = TFM_PlayerData.getPlayerData(player);
             playerdata.setSuperadminIdVerified(null);
+
+
 
             TFM_UserList.getInstance(TotalFreedomMod.plugin).addUser(player);
 
@@ -724,22 +782,6 @@ public class TFM_PlayerListener implements Listener
                     player.setGameMode(GameMode.SURVIVAL);
                     TFM_Util.bcastMsg("Warning: " + player.getName() + " has been flagged as an impostor!", ChatColor.RED);
                 }
-                if (TFM_SuperadminList.isUserSuperadmin(player))
-                {
-                    this.namecolor = ChatColor.GOLD;
-                    player.setPlayerListName(namecolor + "");
-                }
-                else if (TFM_SuperadminList.isTelnetAdmin(player))
-                {
-                    this.namecolor = ChatColor.GREEN;
-                    player.setPlayerListName(namecolor + "");
-                }
-                else if (TFM_SuperadminList.isSeniorAdmin(player))
-                {
-                    this.namecolor = ChatColor.LIGHT_PURPLE;
-                    player.setPlayerListName(namecolor + "");
-                }
-                
                 else
                 {
                     if (TFM_SuperadminList.verifyIdentity(player.getName(), player.getAddress().getAddress().getHostAddress()))
