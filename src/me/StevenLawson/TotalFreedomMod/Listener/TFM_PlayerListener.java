@@ -710,53 +710,58 @@ public class TFM_PlayerListener implements Listener
         final TFM_Superadmin entry = TFM_SuperadminList.getAdminEntry(player.getName());
         if (entry != null && !entry.isSeniorAdmin() && entry.isTelnetAdmin())
         {
-            
+
+            player.setPlayerListName(ChatColor.GREEN + player.getName());
+
+            /*   if (player.getName().length() < 11)
+             {
+             player.setPlayerListName(ChatColor.GREEN + "[STA] " + player.getName());
+             }
+             else
+             {
              player.setPlayerListName(ChatColor.GREEN + player.getName());
-            
-         /*   if (player.getName().length() < 11)
-            {
-                player.setPlayerListName(ChatColor.GREEN + "[STA] " + player.getName());
-            }
-            else
-            {
-                player.setPlayerListName(ChatColor.GREEN + player.getName());
-            } */
+             } */
         }
         else if (TFM_SuperadminList.isSeniorAdmin(player))
         {
-            
+
             player.setPlayerListName(ChatColor.LIGHT_PURPLE + player.getName());
-           
+
             /*if (player.getName().length() < 11)
-            {
-                player.setPlayerListName(ChatColor.LIGHT_PURPLE + "[SRA] " + player.getName());
-            }
-            else
-            {
-                player.setPlayerListName(ChatColor.LIGHT_PURPLE + player.getName());
-            } */
+             {
+             player.setPlayerListName(ChatColor.LIGHT_PURPLE + "[SRA] " + player.getName());
+             }
+             else
+             {
+             player.setPlayerListName(ChatColor.LIGHT_PURPLE + player.getName());
+             } */
 
 
         }
         else if (TFM_SuperadminList.isUserSuperadmin(player))
         {
+            player.setPlayerListName(ChatColor.AQUA + player.getName());
+
+            /* if (player.getName().length() < 11)
+             {
+             player.setPlayerListName(ChatColor.GOLD + "[SA] " + player.getName());
+             }
+             else
+             {
              player.setPlayerListName(ChatColor.GOLD + player.getName());
+             } */
 
-           /* if (player.getName().length() < 11)
-            {
-                player.setPlayerListName(ChatColor.GOLD + "[SA] " + player.getName());
-            }
-            else
-            {
-                player.setPlayerListName(ChatColor.GOLD + player.getName());
-            } */
-            
-
+if (TFM_Util.DEVELOPERS.contains(player.getName()))
+        {
+            player.setPlayerListName(ChatColor.DARK_PURPLE + player.getName());
+        }
         }
         if (player.getName().equalsIgnoreCase("wild1145"))
-                {
-                   player.setPlayerListName(ChatColor.DARK_PURPLE + "[SYS] Wild1145");
-                }
+        {
+            player.setPlayerListName(ChatColor.DARK_PURPLE + "[SYS] Wild1145");
+        }
+        
+        
 
 
         try
