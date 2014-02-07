@@ -15,7 +15,7 @@ public class Command_gt extends TFM_Command
 	{
 	    if (args.length != 1)
 		{
-			 return false;
+		    return false;
 	    }
 		else
 		{
