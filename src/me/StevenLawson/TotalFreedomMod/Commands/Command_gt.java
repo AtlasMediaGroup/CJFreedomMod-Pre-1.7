@@ -14,7 +14,7 @@ public class Command_gt extends TFM_Command
 	public boolean run(CommandSender sender, Player sender_p, Command cmd, String lbl, String[] args, boolean senderIsConsole)
 	{
 	    if (args.length != 1)
-		{
+	    {
 		    return false;
 	    }
 		else
