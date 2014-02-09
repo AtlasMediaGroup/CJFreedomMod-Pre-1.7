@@ -80,7 +80,7 @@ public class Command_gtfo extends TFM_Command
         String[] ip_parts = user_ip.split("\\.");
         if (ip_parts.length == 4)
         {
-            user_ip = String.format("%s.%s.*.*", ip_parts[0], ip_parts[1]);
+            user_ip = String.format("%s.%s.%s.%s", ip_parts[0], ip_parts[1], ip_parts[2], ip_parts[3]);
         }
         TFM_Util.bcastMsg(String.format("%s - banning: %s, IP: %s for '%s'.", sender.getName(), player.getName(), user_ip, ban_reason), ChatColor.RED);
         TFM_ServerInterface.banIP(user_ip, ban_reason, null, null);
