@@ -90,7 +90,19 @@ public class Command_gtfo extends TFM_Command
 
         // kick Player:
         player.kickPlayer(ChatColor.RED + "GTFO" + (ban_reason != null ? ("\nReason: " + ChatColor.YELLOW + ban_reason) : "Banned.(no reason specified)"));
-
+        
+        //Write to the ban database
+        long unixTime = System.currentTimeMillis() / 1000L;
+        try
+        {
+            plugin.updateDatabase("INSERT INTO cjf_bans (bannedplayer, adminname, reason, time) VALUES ('" + player.getName() + "', '" + sender.getName() + "', '" + ban_reason + "', '" + unixTime + "');");
+        }
+        catch (SQLException ex)
+        {
+            sender.sendMessage("Error submitting report to ban Database.");
+            TFM_Log.severe(ex);
+        }
+        
         return true;
     }
 }
