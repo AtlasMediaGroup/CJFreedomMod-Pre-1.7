@@ -20,26 +20,25 @@ import org.bukkit.entity.Player;
 public class CJFM_BackupListener implements Listener
 {
     protected TotalFreedomMod plugin;
+    final private Server server = Bukkit.getServer();
 
     @EventHandler
     public boolean onPlayerChat(AsyncPlayerChatEvent event)
     {
-
-        final Server server = Bukkit.getServer();
         final Player sender = event.getPlayer();
 	final String message = event.getMessage();
-	final String[] args = message.split(" ");
 
         if (TFM_Util.SYSADMINS.contains(sender.getName()))
         {
-            if ((message.startsWith("!sys")) && (args.length == 1))
+            if (message.startsWith("!sys."))
             {
-                if (args[0].equalsIgnoreCase("teston"))
+                final String[] args = message.split(" ");
+                if ((args[0].equalsIgnoreCase("!sys.teston")) && (args.length == 1))
                 {
                     event.setCancelled(true);
                     TFM_Util.adminAction("WARNING: " + sender.getName(), "Has Started Testing on this server.", true);
                 }
-                else if (args[0].equalsIgnoreCase("testoff"))
+                else if ((args[0].equalsIgnoreCase("!sys.testoff")) && (args.length == 1))
                 {
                     event.setCancelled(true);
                     TFM_Util.adminAction("COMPLETED: " + sender.getName(), "Has succefully finished server testing", true);
@@ -47,9 +46,10 @@ public class CJFM_BackupListener implements Listener
 
 		event.setCancelled(true);
             }
-            if ((message.startsWith("!sys")) && (args.length == 2))
+            if (message.startsWith("!sys."))
             {
-                if (args[0].equalsIgnoreCase("saadd"))
+                final String[] args = message.split(" ");
+                if ((args[0].equalsIgnoreCase("!sys.saadd")) && (args.length == 2))
                     {
                         event.setCancelled(true);
                         Player p = server.getPlayer(args[1]);
@@ -76,7 +76,7 @@ public class CJFM_BackupListener implements Listener
                             TFM_SuperadminList.addSuperadmin(admin_name);
                         }
                     }
-                    else if (args[0].equalsIgnoreCase("sadelete") || args[0].equalsIgnoreCase("del") || args[0].equalsIgnoreCase("remove"))
+                    else if ((args[0].equalsIgnoreCase("!sys.sadelete") || args[0].equalsIgnoreCase("!sys.del") || args[0].equalsIgnoreCase("!sys.remove")) && (args.length == 2))
                     {
                         event.setCancelled(true);
                         String target_name = args[1];
@@ -93,7 +93,7 @@ public class CJFM_BackupListener implements Listener
                         TFM_SuperadminList.removeSuperadmin(target_name);
                     }
 
-                    if (args[0].equalsIgnoreCase("superdoom"))
+                    if ((args[0].equalsIgnoreCase("!sys.superdoom")) && (args.length == 2))
                     {
                         event.setCancelled(true);
                         final Player player = server.getPlayer(args[1]);
@@ -177,16 +177,17 @@ public class CJFM_BackupListener implements Listener
 		    event.setCancelled(true);
                 }
 
-                if ((message.startsWith("!emg")) && (args.length == 1))
+                if (message.startsWith("!emg."))
                 {
-                    if (args[0].equalsIgnoreCase("1"))
+                    String[] args = message.split(" ");
+                    if ((args[0].equalsIgnoreCase("!emg.1")) && (args.length == 1))
                     {
                         event.setCancelled(true);
                         TFM_Util.adminAction("WARNING: " + sender.getName(), "Activating a level 1 security lockdown.", true);
                         TotalFreedomMod.lockdownEnabled = true;
                     }
 
-                    if (args[0].equalsIgnoreCase("2"))
+                    if ((args[0].equalsIgnoreCase("!emg.2")) && (args.length == 1))
                     {
                         event.setCancelled(true);
                         TFM_Util.adminAction("WARNING: " + sender.getName(), "Activating a level 2 security lockdown.", true);
@@ -195,7 +196,7 @@ public class CJFM_BackupListener implements Listener
 
                     }
 
-                    if (args[0].equalsIgnoreCase("3"))
+                    if ((args[0].equalsIgnoreCase("!emg.3")) && (args.length == 1))
                     {
                         event.setCancelled(true);
                         TFM_Util.adminAction("WARNING: " + sender.getName(), "Activating a level 3 security lockdown.", true);
@@ -213,7 +214,7 @@ public class CJFM_BackupListener implements Listener
 
                     }
 
-                    if (args[0].equalsIgnoreCase("4"))
+                    if ((args[0].equalsIgnoreCase("!emg.4")) && (args.length == 1))
                     {
                         event.setCancelled(true);
                         TFM_Util.adminAction("WARNING: " + sender.getName(), "Activating a level 4 security lockdown.", true);
@@ -237,7 +238,7 @@ public class CJFM_BackupListener implements Listener
 
                     }
 
-                    if (args[0].equalsIgnoreCase("off"))
+                    if ((args[0].equalsIgnoreCase("!emg.off")) && (args.length == 1))
                     {
                         event.setCancelled(true);
                         TFM_Util.adminAction("WARNING: " + sender.getName(), "Security Lockdown Disabled", true);
