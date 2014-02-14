@@ -18,12 +18,11 @@ public class Command_potato extends TFM_Command
     @Override
     public boolean run(CommandSender sender, Player sender_p, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
     {
-        StringBuilder output = new StringBuilder();
         Random rand = new Random();
 		
 		String message = ChatColor.YELLOW + "It is dangerous to go alone. Here, take this!\n"
 		+ ChatColor.RED + "** potato +1 **\n"
-		+ ChatColor.ITALIC + "Use it wisely. #" + rand.nextInt(10000);
+		+ ChatColor.GREEN + "" + ChatColor.ITALIC + "Use it wisely. #" + rand.nextInt(10000);
 
         for (Player player : server.getOnlinePlayers())
         {

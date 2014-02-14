@@ -80,11 +80,15 @@ public class Command_report extends TFM_Command
 
 
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-M hh:mm");
-        String Time = sdf.format(new Date());
+        /*
+         * SimpleDateFormat sdf = new SimpleDateFormat("dd-M hh:mm");
+         * String Time = sdf.format(new Date());
+         * Commented out due to new unix time stamp.
+         */
+        long unixTime = System.currentTimeMillis() / 1000L;
         try
         {
-            plugin.updateDatabase("INSERT INTO reports (Reported, Reporter, ban_reason, Time, Status) VALUES ('" + Reported + "', '" + Reporter + "', '" + ban_reason + "', '" + Time + "', 'open');");
+            plugin.updateDatabase("INSERT INTO reports (Reported, Reporter, ban_reason, Time, Status) VALUES ('" + Reported + "', '" + Reporter + "', '" + ban_reason + "', '" + unixTime + "', 'open');");
             TFM_Log.info("New Report Added by: " + Reporter);
         }
         catch (SQLException ex)
