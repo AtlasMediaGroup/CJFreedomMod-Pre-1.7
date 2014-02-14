@@ -1,5 +1,6 @@
-package me.StevenLawson.TotalFreedomMod.Commands;
+/*package me.StevenLawson.TotalFreedomMod.Commands;
 
+import me.StevenLawson.TotalFreedomMod.TFM_Util;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -22,7 +23,7 @@ public class Command_gt extends TFM_Command
 			final Player p;
 			try
 			{
-				p = getPlayer(args[0]
+				p = getPlayer(args[0]);
 			}
 			catch (PlayerNotFoundException ex)
 			{
@@ -59,3 +60,4 @@ public class Command_gt extends TFM_Command
 		return true;
 	}
 }
+*/
