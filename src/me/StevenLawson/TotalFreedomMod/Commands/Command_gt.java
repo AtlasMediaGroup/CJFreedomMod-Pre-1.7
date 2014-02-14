@@ -1,4 +1,4 @@
-/*package me.StevenLawson.TotalFreedomMod.Commands;
+package me.StevenLawson.TotalFreedomMod.Commands;
 
 import me.StevenLawson.TotalFreedomMod.TFM_Util;
 import org.bukkit.*;
@@ -31,10 +31,11 @@ public class Command_gt extends TFM_Command
 				return true;
 			}
 		
-			TFM_Util.adminAction(sender_p.getName(), "has sent " + p.getName() + " into the null void.", true);
+			TFM_Util.adminAction(sender_p.getName(), "Sending " + p.getName() + " into the null void.", true);
 			
 			final Location l = p.getLocation();
-			p.teleport(new Location(l.getWorld(), l.getBlockX(), l.setY(120), l.getBlockZ()));
+			l.setY(120);
+			p.teleport(l);
 			p.setVelocity(new Vector(0, 10, 0));
 			for (int x = -1; x <= 1; x++)
 			{
@@ -50,7 +51,8 @@ public class Command_gt extends TFM_Command
 				@Override
 				public void run()
 				{
-					p.teleport(new Location(l.getWorld(), l.getBlockX(), l.setY(0), l.getBlockZ()));
+					l.setY(0);
+					p.teleport(l);
 					p.setVelocity(new Vector(0, -10, 0));
 				}
 			}.runTaskLater(plugin, 40L);
@@ -60,4 +62,3 @@ public class Command_gt extends TFM_Command
 		return true;
 	}
 }
-*/
