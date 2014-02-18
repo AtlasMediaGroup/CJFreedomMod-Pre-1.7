@@ -83,7 +83,7 @@ public class Command_report extends TFM_Command
         /*
          * SimpleDateFormat sdf = new SimpleDateFormat("dd-M hh:mm");
          * String Time = sdf.format(new Date());
-         * Commented out due to new unix time stamp.
+         * Changed to Unix Time Frame. 
          */
         long unixTime = System.currentTimeMillis() / 1000L;
         try

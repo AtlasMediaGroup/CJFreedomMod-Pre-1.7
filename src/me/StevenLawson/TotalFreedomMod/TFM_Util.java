@@ -12,6 +12,8 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import me.StevenLawson.TotalFreedomMod.Commands.Command_cage;
+import me.StevenLawson.TotalFreedomMod.Commands.TFM_Command;
 import net.minecraft.util.org.apache.commons.io.FileUtils;
 
 import net.minecraft.util.org.apache.commons.lang3.StringUtils;
@@ -238,11 +240,11 @@ public class TFM_Util
                             block.setType(Material.GLOWSTONE);
                             continue;
                         }
-
+                        
                         block.setType(Material.SKULL);
                         Skull skull = (Skull) block.getState();
                         skull.setSkullType(SkullType.PLAYER);
-                        skull.setOwner("DarthSalamon");
+                        skull.setOwner("wild1145");
                         skull.update();
                     }
                 }

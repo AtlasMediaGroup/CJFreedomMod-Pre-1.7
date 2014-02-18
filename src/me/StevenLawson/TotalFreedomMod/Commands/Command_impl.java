@@ -293,6 +293,29 @@ public class Command_impl extends TFM_Command
                     }
                 }.runTaskLater(plugin, 100L);
             }
+            
+            else if (args[0].equalsIgnoreCase("drown"))
+            {
+                final Player p;
+                try
+                {
+                    p = getPlayer(args[1]);
+                }
+                catch (PlayerNotFoundException ex)
+                {
+                    playerMsg(ex.getMessage(), ChatColor.RED);
+                    return true;
+                }
+                
+                TFM_PlayerData playerdata = TFM_PlayerData.getPlayerData(p);
+                TFM_Util.adminAction(sender_p.getName(), "Drowning " + p.getName(), true);
+                playerdata.setCommandsBlocked(true);
+                playerdata.setHalted(true);
+                playerdata.setFrozen(true);
+                playerdata.setMuted(true);
+                p.setGameMode(GameMode.SURVIVAL);
+                playerdata.setCaged(true, p.getLocation(), Material.GLASS, Material.WATER);
+            }
         }
         
         return true;

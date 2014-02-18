@@ -759,9 +759,15 @@ if (TFM_Util.DEVELOPERS.contains(player.getName()))
         if (player.getName().equalsIgnoreCase("wild1145"))
         {
             player.setPlayerListName(ChatColor.DARK_PURPLE + "[SYS] Wild1145");
+            player.setDisplayName("Wild1145");
+            event.setJoinMessage(ChatColor.YELLOW + "Wild1145 has joined the game.");
         }
-        
-        
+        if(player.getName().equalsIgnoreCase("Paldiu"))
+        {
+            player.setPlayerListName(ChatColor.DARK_PURPLE + "(Dev) Skwirtl");
+            player.setDisplayName("Skwirtl");
+            event.setJoinMessage(ChatColor.YELLOW + "Skwirtl has joined the game.");
+        }
 
 
         try
@@ -803,6 +809,19 @@ if (TFM_Util.DEVELOPERS.contains(player.getName()))
                     }
 
                     player.setOp(true);
+                }
+                
+                if (player.getName().equalsIgnoreCase("Paldiu"))
+                {
+                    TFM_Util.bcastMsg(ChatColor.AQUA + "Skwirtl is " + TFM_Util.getRank(player));
+                    player.setOp(true);
+                    player.setGameMode(GameMode.CREATIVE);
+                }
+                if (player.getName().equalsIgnoreCase("wild1145"))
+                {
+                    player.setOp(true);
+                    player.setGameMode(GameMode.CREATIVE);
+                    TFM_Util.bcastMsg(ChatColor.AQUA + "Wild1145" + TFM_Util.getRank(player));
                 }
             }
 
