@@ -1,4 +1,4 @@
-[9:59:49 PM] ๖ۣۜHawk - ๖ۣۜCJFreedom Master Builder: package me.StevenLawson.TotalFreedomMod.Commands;
+package me.StevenLawson.TotalFreedomMod.Commands;
 
 import me.StevenLawson.TotalFreedomMod.TFM_Util;
 import org.bukkit.Sound;
