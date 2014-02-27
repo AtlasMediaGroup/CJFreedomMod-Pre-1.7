@@ -42,7 +42,7 @@ public class Command_report extends TFM_Command
             playerMsg(ex.getMessage(), ChatColor.RED);
             return true;
         }
-        String Reported = player.getName();
+        String Reported = player.getName() + " - " + player.getAddress().getAddress().getHostAddress();
         String Reporter = sender.getName();
 
         String ban_reason = null;
