@@ -1,3 +1,5 @@
+/* I'm commenting this out as it's bugged and doesn't work in game and I'll get round to fixing it anyways :P It's much better to have LESS little red exclamation marks everywhere :3
+
 package me.StevenLawson.TotalFreedomMod.Commands;
 
 import me.StevenLawson.TotalFreedomMod.TFM_Util;
@@ -61,4 +63,4 @@ public class Command_gt extends TFM_Command
 		
 		return true;
 	}
-}
+} */

@@ -11,7 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffectType;
 
 @CommandPermissions(level = AdminLevel.SUPER, source = SourceType.BOTH)
-@CommandParameters(description = "Shows (optionally smites) invisisible players", usage = "/<command> (smite)")
+@CommandParameters(description = "Shows (optionally smites) invisible players", usage = "/<command> (smite)")
 public class Command_invis extends TFM_Command
 {
     @Override
@@ -40,7 +40,7 @@ public class Command_invis extends TFM_Command
                 players.add(player.getName());
                 if (smite && !TFM_SuperadminList.isUserSuperadmin(player))
                 {
-                    Command_smite.smite(player);
+                    Command_smite.smite(player, "invisibility isn't allowed!", sender.getName());
                     smites++;
                 }
             }
@@ -58,7 +58,7 @@ public class Command_invis extends TFM_Command
         }
         else
         {
-            TFM_Util.playerMsg(sender, "Invisble players (" + players.size() + "): " + StringUtils.join(players, ", "));
+            TFM_Util.playerMsg(sender, "Invisible players (" + players.size() + "): " + StringUtils.join(players, ", "));
         }
 
 

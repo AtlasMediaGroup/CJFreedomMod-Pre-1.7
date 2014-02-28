@@ -1,3 +1,8 @@
+import me.StevenLawson.TotalFreedomMod.Commands.AdminLevel;
+import me.StevenLawson.TotalFreedomMod.Commands.CommandParameters;
+import me.StevenLawson.TotalFreedomMod.Commands.CommandPermissions;
+import me.StevenLawson.TotalFreedomMod.Commands.SourceType;
+import me.StevenLawson.TotalFreedomMod.Commands.TFM_Command;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
