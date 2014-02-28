@@ -116,7 +116,7 @@ public class Command_list extends TFM_Command
                 }
                  if (player.getName().equalsIgnoreCase("phoenix411"))
                 {
-                    prefix = (ChatColor.DARK_RED + "[Chief Of Security & Acting Super admin Manager]");
+                    prefix = (ChatColor.DARK_RED + "[Chief Of Security & Acting Super Admin Manager]");
                 }
                  if (player.getName().equalsIgnoreCase("ninjablue1"))
                 {
@@ -147,11 +147,17 @@ public class Command_list extends TFM_Command
             {
                 if (CJFM_DonatorList.isSeniorDonator(player))
                 {
-                    prefix = (ChatColor.LIGHT_PURPLE + "[Senior-Donator]");
+                    if (!TFM_SuperadminList.isUserSuperadmin(player))
+                    {
+                        prefix = (ChatColor.LIGHT_PURPLE + "[Senior-Donator]");
+                    }
                 }
                 else
                 {
-                    prefix = (ChatColor.DARK_AQUA + "[Donator]");
+                    if (!TFM_SuperadminList.isUserSuperadmin(player))
+                    {
+                        prefix = (ChatColor.DARK_AQUA + "[Donator]");
+                    }
                 }
 
             }
