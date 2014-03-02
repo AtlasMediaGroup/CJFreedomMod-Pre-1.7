@@ -30,6 +30,7 @@ public class Command_banregs extends TFM_Command
             playerMsg(ChatColor.LIGHT_PURPLE + "Advertising at least 1 or 2 times - /gtfo");
             playerMsg(ChatColor.BLUE + "This can be used if you are an OP planning on applying for Super Admin, or if you're an admin wanting to refresh on the Banning Regulations!");
             playerMsg(ChatColor.DARK_RED + "Note: These are directly copied from Wild1145's thread on the CJFreedom Forums!");
+        return false;
             
     }
 }
