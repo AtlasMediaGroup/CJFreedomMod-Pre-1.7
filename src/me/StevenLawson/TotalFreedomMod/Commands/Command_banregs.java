@@ -15,12 +15,6 @@ public class Command_banregs extends TFM_Command
     public boolean run(CommandSender sender, Player sender_p, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
     {
 
-        if(args.length != 0)
-        {
-            // playerMsg(ChatColor.RED + "Too many arguments! /<command>");
-        }
-        else
-        {
             playerMsg(ChatColor.AQUA + "--- CJFreedom Banning Regulations ---");
             playerMsg(ChatColor.LIGHT_PURPLE + "A Player Is Griefing - Ban");
             playerMsg(ChatColor.LIGHT_PURPLE + "Large World-edits - If over 15,000 Then ban Else check that they are not griefing");
@@ -37,8 +31,5 @@ public class Command_banregs extends TFM_Command
             playerMsg(ChatColor.BLUE + "This can be used if you are an OP planning on applying for Super Admin, or if you're an admin wanting to refresh on the Banning Regulations!");
             playerMsg(ChatColor.DARK_RED + "Note: These are directly copied from Wild1145's thread on the CJFreedom Forums!");
             
-            
-        }
-        return false;
     }
 }
