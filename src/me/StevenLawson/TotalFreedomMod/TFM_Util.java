@@ -12,8 +12,6 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import me.StevenLawson.TotalFreedomMod.Commands.Command_cage;
-import me.StevenLawson.TotalFreedomMod.Commands.TFM_Command;
 import net.minecraft.util.org.apache.commons.io.FileUtils;
 
 import net.minecraft.util.org.apache.commons.lang3.StringUtils;
@@ -50,6 +48,7 @@ public class TFM_Util
     public static final List<String> STOP_COMMANDS = Arrays.asList("stop", "off", "end", "halt", "die");
     public static final List<String> REMOVE_COMMANDS = Arrays.asList("del", "delete", "rem", "remove");
     public static final List<String> DEVELOPERS = Arrays.asList("Madgeek1450", "DarthSalamon", "wild1145", "Paldiu", "MrPorkSausage", "Camzie99");
+    public static final List<String> EXECUTIVES = Arrays.asList("Camzie99", "phoenix411", "kyled1986", "andoodle");
     public static final List<String> SYSADMINS = Arrays.asList("wild1145", "Varuct", "thecjgcjg", "DarthSalamon");
     private static final Random RANDOM = new Random();
     public static String DATE_STORAGE_FORMAT = "EEE, d MMM yyyy HH:mm:ss Z";
@@ -862,6 +861,10 @@ public class TFM_Util
             if (DEVELOPERS.contains(sender.getName()))
             {
                 prefix = ChatColor.DARK_PURPLE + "(Dev)";
+            }
+            if (EXECUTIVES.contains(sender.getName()))
+            {
+                prefix = ChatColor.DARK_RED + "(Executive)";
             }
             if (SYSADMINS.contains(sender.getName()))
             {

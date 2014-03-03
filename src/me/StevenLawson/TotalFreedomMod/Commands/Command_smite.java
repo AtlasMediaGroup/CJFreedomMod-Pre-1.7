@@ -12,17 +12,24 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 @CommandPermissions(level = AdminLevel.SUPER, source = SourceType.BOTH)
-@CommandParameters(description = "Someone being a little bitch? Smite them down...", usage = "/<command> [playername] [reason]")
+@CommandParameters(description = "Someone being a little bitch? Smite them down...", usage = "/<command> <playername> [reason]")
 public class Command_smite extends TFM_Command
 {
     @Override
     public boolean run(CommandSender sender, Player sender_p, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
     {
-        if (args.length < 2)
+        String smite_reason = null;
+        
+        if (args.length == 1)
         {
-            return false;
+            smite_reason = "being a naughty, naughty boy";
         }
-
+        
+        if (args.length >= 2)
+        {
+            smite_reason = StringUtils.join(ArrayUtils.subarray(args, 1, args.length), " ");
+        }
+        
         Player player;
         try
         {
@@ -33,12 +40,7 @@ public class Command_smite extends TFM_Command
             playerMsg(ex.getMessage(), ChatColor.RED);
             return true;
         }
-        
-        String smite_reason = null;
-        if (args.length >= 2)
-        {
-            smite_reason = StringUtils.join(ArrayUtils.subarray(args, 1, args.length), " ");
-        }
+
 
         smite(player, smite_reason, sender.getName());
 
@@ -48,7 +50,7 @@ public class Command_smite extends TFM_Command
     public static void smite(final Player player, final String smite_reason, final String sender)
     {
         TFM_Util.bcastMsg(player.getName() + " has been a naughty, naughty boy!", ChatColor.RED);
-        TFM_Util.bcastMsg("They have been smitten because " + smite_reason + " by " + sender, ChatColor.RED);
+        TFM_Util.bcastMsg("They have been smitten for: " + smite_reason + " by " + sender, ChatColor.RED);
 
         //Deop
         player.setOp(false);

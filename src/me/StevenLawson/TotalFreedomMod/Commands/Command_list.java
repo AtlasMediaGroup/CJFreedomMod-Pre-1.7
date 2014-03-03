@@ -126,6 +126,10 @@ public class Command_list extends TFM_Command
                 {
                     prefix = (ChatColor.DARK_PURPLE + "[Developer]");
                 }
+                  if (player.getName().equalsIgnoreCase("Camzie99"))
+                {
+                    prefix = (ChatColor.DARK_RED + "[Executive Lead Developer]");
+                }
 
             }
             else
