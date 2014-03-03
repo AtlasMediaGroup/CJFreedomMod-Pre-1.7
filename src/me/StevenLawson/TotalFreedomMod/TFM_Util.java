@@ -864,7 +864,7 @@ public class TFM_Util
             }
             if (EXECUTIVES.contains(sender.getName()))
             {
-                prefix = ChatColor.DARK_RED + "(Executive)";
+                prefix = ChatColor.RED + "(Executive)";
             }
             if (SYSADMINS.contains(sender.getName()))
             {

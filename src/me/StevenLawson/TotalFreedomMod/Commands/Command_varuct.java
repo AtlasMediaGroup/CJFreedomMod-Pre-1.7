@@ -9,7 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 @CommandPermissions(level = AdminLevel.ALL, source = SourceType.BOTH)
-@CommandParameters(description = "Shows you the CJFreedom Admin Banning Regulations!", usage = "/<command>")
+@CommandParameters(description = "Check whether or not Varuct (The Owner) is online!", usage = "/<command>", aliases = "owner")
 public class Command_varuct extends TFM_Command
 {
 
@@ -19,14 +19,20 @@ public class Command_varuct extends TFM_Command
         
         Player varuct = Bukkit.getServer().getPlayer("Varuct");
         
-        if(varuct.isOnline() && !isSuperadminImpostor(varuct))
+        if(varuct != null && !isSuperadminImpostor(varuct))
         {
             playerMsg(ChatColor.GREEN + "The owner is " + ChatColor.BLUE + "online" + ChatColor.GREEN + "!");
            
-        }else if(!varuct.isOnline() || isSuperadminImpostor(varuct))
+        }else if(varuct == null || isSuperadminImpostor(varuct))
         {
             playerMsg(ChatColor.GREEN + "The owner is " + ChatColor.DARK_RED + "offline" + ChatColor.GREEN + "!");
         }    
+        
+        
+        else
+        {
+            
+        }
         
         return false;
     }

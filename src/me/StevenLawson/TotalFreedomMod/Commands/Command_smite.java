@@ -20,6 +20,11 @@ public class Command_smite extends TFM_Command
     {
         String smite_reason = null;
         
+        if (args.length < 1)
+        {
+            return false;
+        }
+        
         if (args.length == 1)
         {
             smite_reason = "being a naughty, naughty boy";

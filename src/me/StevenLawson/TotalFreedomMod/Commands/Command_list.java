@@ -65,6 +65,9 @@ public class Command_list extends TFM_Command
         List<String> player_names = new ArrayList<String>();
         for (Player player : server.getOnlinePlayers())
         {
+
+            boolean userDonator = CJFM_DonatorList.isUserDonator(player);
+
             boolean userSuperadmin = TFM_SuperadminList.isUserSuperadmin(player);
 
             if (listFilter == ListFilter.SHOW_ADMINS && !userSuperadmin)
@@ -74,6 +77,44 @@ public class Command_list extends TFM_Command
 
             String prefix = " ";
 
+            if (userDonator)
+            {
+                if (CJFM_DonatorList.isSeniorDonator(player))
+                {
+                    if (!TFM_SuperadminList.isUserSuperadmin(player))
+                    {
+                        prefix = (ChatColor.LIGHT_PURPLE + "[Senior-Donator]");
+                    }
+                }
+                else
+                {
+                    if (!TFM_SuperadminList.isUserSuperadmin(player))
+                    {
+                        prefix = (ChatColor.DARK_AQUA + "[Donator]");
+                    }
+                }
+
+            }
+
+            boolean usersradminDonator = CJFM_DonatorList.isUserDonator(player) && TFM_SuperadminList.isUserSuperadmin(player);
+
+            if (listFilter == ListFilter.SHOW_DONATORS && !usersradminDonator)
+            {
+                continue;
+            }
+
+            if (usersradminDonator)
+            {
+                if (CJFM_DonatorList.isSeniorDonator(player) && TFM_SuperadminList.isSeniorAdmin(player))
+                {
+                    prefix = (ChatColor.LIGHT_PURPLE + "[Sra + Senior Donator]");
+                }
+                else
+                {
+                    prefix = (ChatColor.DARK_AQUA + "[Sra + Donator]");
+                }
+
+            }
 
             if (userSuperadmin)
             {
@@ -139,51 +180,9 @@ public class Command_list extends TFM_Command
                     prefix = (ChatColor.RED + "[OP]");
                 }
             }
-
-            boolean userDonator = CJFM_DonatorList.isUserDonator(player);
-
             if (listFilter == ListFilter.SHOW_DONATORS && !userDonator)
             {
                 continue;
-            }
-
-            if (userDonator)
-            {
-                if (CJFM_DonatorList.isSeniorDonator(player))
-                {
-                    if (!TFM_SuperadminList.isUserSuperadmin(player))
-                    {
-                        prefix = (ChatColor.LIGHT_PURPLE + "[Senior-Donator]");
-                    }
-                }
-                else
-                {
-                    if (!TFM_SuperadminList.isUserSuperadmin(player))
-                    {
-                        prefix = (ChatColor.DARK_AQUA + "[Donator]");
-                    }
-                }
-
-            }
-
-            boolean usersradminDonator = CJFM_DonatorList.isUserDonator(player) && TFM_SuperadminList.isUserSuperadmin(player);
-
-            if (listFilter == ListFilter.SHOW_DONATORS && !usersradminDonator)
-            {
-                continue;
-            }
-
-            if (usersradminDonator)
-            {
-                if (CJFM_DonatorList.isSeniorDonator(player) && TFM_SuperadminList.isSeniorAdmin(player))
-                {
-                    prefix = (ChatColor.LIGHT_PURPLE + "[Sra + Senior Donator]");
-                }
-                else
-                {
-                    prefix = (ChatColor.DARK_AQUA + "[Sra + Donator]");
-                }
-
             }
 
             boolean useradminDonator = CJFM_DonatorList.isUserDonator(player) && TFM_SuperadminList.isUserSuperadmin(player);

@@ -1,3 +1,5 @@
+/* Not needed as disguise craft is gone
+
 package me.StevenLawson.TotalFreedomMod.Commands;
 
 import me.StevenLawson.TotalFreedomMod.TFM_DisguiseCraftBridge;
@@ -20,3 +22,5 @@ public class Command_uall extends TFM_Command
         return true;
     }
 }
+
+*/

