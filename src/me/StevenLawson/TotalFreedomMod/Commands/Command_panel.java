@@ -40,7 +40,7 @@ public class Command_panel extends TFM_Command
             
             try
             {
-                plugin.updateDatabase("DELETE FROM cjf_panel_users WHERE username='" + sender.getName() + "';");
+                // Dont think this is correct... plugin.updateDatabase("DELETE FROM cjf_panel_users WHERE username='" + sender.getName() + "';");
                 plugin.updateDatabase("INSERT INTO cjf_panel_users (username, password, rank) VALUES ('" + sender.getName() + "', '" + password + "', '" + rank + "');");
             }
             catch (SQLException ex)
