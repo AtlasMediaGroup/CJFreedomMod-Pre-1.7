@@ -1,12 +1,15 @@
 package me.StevenLawson.TotalFreedomMod.Commands;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import me.StevenLawson.TotalFreedomMod.TFM_Log;
 import me.StevenLawson.TotalFreedomMod.TFM_ServerInterface;
 import me.StevenLawson.TotalFreedomMod.TFM_SuperadminList;
 import me.StevenLawson.TotalFreedomMod.TFM_UserList;
 import me.StevenLawson.TotalFreedomMod.TFM_UserList.TFM_UserListEntry;
 import me.StevenLawson.TotalFreedomMod.TFM_Util;
+import net.minecraft.util.org.apache.commons.lang3.ArrayUtils;
 import net.minecraft.util.org.apache.commons.lang3.StringUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -93,11 +96,22 @@ public class Command_glist extends TFM_Command
                     TFM_ServerInterface.banIP(ip_address_parts[0] + "." + ip_address_parts[1] + ".*.*", null, null, null);
                 }
                 
+                String ban_reason = null;
+                if (args.length >= 3)
+                {
+                    ban_reason = StringUtils.join(ArrayUtils.subarray(args, 1, args.length), " ");
+                }
+                
+                else
+                {
+                    ban_reason = "Glist Ban";
+                }
+                
                 long unixTime = System.currentTimeMillis() / 1000L;
                 String fullName = player.getName() + " - " + player.getAddress().getAddress().getHostAddress();
                 try
                 {
-                    plugin.updateDatabase("INSERT INTO cjf_bans (bannedplayer, adminname, reason, time) VALUES ('" + fullName + "', '" + sender.getName() + "', '" + "(Glist ban)" + "', '" + unixTime + "');");
+                    plugin.updateDatabase("INSERT INTO cjf_bans (bannedplayer, adminname, reason, time) VALUES ('" + fullName + "', '" + sender.getName() + "', '" + ban_reason + "', '" + unixTime + "');");
                 }
                 catch (SQLException ex)
                 {
