@@ -3,7 +3,9 @@ package me.StevenLawson.TotalFreedomMod.Commands;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static me.RyanWild.CJFreedomMod.CJFM_Util.SYSADMINS;
 import me.StevenLawson.TotalFreedomMod.TFM_SuperadminList;
+import me.StevenLawson.TotalFreedomMod.TotalFreedomMod;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -19,7 +21,7 @@ public class Command_panel extends TFM_Command
         {
             String rank;
             String chars = "abcdefghijklmnopqrstuvwxyz0123456789";
-            int numberOfCodes = 0;//controls the length of alpha numberic string
+            int numberOfCodes = 0;
             String password = "";
             while (numberOfCodes < 6)
             {
@@ -38,16 +40,58 @@ public class Command_panel extends TFM_Command
                 rank = "senior";
             }
             
+            playerMsg(sender, "Congratulations, you now have " + rank + "access to the CJFreedom panel! Your password is " + password + "! Be sure to change it quickly!");
+            
             try
             {
-                // Dont think this is correct... plugin.updateDatabase("DELETE FROM cjf_panel_users WHERE username='" + sender.getName() + "';");
                 plugin.updateDatabase("INSERT INTO cjf_panel_users (username, password, rank) VALUES ('" + sender.getName() + "', '" + password + "', '" + rank + "');");
             }
             catch (SQLException ex)
             {
                 Logger.getLogger(Command_panel.class.getName()).log(Level.SEVERE, null, ex);
+                playerMsg(sender, "Error updating MySQL Table contact a System Admin or Developer");
             }
             
+            return true;
+        }
+        
+        if (args.length == 2 && args[0].equalsIgnoreCase("admin"))
+        {
+            if (!SYSADMINS.contains(sender.getName()))
+            {
+                sender.sendMessage(TotalFreedomMod.MSG_NO_PERMS);
+                return true;
+            }
+            
+            if (args[1].equalsIgnoreCase("disable"))
+            {
+                /* - Future feature
+                try
+                {
+                    plugin.updateDatabase("UPDATE cjf_panel_users SET disabled='false' WHERE username='" + args[2] + "';");
+                }
+                catch (SQLException ex)
+                {
+                    Logger.getLogger(Command_panel.class.getName()).log(Level.SEVERE, null, ex);
+                    playerMsg(sender, "Error updating MySQL Table contact a System Admin or Developer");
+                }
+                return true;
+                */
+            }
+            
+            if (args[1].equalsIgnoreCase("delete"))
+            {
+                try
+                {
+                    plugin.updateDatabase("DELETE FROM cjf_panel_users WHERE username='" + args[2] + "';");
+                }
+                catch (SQLException ex)
+                {
+                    Logger.getLogger(Command_panel.class.getName()).log(Level.SEVERE, null, ex);
+                    playerMsg(sender, "Error updating MySQL Table contact a System Admin or Developer");
+                }
+                return true;
+            }
         }
         return false;
     }
