@@ -22,10 +22,12 @@ public class Command_varuct extends TFM_Command
         if(varuct != null && !isSuperadminImpostor(varuct))
         {
             playerMsg(ChatColor.GREEN + "The owner is " + ChatColor.BLUE + "online" + ChatColor.GREEN + "!");
+            return true;
            
         }else if(varuct == null || isSuperadminImpostor(varuct))
         {
             playerMsg(ChatColor.GREEN + "The owner is " + ChatColor.DARK_RED + "offline" + ChatColor.GREEN + "!");
+            return true;
         }    
         
         

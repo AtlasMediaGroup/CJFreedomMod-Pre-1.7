@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import me.RyanWild.CJFreedomMod.CJFM_DonatorList;
 import me.StevenLawson.TotalFreedomMod.Commands.TFM_CommandLoader;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -159,10 +160,13 @@ public class TFM_CommandBlocker
     {
         ANYONE("a", 0),
         OP("o", 1),
-        SUPER("s", 2),
-        TELNET("t", 3),
-        SENIOR("c", 4),
-        NOBODY("n", 5);
+        SENIOR_DONATOR("sd", 2),
+        SUPER("s", 3),
+        TELNET("t", 4),
+        SENIOR("c", 5),
+        NOBODY("n", 6);
+        
+        
         private final String token;
         private final int level;
 
@@ -199,6 +203,14 @@ public class TFM_CommandBlocker
                 {
                     return SENIOR;
                 }
+                
+                if (CJFM_DonatorList.isSeniorDonator(sender))
+                {
+                    return SENIOR_DONATOR;
+                }
+                
+                
+                
 
                 if (!(sender instanceof Player))
                 {
@@ -206,6 +218,7 @@ public class TFM_CommandBlocker
                 }
 
                 return SUPER;
+                
             }
         }
 

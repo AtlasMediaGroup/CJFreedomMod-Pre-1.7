@@ -7,11 +7,13 @@ import java.lang.reflect.Field;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import static me.StevenLawson.TotalFreedomMod.TotalFreedomMod.plugin;
 import net.minecraft.util.org.apache.commons.io.FileUtils;
 
 import net.minecraft.util.org.apache.commons.lang3.StringUtils;
@@ -48,7 +50,7 @@ public class TFM_Util
     public static final List<String> STOP_COMMANDS = Arrays.asList("stop", "off", "end", "halt", "die");
     public static final List<String> REMOVE_COMMANDS = Arrays.asList("del", "delete", "rem", "remove");
     public static final List<String> DEVELOPERS = Arrays.asList("Madgeek1450", "DarthSalamon", "wild1145", "Paldiu", "MrPorkSausage", "Camzie99");
-    public static final List<String> EXECUTIVES = Arrays.asList("Camzie99", "phoenix411", "kyled1986", "andoodle");
+    public static final List<String> EXECUTIVES = Arrays.asList("Camzie99", "Phoenix411", "Kyled1986", "andoodle");
     public static final List<String> SYSADMINS = Arrays.asList("wild1145", "Varuct", "thecjgcjg", "DarthSalamon");
     private static final Random RANDOM = new Random();
     public static String DATE_STORAGE_FORMAT = "EEE, d MMM yyyy HH:mm:ss Z";
@@ -409,9 +411,21 @@ public class TFM_Util
                 //p.setBanned(true);
                 TFM_ServerInterface.banUsername(player.getName(), kickMessage, "AutoEject", null);
 
-                TFM_Util.bcastMsg(ChatColor.RED + player.getName() + " has been banned permanently.");
+                TFM_Util.bcastMsg(ChatColor.RED + player.getName() + " has been banned for 24 hours.");
 
                 player.kickPlayer(kickMessage);
+                
+                //Write to the ban database
+                long unixTime = System.currentTimeMillis() / 1000L;
+                String fullName = player.getName() + " - " + player.getAddress().getAddress().getHostAddress();
+                try
+                {
+                plugin.updateDatabase("INSERT INTO cjf_bans (bannedplayer, adminname, reason, time) VALUES ('" + fullName + "', '" + "Auto Eject" + "', '" + "Auto Eject" + "', '" + unixTime + "');");
+                }
+                catch (SQLException ex)
+                {
+                    TFM_Log.severe(ex);
+                }
 
                 break;
             }

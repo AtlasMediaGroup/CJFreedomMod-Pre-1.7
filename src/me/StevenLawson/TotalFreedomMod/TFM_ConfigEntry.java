@@ -18,6 +18,7 @@ public enum TFM_ConfigEntry
     ALLOW_WATER_PLACE(Boolean.class, "allow_water_place"),
     AUTO_ENTITY_WIPE(Boolean.class, "auto_wipe"),
     AUTO_PROTECT_SPAWNPOINTS(Boolean.class, "auto_protect_spawnpoints"),
+    DHAMMER_MODE(Boolean.class, "dhammer_mode"),
     DISABLE_NIGHT(Boolean.class, "disable_night"),
     DISABLE_WEATHER(Boolean.class, "disable_weather"),
     GENERATE_FLATLANDS(Boolean.class, "generate_flatlands"),

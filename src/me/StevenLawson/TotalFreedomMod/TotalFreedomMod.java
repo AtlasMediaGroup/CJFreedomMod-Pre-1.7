@@ -100,6 +100,8 @@ public class TotalFreedomMod extends JavaPlugin
     {
         TFM_Log.info("Version: " + TotalFreedomMod.pluginVersion + "." + TotalFreedomMod.buildNumber + " by Madgeek1450 and DarthSalamon");
 
+        TFM_ConfigEntry.DHAMMER_MODE.setBoolean(false);
+        
         loadSuperadminConfig();
         loadDonatorConfig();
         loadPermbanConfig();

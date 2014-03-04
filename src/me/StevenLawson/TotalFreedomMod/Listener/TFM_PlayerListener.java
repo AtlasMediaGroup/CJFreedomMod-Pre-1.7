@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.regex.Pattern;
 import me.StevenLawson.TotalFreedomMod.*;
+import me.StevenLawson.TotalFreedomMod.Commands.Command_doomhammer;
 import me.StevenLawson.TotalFreedomMod.Commands.Command_landmine;
 import me.StevenLawson.TotalFreedomMod.TFM_RollbackManager.RollbackEntry;
 import net.minecraft.util.org.apache.commons.lang3.StringUtils;
@@ -31,6 +32,11 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 import me.StevenLawson.TotalFreedomMod.TFM_SuperadminList;
 import me.StevenLawson.TotalFreedomMod.TFM_Superadmin;
+import static me.StevenLawson.TotalFreedomMod.TFM_Util.playerMsg;
+import org.bukkit.command.CommandSender;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.inventory.meta.ItemMeta;
+
 
 public class TFM_PlayerListener implements Listener
 {
@@ -38,7 +44,7 @@ public class TFM_PlayerListener implements Listener
     private static final List<String> BLOCKED_MUTED_CMDS = Arrays.asList(StringUtils.split("say,me,msg,m,tell,r,reply,mail,email", ","));
     private static final int MSG_PER_HEARTBEAT = 10;
     private static final List<String> adminCommands = Arrays.asList(StringUtils.split("gtfo,ban,kick,smite,tban,noob,orbit,doom,saconfig,stfu", ","));
-
+    
     @EventHandler(priority = EventPriority.HIGH)
     public void onPlayerInteract(PlayerInteractEvent event)
     {
@@ -282,6 +288,39 @@ public class TFM_PlayerListener implements Listener
     {
         //to add later
     }
+    
+    @EventHandler(priority = EventPriority.HIGH)
+    public void onAttack(EntityDamageByEntityEvent event)
+    {
+        if(event.getDamager() instanceof Player)
+        {
+            Player attacker = (Player)event.getDamager();
+            
+            //define a doomhammer
+            ItemStack dhammer = new ItemStack(Material.DIAMOND_AXE, 1);
+            ItemMeta dhammermeta = dhammer.getItemMeta();
+            List<String> lores = new ArrayList<String>();
+            lores.add(ChatColor.RED + "The all powerful Doom Hammer!");
+            dhammermeta.setDisplayName(ChatColor.DARK_RED + "Doom Hammer");
+            dhammermeta.setLore(lores);
+            dhammer.setItemMeta(dhammermeta);
+        
+            if(event.getEntity() instanceof Player && TFM_ConfigEntry.DHAMMER_MODE.getBoolean() == true)
+            {
+                if (TFM_SuperadminList.isSeniorAdmin((CommandSender) attacker))
+                {  
+                Player player = (Player) event.getEntity();
+                Player sender = (Player) event.getDamager();
+                Command_doomhammer.doom(player, sender);
+                }
+            }
+            if(event.getEntity() instanceof Player && attacker.getGameMode() == GameMode.CREATIVE)
+            {
+                event.setCancelled(true);
+                playerMsg(attacker, "No GM PVP!", ChatColor.RED);
+            }
+        }
+    }
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void onPlayerMove(PlayerMoveEvent event)
@@ -494,7 +533,7 @@ public class TFM_PlayerListener implements Listener
             }
 
             // Check for message repeat
-            if (playerdata.getLastMessage().equalsIgnoreCase(message))
+            if (playerdata.getLastMessage().equalsIgnoreCase(message) && !TFM_SuperadminList.isUserSuperadmin(player))
             {
                 TFM_Util.playerMsg(player, "Please do not repeat messages.");
                 event.setCancelled(true);
@@ -528,7 +567,7 @@ public class TFM_PlayerListener implements Listener
             }
 
             // Check for caps
-            if (message.length() >= 6)
+            if (message.length() >= 6 && !TFM_SuperadminList.isUserSuperadmin(player))
             {
                 int caps = 0;
                 for (char c : message.toCharArray())

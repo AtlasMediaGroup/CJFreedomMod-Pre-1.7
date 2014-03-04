@@ -11,7 +11,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 @CommandPermissions(level = AdminLevel.OP, source = SourceType.ONLY_IN_GAME)
-@CommandParameters(description = "Essentials Interface Command - Color your current nickname.", usage = "/<command> <color>")
+@CommandParameters(description = "Essentials Interface Command - Color your current nickname.", usage = "/<command> <color>", aliases = "colourme")
 public class Command_colorme extends TFM_Command
 {
     @Override
@@ -24,7 +24,7 @@ public class Command_colorme extends TFM_Command
 
         if ("list".equalsIgnoreCase(args[0]))
         {
-            playerMsg("Colors: " + StringUtils.join(TFM_Util.CHAT_COLOR_NAMES.keySet(), ", "));
+            playerMsg("Colours: " + StringUtils.join(TFM_Util.CHAT_COLOR_NAMES.keySet(), ", "));
             return true;
         }
 

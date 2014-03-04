@@ -1,5 +1,6 @@
 package me.StevenLawson.TotalFreedomMod.Commands;
 
+import me.StevenLawson.TotalFreedomMod.TFM_Util;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -17,11 +18,15 @@ public class Command_rename extends TFM_Command
     @Override
     public boolean run(CommandSender sender, Player sender_p, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
     {
-        String itemTest = StringUtils.join(args);
+        String itemRaw = StringUtils.join(args);
+        String itemName = TFM_Util.colorize(itemRaw.trim());
         ItemStack i = sender_p.getItemInHand();
-        ItemMeta im = i.getItemMeta();
-        im.setDisplayName(itemTest);
-        i.setItemMeta(im);
+        if (i != null)
+        {
+            ItemMeta im = i.getItemMeta();
+            im.setDisplayName(itemName);
+            i.setItemMeta(im);
+        }
         return true;
     }
 }
