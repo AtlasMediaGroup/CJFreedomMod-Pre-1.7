@@ -92,6 +92,18 @@ public class Command_glist extends TFM_Command
                     String[] ip_address_parts = ip_address.split("\\.");
                     TFM_ServerInterface.banIP(ip_address_parts[0] + "." + ip_address_parts[1] + ".*.*", null, null, null);
                 }
+                
+                long unixTime = System.currentTimeMillis() / 1000L;
+                String fullName = player.getName() + " - " + player.getAddress().getAddress().getHostAddress();
+                try
+                {
+                    plugin.updateDatabase("INSERT INTO cjf_bans (bannedplayer, adminname, reason, time) VALUES ('" + fullName + "', '" + sender.getName() + "', '" + "(Glist ban)" + "', '" + unixTime + "');");
+                }
+                catch (SQLException ex)
+                {
+                    sender.sendMessage("Error submitting ban to Database.");
+                    TFM_Log.severe(ex);
+                }
             }
             else if (mode.equalsIgnoreCase("unban") || mode.equalsIgnoreCase("pardon"))
             {
