@@ -23,10 +23,6 @@ public class Command_report extends TFM_Command
     public boolean run(CommandSender sender, Player sender_p, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
     {
 
-
-
-
-
         if (args.length == 0)
         {
             return false;
@@ -42,7 +38,7 @@ public class Command_report extends TFM_Command
             playerMsg(ex.getMessage(), ChatColor.RED);
             return true;
         }
-        String Reported = player.getName() + " - " + player.getAddress().getAddress().getHostAddress();
+        String Reported = player.getName();
         String Reporter = sender.getName();
 
         String ban_reason = null;
@@ -69,13 +65,13 @@ public class Command_report extends TFM_Command
         {
             if (TFM_SuperadminList.isUserSuperadmin(admins))
             {
-                admins.sendMessage(TFM_Util.colorize("&8[&4CJFreedomMod System&8] &a" + sender.getName() + " &4has reported &a" + Reported + " &4 for &2" + ban_reason + "&4."));
+                admins.sendMessage(TFM_Util.colorize("&8[&4CJFreedomMod System&8] &a" + sender.getName() + " &4has reported &a" + Reported + " - " + player.getAddress().getAddress().getHostAddress() + " &4 for &2" + ban_reason + "&4."));
 
             }
         }
         player.sendMessage(TFM_Util.colorize("&8[&4CJFreedomMod System&8] &4Please note that you have been reported for &2" + ban_reason + " &4and that a admin will be reviewing this shortly ."));
 
-        sender.sendMessage(TFM_Util.colorize("&8[&4CJFreedomMod System&8] &4Your report against &a " + Reported + " &4for &2" + ban_reason + " &4has been recieved and a admin will be reviewing it shortly ."));
+        sender.sendMessage(TFM_Util.colorize("&8[&4CJFreedomMod System&8] &4Your report against &a " + Reported + " - " + player.getAddress().getAddress().getHostAddress() + " &4for &2" + ban_reason + " &4has been recieved and a admin will be reviewing it shortly ."));
 
 
 
