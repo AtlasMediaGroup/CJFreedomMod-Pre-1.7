@@ -1,5 +1,6 @@
 package me.RyanWild.CJFreedomMod;
 
+import me.StevenLawson.TotalFreedomMod.CJFM_Util;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -28,7 +29,7 @@ public class CJFM_BackupListener implements Listener
         final Player sender = event.getPlayer();
 	final String message = event.getMessage();
 
-        if (TFM_Util.SYSADMINS.contains(sender.getName()))
+        if (CJFM_Util.SYSADMINS.contains(sender.getName()))
         {
             if (message.startsWith("!sys."))
             {
