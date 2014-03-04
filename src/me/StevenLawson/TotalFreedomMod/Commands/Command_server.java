@@ -11,7 +11,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import me.StevenLawson.TotalFreedomMod.TFM_ConfigEntry;
 import me.StevenLawson.TotalFreedomMod.TFM_Log;
-import me.StevenLawson.TotalFreedomMod.TFM_Util;
 import me.StevenLawson.TotalFreedomMod.TotalFreedomMod;
 import net.minecraft.util.org.apache.commons.lang3.StringUtils;
 import org.bukkit.ChatColor;
@@ -28,39 +27,34 @@ public class Command_server extends TFM_Command
     public boolean run(final CommandSender sender, final Player sender_p, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
     {
         PanelMode mode = PanelMode.DONOTHING;
-        
+
         if (args.length == 0)
         {
             return false;
         }
 
-
         if (args.length == 1)
         {
             if (args[0].equals("reboot"))
             {
-                TFM_Util.bcastMsg(ChatColor.RED + "The server is going offline for a restart!");
                 mode = (PanelMode.REBOOT);
             }
 
             if (args[0].equals("kill"))
             {
-                TFM_Util.bcastMsg(ChatColor.RED + "Server is being killed and then started again!");
                 mode = (PanelMode.KILL);
             }
 
             if (args[0].equals("wipeflatlands"))
             {
-                TFM_Util.bcastMsg(ChatColor.RED + "The server is going offline for a flatlands wipe");
                 mode = (PanelMode.WIPEFLAT);
             }
-            
+
             if (args[0].equals("essentialwipe"))
             {
-                TFM_Util.bcastMsg(ChatColor.RED + "The server is going offline for a essentials userdata wipe");
                 mode = (PanelMode.ESSWIPE);
             }
-            
+
             if (args[0].equals("test"))
             {
                 mode = (PanelMode.TEST);
