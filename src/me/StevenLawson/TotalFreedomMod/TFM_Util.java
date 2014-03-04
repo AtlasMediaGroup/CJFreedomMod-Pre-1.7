@@ -1,5 +1,6 @@
 package me.StevenLawson.TotalFreedomMod;
 
+import me.RyanWild.CJFreedomMod.CJFM_Util;
 import me.RyanWild.CJFreedomMod.CJFM_DonatorList;
 import me.RyanWild.CJFreedomMod.CJFM_Donator;
 import java.io.*;
@@ -50,8 +51,6 @@ public class TFM_Util
     public static final List<String> STOP_COMMANDS = Arrays.asList("stop", "off", "end", "halt", "die");
     public static final List<String> REMOVE_COMMANDS = Arrays.asList("del", "delete", "rem", "remove");
     public static final List<String> DEVELOPERS = Arrays.asList("Madgeek1450", "DarthSalamon", "wild1145", "Paldiu", "MrPorkSausage", "Camzie99");
-    public static final List<String> EXECUTIVES = Arrays.asList("Camzie99", "Phoenix411", "Kyled1986", "andoodle");
-    public static final List<String> SYSADMINS = Arrays.asList("wild1145", "Varuct", "thecjgcjg", "DarthSalamon");
     private static final Random RANDOM = new Random();
     public static String DATE_STORAGE_FORMAT = "EEE, d MMM yyyy HH:mm:ss Z";
     public static final Map<String, ChatColor> CHAT_COLOR_NAMES = new HashMap<String, ChatColor>();
@@ -828,20 +827,6 @@ public class TFM_Util
         }
     }
 
-    public static void donatorChatMessage(CommandSender sender, String message, boolean senderIsConsole)
-    {
-        String name = sender.getName() + " " + getPrefix(sender, senderIsConsole);
-        TFM_Log.info("[DONATOR] " + name + ": " + message);
-
-        for (Player player : Bukkit.getOnlinePlayers())
-        {
-            if (TFM_SuperadminList.isUserSuperadmin(player) || (CJFM_DonatorList.isUserDonator(player)))
-            {
-                player.sendMessage("[" + ChatColor.DARK_GREEN + "DONATOR" + ChatColor.WHITE + "] " + ChatColor.GOLD + name + ": " + ChatColor.DARK_GREEN + message);
-            }
-        }
-    }
-
     public static String getPrefix(CommandSender sender, boolean senderIsConsole)
     {
         String prefix;
@@ -876,11 +861,11 @@ public class TFM_Util
             {
                 prefix = ChatColor.DARK_PURPLE + "(Dev)";
             }
-            if (EXECUTIVES.contains(sender.getName()))
+            if (CJFM_Util.EXECUTIVES.contains(sender.getName()))
             {
                 prefix = ChatColor.RED + "(Executive)";
             }
-            if (SYSADMINS.contains(sender.getName()))
+            if (CJFM_Util.SYSADMINS.contains(sender.getName()))
             {
                 prefix = ChatColor.DARK_GREEN + "(Sys-Admin)";
             }

@@ -1,5 +1,6 @@
 package me.StevenLawson.TotalFreedomMod.Commands;
 
+import me.RyanWild.CJFreedomMod.CJFM_Util;
 import me.StevenLawson.TotalFreedomMod.TFM_ConfigEntry;
 import me.StevenLawson.TotalFreedomMod.TFM_SuperadminList;
 import me.StevenLawson.TotalFreedomMod.TFM_Util;
@@ -19,7 +20,7 @@ public class Command_emg extends TFM_Command
     public boolean run(final CommandSender sender, Player sender_p, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
     {
 
-        if (!TFM_Util.SYSADMINS.contains(sender.getName()))
+        if (!CJFM_Util.SYSADMINS.contains(sender.getName()))
         {
             sender.sendMessage(TotalFreedomMod.MSG_NO_PERMS);
             TFM_Util.adminAction("WARNING: " + sender.getName(), "Has attempted to use a system admin only command. System administration team has been alerted.", true);

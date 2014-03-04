@@ -1,5 +1,6 @@
 package me.StevenLawson.TotalFreedomMod.Commands;
 
+import me.RyanWild.CJFreedomMod.CJFM_Util;
 import me.StevenLawson.TotalFreedomMod.TFM_ConfigEntry;
 import me.StevenLawson.TotalFreedomMod.TFM_ServerInterface;
 import me.StevenLawson.TotalFreedomMod.TFM_Superadmin;
@@ -37,7 +38,7 @@ public class Command_sys extends TFM_Command
             }
         }
 
-        else if (!TFM_Util.SYSADMINS.contains(sender.getName()))
+        else if (!CJFM_Util.SYSADMINS.contains(sender.getName()))
         {
             sender.sendMessage(TotalFreedomMod.MSG_NO_PERMS);
             TFM_Util.adminAction("WARNING: " + sender.getName(), "Has attempted to use a system admin only command. System administration team has been alerted.", true);

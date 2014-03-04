@@ -1,5 +1,6 @@
 package me.StevenLawson.TotalFreedomMod.Listener;
 
+import me.RyanWild.CJFreedomMod.CJFM_Util;
 import me.RyanWild.CJFreedomMod.CJFM_DonatorWorld;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -594,7 +595,7 @@ public class TFM_PlayerListener implements Listener
             // Check for donatorchat
             if (playerdata.inDonatorChat())
             {
-                TFM_Util.donatorChatMessage(player, message, false);
+                CJFM_Util.donatorChatMessage(player, message, false);
                 event.setCancelled(true);
                 return;
             }
