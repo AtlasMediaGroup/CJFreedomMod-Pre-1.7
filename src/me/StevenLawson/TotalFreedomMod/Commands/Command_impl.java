@@ -310,11 +310,10 @@ public class Command_impl extends TFM_Command
                 TFM_PlayerData playerdata = TFM_PlayerData.getPlayerData(p);
                 TFM_Util.adminAction(sender_p.getName(), "Drowning " + p.getName(), true);
                 playerdata.setCommandsBlocked(true);
-                playerdata.setHalted(true);
-                playerdata.setFrozen(true);
-                playerdata.setMuted(true);
                 p.setGameMode(GameMode.SURVIVAL);
                 playerdata.setCaged(true, p.getLocation(), Material.GLASS, Material.WATER);
+                playerdata.setFrozen(true);
+                playerdata.setMuted(true);
             }
         }
         
