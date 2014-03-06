@@ -762,7 +762,7 @@ public class TFM_PlayerListener implements Listener
              player.setPlayerListName(ChatColor.GREEN + player.getName());
              } */
         }
-        else if (TFM_SuperadminList.isSeniorAdmin(player))
+        else if (TFM_SuperadminList.isSeniorAdmin(player) && !CJFM_Util.EXECUTIVES.contains(player))
         {
 
             player.setPlayerListName(ChatColor.LIGHT_PURPLE + player.getName());
@@ -778,6 +778,12 @@ public class TFM_PlayerListener implements Listener
 
 
         }
+        
+        else if (TFM_SuperadminList.isSeniorAdmin(player) && CJFM_Util.EXECUTIVES.contains(player))
+        {
+            player.setPlayerListName(ChatColor.RED + player.getName());
+        }
+        
         else if (TFM_SuperadminList.isUserSuperadmin(player))
         {
             player.setPlayerListName(ChatColor.AQUA + player.getName());
@@ -790,6 +796,7 @@ public class TFM_PlayerListener implements Listener
              {
              player.setPlayerListName(ChatColor.GOLD + player.getName());
              } */
+            
 
 if (TFM_Util.DEVELOPERS.contains(player.getName()))
         {

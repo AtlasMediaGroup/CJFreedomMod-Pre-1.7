@@ -244,7 +244,7 @@ public class TFM_Util
                         block.setType(Material.SKULL);
                         Skull skull = (Skull) block.getState();
                         skull.setSkullType(SkullType.PLAYER);
-                        skull.setOwner("wild1145");
+                        skull.setOwner(TFM_ConfigEntry.HEAD.getString());
                         skull.update();
                     }
                 }

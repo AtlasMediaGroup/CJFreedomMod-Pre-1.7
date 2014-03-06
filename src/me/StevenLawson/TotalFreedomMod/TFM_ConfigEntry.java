@@ -21,6 +21,7 @@ public enum TFM_ConfigEntry
     DHAMMER_MODE(Boolean.class, "dhammer_mode"),
     DISABLE_NIGHT(Boolean.class, "disable_night"),
     DISABLE_WEATHER(Boolean.class, "disable_weather"),
+    ENABLE_ADMINWORLD(Boolean.class, "enable_adminworld"),
     GENERATE_FLATLANDS(Boolean.class, "generate_flatlands"),
     LANDMINES_ENABLED(Boolean.class, "landmines_enabled"),
     MOB_LIMITER_DISABLE_DRAGON(Boolean.class, "mob_limiter_disable_dragon"),
@@ -70,8 +71,9 @@ public enum TFM_ConfigEntry
     //
     BLOCKED_COMMANDS(List.class, "blocked_commands"),
     HOST_SENDER_NAMES(List.class, "host_sender_names"),
-    UNBANNABLE_USERNAMES(List.class, "unbannable_usernames");
+    UNBANNABLE_USERNAMES(List.class, "unbannable_usernames"),
     //
+    HEAD(String.class, "head");
     
     private final Class<?> type;
     private final String configName;

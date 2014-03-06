@@ -1,7 +1,9 @@
 package me.StevenLawson.TotalFreedomMod.Commands;
 
 import me.StevenLawson.TotalFreedomMod.TFM_Log;
+import me.StevenLawson.TotalFreedomMod.TFM_SuperadminList;
 import me.StevenLawson.TotalFreedomMod.TFM_Util;
+import me.StevenLawson.TotalFreedomMod.TotalFreedomMod;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.enchantments.Enchantment;
@@ -9,7 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 @CommandPermissions(level = AdminLevel.OP, source = SourceType.ONLY_IN_GAME)
-@CommandParameters(description = "Enchant items.", usage = "/<command> <list | addall | reset | add <name> | remove <name>>")
+@CommandParameters(description = "Enchant items.", usage = "/<command> <list | addall | reset | add <name> | remove <name> | god <int>>", aliases = "ench")
 public class Command_enchant extends TFM_Command
 {
     @Override
@@ -25,6 +27,51 @@ public class Command_enchant extends TFM_Command
         if (itemInHand == null)
         {
             playerMsg("You are holding an invalid item.");
+            return true;
+        }
+        
+        if (args[0].equalsIgnoreCase("custom") && TFM_SuperadminList.isSeniorAdmin(sender))
+        {
+            int level = 0;
+            
+            if (args.length == 3)
+            {
+                level = Integer.parseInt(args[2]);
+            }
+            
+            else
+            {
+                level = 10;
+            }
+            
+            Enchantment enchantment = Enchantment.getById(Integer.parseInt(args[1]));
+            itemInHand.addUnsafeEnchantment(enchantment, level);
+        }
+        
+        if (args[0].equalsIgnoreCase("god"))
+        {
+            if (!TFM_SuperadminList.isUserSuperadmin(sender))
+            {
+                playerMsg(TotalFreedomMod.MSG_NO_PERMS);
+            }
+            
+            else for (Enchantment ench : Enchantment.values())
+            {
+                int level;
+                if (args.length == 2)
+                {
+                    level = Integer.parseInt(args[1]);
+                }
+                
+                else
+                {
+                    level = 10;
+                }
+                if (!ench.equals(Enchantment.PROTECTION_FALL))
+                {
+                    itemInHand.addUnsafeEnchantment(ench, level);
+                }
+            }
             return true;
         }
 
@@ -55,13 +102,6 @@ public class Command_enchant extends TFM_Command
         {
             for (Enchantment ench : Enchantment.values())
             {
-                /*
-                 2013-07-20 23:17:13 [INFO] [TotalFreedomMod]: Command Error: enchant
-                 java.lang.NullPointerException
-                 at net.minecraft.server.v1_6_R2.EnchantmentDurability.canEnchant(SourceFile:33)
-                 at org.bukkit.craftbukkit.v1_6_R2.enchantments.CraftEnchantment.canEnchantItem(CraftEnchantment.java:55)
-                 at me.StevenLawson.TotalFreedomMod.Commands.Command_enchant.run(Command_enchant.java:56)
-                 */
                 try
                 {
                     if (ench.canEnchantItem(itemInHand))

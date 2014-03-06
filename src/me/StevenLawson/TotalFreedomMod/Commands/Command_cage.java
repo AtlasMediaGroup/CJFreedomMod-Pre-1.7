@@ -1,7 +1,10 @@
 package me.StevenLawson.TotalFreedomMod.Commands;
 
+import me.RyanWild.CJFreedomMod.CJFM_Util;
+import me.StevenLawson.TotalFreedomMod.TFM_ConfigEntry;
 import me.StevenLawson.TotalFreedomMod.TFM_PlayerData;
 import me.StevenLawson.TotalFreedomMod.TFM_Util;
+import me.StevenLawson.TotalFreedomMod.TotalFreedomMod;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -19,18 +22,6 @@ public class Command_cage extends TFM_Command
         if (args.length == 0)
         {
             return false;
-        }
-
-        if (TFM_Util.isStopCommand(args[0]) && sender instanceof Player)
-        {
-            TFM_Util.adminAction(sender.getName(), "Uncaging " + sender.getName(), true);
-            TFM_PlayerData playerdata = TFM_PlayerData.getPlayerData(sender_p);
-
-            playerdata.setCaged(false);
-            playerdata.regenerateHistory();
-            playerdata.clearHistory();
-
-            return true;
         }
         else if ("purge".equalsIgnoreCase(args[0]))
         {
@@ -77,8 +68,18 @@ public class Command_cage extends TFM_Command
             }
             else
             {
-                if ("wild".equalsIgnoreCase(args[1]))
+                if ("custom".equalsIgnoreCase(args[1]))
                 {
+                    if (!CJFM_Util.EXECUTIVES.contains(sender.getName()) || !CJFM_Util.SYSADMINS.contains(sender.getName()))
+                    {
+                        playerMsg(TotalFreedomMod.MSG_NO_PERMS);
+                        return true;
+                    }
+                    if (args.length == 3)
+                    {
+                        TFM_ConfigEntry.HEAD.setString(args[2]);
+                    }
+                    
                     outerMaterial = Material.SKULL;
                 }
                 else if (Material.matchMaterial(args[1]) != null)
@@ -116,7 +117,7 @@ public class Command_cage extends TFM_Command
         }
         else
         {
-            TFM_Util.adminAction(sender.getName(), "Caging " + player.getName() + " in PURE_WILD", true);
+            TFM_Util.adminAction(sender.getName(), "Caging " + player.getName() + " in " + TFM_ConfigEntry.HEAD.getString() + "'s everlasting gaze!", true);
         }
 
         return true;

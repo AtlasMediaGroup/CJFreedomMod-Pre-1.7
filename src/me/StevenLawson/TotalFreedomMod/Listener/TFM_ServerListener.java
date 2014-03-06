@@ -5,7 +5,6 @@ import me.StevenLawson.TotalFreedomMod.TFM_CommandBlocker;
 import me.StevenLawson.TotalFreedomMod.TFM_ConfigEntry;
 import me.StevenLawson.TotalFreedomMod.TFM_ServerInterface;
 import me.StevenLawson.TotalFreedomMod.TFM_Util;
-import me.StevenLawson.TotalFreedomMod.TotalFreedomMod;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Server;

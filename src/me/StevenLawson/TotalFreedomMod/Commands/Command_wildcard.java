@@ -12,8 +12,7 @@ import org.bukkit.entity.Player;
 @CommandParameters(description = "Run any command on all users, username placeholder = ?.", usage = "/<command> [fluff] ? [fluff] ?")
 public class Command_wildcard extends TFM_Command
 {
-    private List<String> blocked = Arrays.asList("wildcard", "gtfo", "saaddme", "saadd", "saconfig", "kick", "doom", "jelly");
-    //private String[] blocked = StringUtils.split("wildcard,gtfo,saadd,saaddme,saconfig,kick,doom,jelly", ",");
+    private final List<String> blocked = Arrays.asList("wildcard", "gtfo", "saaddme", "saadd", "saconfig", "kick", "doom", "doomhammer", "sys", "smite", "noise", "deafen");
     
     @Override
     public boolean run(CommandSender sender, Player sender_p, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)

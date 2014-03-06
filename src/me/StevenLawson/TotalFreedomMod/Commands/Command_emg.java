@@ -5,12 +5,10 @@ import me.StevenLawson.TotalFreedomMod.TFM_ConfigEntry;
 import me.StevenLawson.TotalFreedomMod.TFM_SuperadminList;
 import me.StevenLawson.TotalFreedomMod.TFM_Util;
 import me.StevenLawson.TotalFreedomMod.TotalFreedomMod;
-import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
 
 @CommandPermissions(level = AdminLevel.ALL, source = SourceType.BOTH)
 @CommandParameters(description = "System Administration Emergancy", usage = "/<command> <1 | 2 |3 | 4 | 5 | Off>>")

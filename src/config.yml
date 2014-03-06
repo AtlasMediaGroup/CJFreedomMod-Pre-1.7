@@ -1,5 +1,8 @@
-# TotalFreedomMod v3.2 Configuration
+# TotalFreedomMod v3.1 Configuration
 # by Madgeek1450 and DarthSalamon
+
+# Cage Head
+head: wild1145
 
 # Block placement prevention:
 allow_fire_place: false
@@ -50,38 +53,64 @@ explosive_radius: 4.0
 #
 blocked_commands:
   # Disabled commands
-  - 'n:b:/time:Server-side time changing is disabled. Please use /ptime to set your own personal time.'
-  - 'n:b:/md:This server now uses DisguiseCraft instead of MobDisguise. Type /d to disguise and /u to undisguise.'
-  - 'n:b:/gamemode:Use /creative and /survival to set your gamemode.'
-  - 'n:b:/gamerule:_'
-  - 'n:b:/ban:_'
-  - 'n:b:/pardon:_'
-  - 'n:b:/ban-ip:_'
-  - 'n:b:/pardon-ip:_'
-  - 'n:b:/toggledownfall:_'
-  - 'n:b:/effect:Please use /potion to set effects.'
-  - 'n:b:/enderchest:_'
-  
+  - n:b:/time:Server-side time changing is disabled.
+  - n:b:/ptime:All form of time changing is currently disabled.
+  - n:b:/md:This server now uses DisguiseCraft instead of MobDisguise. Type /d to disguise and /u to undisguise.
+  - n:b:/gamemode:Use /creative and /survival to set your gamemode.
+  - n:b:/ban:_
+  - n:b:/pardon:_
+  - n:b:/toggledownfall:_
+  - n:b:/ban-ip:_
+  - n:b:/pardon-ip:_
+  - n:b:/scoreboard:Please do not attempt to use scoreboards, they have been blocked on this server.
+  - n:b:/effect:Effects have been blocked, please use /potion.
+  - n:a:/restart:Ha, Nice one there you numpty
+  - n:a:/stop:Ha, nice one, enjoy your ban.
+  - n:b:/give:Please use the /i command to give yourself items
+  - n:b://superpickaxe:SuperPickaxe is disabled on this server until the new WorldEdit build has been finished.
+
   # Superadmin commands
-  - 's:b:/kick:_'
-  - 's:b:/socialspy:_'
-  - 's:b:/kill:_'
-  - 's:b://generate:_'
-  - 's:b://:_'
-  - 's:b:/superpickaxe:_'
-  - 's:b:/brush:_'
-  - 's:b:/tool:_'
-  - 's:b://butcher:_'
-  - 's:b:/scoreboard:_'
-  
-  # Superadmin commands - Auto-eject
-  - 's:a:/stop'
-  - 's:a:/reload'
-  - 's:a:/nuke'
-  - 's:a:/save-all'
-  - 's:a:/save-on'
-  - 's:a:/save-off'
-  - 's:a:/clearhistory'
+  - s:b:/kick:_
+  - s:b:/socialspy:_
+  - s:b:/kill:_
+  - s:b:/clearhistory:_
+  - s:a:/stop:_
+  - s:b:/reload:_
+  - s:a:/nuke:_
+  - s:b:/save-all:Sorry, You can't use this command unless you are Super Admin or above.
+  - s:b:/save-on:Sorry, You can't use this command unless you are Super Admin or above.
+  - s:b:/save-off:Sorry, You can't use this command unless you are Super Admin or above.
+  - s:b:/mail sendall:Sorry, You can't use this command unless you are Super Admin or above.
+  - s:b:/server:_
+  - s:a:/wetoggle:_
+  - s:a:/dtoggle:_
+  - s:a:/pgtoggle:_
+  - s:b:/enjinkey:_
+  - s:b:/enjin debug:_
+  - s:b:/enjin report:_
+  - s:b:/enjin push:_
+  - s:b:/enjin inform:_
+  - s:b:/enjin broadcast:_
+  - s:b:/enjin lag:_
+  - s:b:/enjin updateheads:_
+  - s:b:/enjin heads:_
+  - s:b:/enjin addpoints:_  
+  - s:b:/enjin removepoints:_
+  - s:b:/enjin setpoints:_
+  - s:b:/ekey:_
+  - s:b:/e debug:_
+  - s:b:/e report:_
+  - s:b:/e push:_
+  - s:b:/e inform:_
+  - s:b:/e broadcast:_
+  - s:b:/e lag:_
+  - s:b:/e updateheads:_
+  - s:b:/e heads:_
+  - s:b:/e addpoints:_  
+  - s:b:/e removepoints:_
+  - s:b:/e setpoints:_
+  - s:a:/awe
+  - c:b:/chguser:Well, That has failed. Dont try this again ;) 
 
 # Automatically wipe dropped objects:
 auto_wipe: true
@@ -95,6 +124,12 @@ freecam_trigger_count: 10
 
 # Show all attempted commands in the log, will result in duplicate log messages:
 preprocess_log: true
+
+# DoomHammer
+dhammer_mode: false
+
+# Enable adminworld
+enable_adminworld: true
 
 # Disable nighttime:
 disable_night: true
@@ -124,13 +159,13 @@ flatlands_generation_params: 16,stone,32,dirt,1,grass
 # Admin-Only Mode
 admin_only_mode: false
 
-# Emergancy Mode Place Holder - DO NOT CHANGE
+# Admin-Only Mode
 emergancy_mode: false
 emergancy_mode_open: false
-dev_mode: false
+dev_mode: true
 
 # Protected Areas - Protect areas so that only superadmins can directly modify blocks in those areas. WorldEdit and other such plugins might bypass this.
-protected_areas_enabled: true
+protected_areas_enabled: false
 auto_protect_spawnpoints: true
 auto_protect_radius: 25.0
 
@@ -169,18 +204,27 @@ unbannable_usernames:
   - dinnerbone
   - grumm
   - cavemanfilms
+  - thecjgcjg
+  - wild1145
+  - varuct
 
 # TwitterBot - Used to allow superadmins to verify themselves using twitter
 twitterbot_enabled: false
-twitterbot_url: ''
-twitterbot_secret: ''
+twitterbot_url: http://cjfreedom-twitterbot.eu01.aws.af.cm/
+twitterbot_secret: Pieisniceonagoodeve
+
+
+# API Access
+panel_api_key: 'Cre9r97ug4CRuvEPRU446Kawe'
+panel_url: 'http://www.thecjgcjg.com/panel/scripts/api.php'
+#Include everything up to where the API Is actually needed to add.
 
 # Pet Protect - Prevent tamed pets from being killed.
 pet_protect_enabled: true
 
 # Logs Registration
-logs_register_password: ''
-logs_register_url: ''
+logs_register_password: 'efoawerhfdaioprufhiopdhuipaheruiopafh9p898'
+logs_register_url: 'http://superior-networks.com/freedomlogs/register.php'
   
 # Mojang service checker
 service_checker_url: http://status.mojang.com/check
@@ -195,18 +239,13 @@ autokick_enabled: true
 # autokick_threshold - Percentage of server player capacity used at which players will be automatically kicked for being inactive. Range: 0.0 - 1.0
 autokick_threshold: 0.9
 # autokick_time - Time, in seconds, after which a player should be kicked when inactive
-autokick_time: 120
-
-# API Access
-panel_api_key: 'KEY_HERE'
-panel_url: 'http://www.mywebsite.com/panel/scripts/api.php'
-#Include everything up to where the API Is actually needed to add, like shown above!.
+autokick_time: 240
 
 # MySQL Details
 
-Hostname: 'hostnamehere'
-Port: 3306  
+Hostname: '81.4.123.199'
+Port: '3306'  
 # Dont change the port unless you know the shit your messing with
-Database: 'database'
-Username: 'myusername'
-Password: 'mysecurepassword'
+Database: 'economy'
+Username: 'cjf_server'
+Password: 'VhDAsb9qLdy2UdUXX7ZE9DW3'

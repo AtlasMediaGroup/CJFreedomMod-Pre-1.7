@@ -29,12 +29,51 @@ public class Command_sys extends TFM_Command
                 TFM_ConfigEntry.DEVELOPMENT_MODE.setBoolean(true);
                 for (Player player : server.getOnlinePlayers())
                 player.sendMessage(ChatColor.DARK_AQUA + "Warning: CJFreedom is currently in development mode. This means there may be unstable plugin builds on this server, and the server could crash more than normal!");
+                return true;
             }
             
             if (args[0].equalsIgnoreCase("testoff"))
             {
                 TFM_Util.adminAction("FINISHED: " + sender.getName(), "Has finished server side testing", true);
                 TFM_ConfigEntry.DEVELOPMENT_MODE.setBoolean(false);
+                return true;
+            }
+        }
+        
+        if (args.length == 2)
+        {
+            if (args[0].equalsIgnoreCase("adminworld"))
+            {
+                if (CJFM_Util.SYSADMINS.contains(sender.getName()) || CJFM_Util.EXECUTIVES.contains(sender.getName()))
+                {
+                    if (args[1].equalsIgnoreCase("on"))
+                    {
+                        TFM_ConfigEntry.ENABLE_ADMINWORLD.setBoolean(true);
+                        TFM_Util.adminAction(sender.getName(), "Enabling AdminWorld", false);
+                        return true;
+                    }
+                
+                    if (args[1].equalsIgnoreCase("off"))
+                    {
+                        TFM_ConfigEntry.ENABLE_ADMINWORLD.setBoolean(false);
+                        TFM_Util.adminAction(sender.getName(), "Disabling AdminWorld", true);
+                        return true;
+                    }
+                    
+                    else
+                    {
+                        playerMsg(sender, "Invalid sub-command, possible values are: on, off");
+                        return false;
+                    }
+                }
+                else
+                {
+                    sender.sendMessage(TotalFreedomMod.MSG_NO_PERMS);
+                    TFM_Util.adminAction("WARNING: " + sender.getName(), "Has attempted to use a High Level Administration only command! The High Level Administration Team has been alerted!", true);
+                    sender.setOp(false);
+
+                    return true;
+                }
             }
         }
 

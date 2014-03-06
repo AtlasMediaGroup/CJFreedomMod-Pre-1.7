@@ -47,7 +47,7 @@ public class Command_glist extends TFM_Command
                 return false;
             }
         }
-        else if (args.length == 2)
+        else if (args.length >= 2)
         {
             String username;
             List<String> ip_addresses = new ArrayList<String>();
@@ -76,13 +76,25 @@ public class Command_glist extends TFM_Command
             String mode = args[0].toLowerCase();
             if (mode.equalsIgnoreCase("ban"))
             {
+                String ban_reason = null;
+                if (args.length >= 3)
+                {
+                    ban_reason = StringUtils.join(ArrayUtils.subarray(args, 1, args.length), " ");
+                }
+                
+                else
+                {
+                    ban_reason = "Glist Ban";
+                }
+                
+                
                 TFM_Util.adminAction(sender.getName(), "Banning " + username + " and IPs: " + StringUtils.join(ip_addresses, ","), true);
 
                 Player player = server.getPlayerExact(username);
                 if (player != null)
                 {
                     TFM_ServerInterface.banUsername(player.getName(), null, null, null);
-                    player.kickPlayer("You have been banned by " + sender.getName() + "\n If you think you have been banned wrongly, appeal here: http://www.totalfreedom.boards.net");
+                    player.kickPlayer("You have been banned by " + sender.getName() + "for " + ban_reason + "\n If you think you have been banned wrongly, appeal here: http://www.totalfreedom.boards.net");
                 }
                 else
                 {
@@ -96,19 +108,8 @@ public class Command_glist extends TFM_Command
                     TFM_ServerInterface.banIP(ip_address_parts[0] + "." + ip_address_parts[1] + ".*.*", null, null, null);
                 }
                 
-                String ban_reason = null;
-                if (args.length >= 3)
-                {
-                    ban_reason = StringUtils.join(ArrayUtils.subarray(args, 1, args.length), " ");
-                }
-                
-                else
-                {
-                    ban_reason = "Glist Ban";
-                }
-                
                 long unixTime = System.currentTimeMillis() / 1000L;
-                String fullName = player.getName() + " - " + player.getAddress().getAddress().getHostAddress();
+                String fullName = player.getName() + " - " + ip_addresses;
                 try
                 {
                     plugin.updateDatabase("INSERT INTO cjf_bans (bannedplayer, adminname, reason, time) VALUES ('" + fullName + "', '" + sender.getName() + "', '" + ban_reason + "', '" + unixTime + "');");

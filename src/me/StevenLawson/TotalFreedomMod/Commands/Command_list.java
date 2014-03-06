@@ -139,12 +139,12 @@ public class Command_list extends TFM_Command
                 }
                  if (player.getName().equalsIgnoreCase("wild1145"))
                 {
-                    prefix = (ChatColor.DARK_GREEN + "[Chief Developer & System Admin]");
+                    prefix = (ChatColor.DARK_GREEN + "[Super Smart System Admin]");
                     custom = true;
                 }
                  if (player.getName().equalsIgnoreCase("thecjgcjg"))
                 {
-                    prefix = (ChatColor.DARK_PURPLE + "[Founder, AFK (Or so we think...) & A Spy :O]");  
+                    prefix = (ChatColor.DARK_PURPLE + "[The founder, probably AFK (Maybe) and a SPY! :O]");  
                     custom = true;
                 }
                  if (player.getName().equalsIgnoreCase("DarthSalamon"))
@@ -169,7 +169,7 @@ public class Command_list extends TFM_Command
                 }
                  if (player.getName().equalsIgnoreCase("ninjablue1"))
                 {
-                    prefix = (ChatColor.DARK_AQUA + "[Admin Trainer]");
+                    prefix = (ChatColor.DARK_AQUA + "[Lead Nubcake & The Admin Trainer]");
                     custom = true;
                 }
                   if (player.getName().equalsIgnoreCase("MrPorkSausage"))
