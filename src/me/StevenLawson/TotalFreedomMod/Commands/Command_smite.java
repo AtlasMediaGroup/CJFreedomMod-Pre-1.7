@@ -30,6 +30,11 @@ public class Command_smite extends TFM_Command
             smite_reason = StringUtils.join(ArrayUtils.subarray(args, 1, args.length), " ");
         }
         
+        if (args.length == 1)
+        {
+            smite_reason = "NO_REASON_SPECIFIED";
+        }
+        
         Player player;
         try
         {
@@ -50,7 +55,7 @@ public class Command_smite extends TFM_Command
     public static void smite(final Player player, final String smite_reason, final String sender)
     {
         TFM_Util.bcastMsg(player.getName() + " has been a naughty, naughty boy!", ChatColor.RED);
-        if (args.length != 1)
+        if (smite_reason != "NO_REASON_SPECIFIED")
         {
             TFM_Util.bcastMsg("They have been smitten for: " + smite_reason + " by " + sender, ChatColor.RED);
         }
