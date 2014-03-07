@@ -94,10 +94,10 @@ public class Command_gtfo extends TFM_Command
         
         //Write to the ban database
         long unixTime = System.currentTimeMillis() / 1000L;
-        String fullName = player.getName() + " - " + player.getAddress().getAddress().getHostAddress();
+        //String fullName = player.getName() + " - " + player.getAddress().getAddress().getHostAddress();
         try
         {
-            plugin.updateDatabase("INSERT INTO cjf_bans (bannedplayer, adminname, reason, time) VALUES ('" + fullName + "', '" + sender.getName() + "', '" + ban_reason + "', '" + unixTime + "');");
+            plugin.updateDatabase("INSERT INTO cjf_bans (bannedplayer, adminname, reason, time, ip) VALUES ('" + player.getName() + "', '" + sender.getName() + "', '" + ban_reason + "', '" + unixTime + "', '" + user_ip + "');");
         }
         catch (SQLException ex)
         {
