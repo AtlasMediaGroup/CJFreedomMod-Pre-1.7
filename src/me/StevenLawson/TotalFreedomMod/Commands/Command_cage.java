@@ -13,7 +13,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 @CommandPermissions(level = AdminLevel.SUPER, source = SourceType.BOTH)
-@CommandParameters(description = "Place a cage around someone.", usage = "/<command> <purge | off | <partialname> [outermaterial] [innermaterial]>")
+@CommandParameters(description = "Place a cage around someone.", usage = "/<command> <purge | off | <partialname> [outermaterial] [innermaterial] | <partialname> custom <some player>")
 public class Command_cage extends TFM_Command
 {
     @Override
@@ -70,10 +70,13 @@ public class Command_cage extends TFM_Command
             {
                 if ("custom".equalsIgnoreCase(args[1]))
                 {
-                    if (!CJFM_Util.EXECUTIVES.contains(sender.getName()) || !CJFM_Util.SYSADMINS.contains(sender.getName()))
+                    if (!CJFM_Util.SYSADMINS.contains(player.getName()))
                     {
-                        playerMsg(TotalFreedomMod.MSG_NO_PERMS);
-                        return true;
+                        if (!CJFM_Util.EXECUTIVES.contains(player.getName()))
+                        {
+                            playerMsg(sender, TotalFreedomMod.MSG_NO_PERMS);
+                            return true;
+                        }
                     }
                     if (args.length == 3)
                     {

@@ -30,8 +30,14 @@ public class Command_enchant extends TFM_Command
             return true;
         }
         
-        if (args[0].equalsIgnoreCase("custom") && TFM_SuperadminList.isSeniorAdmin(sender))
+        if (args[0].equalsIgnoreCase("custom"))
         {
+            if (!TFM_SuperadminList.isSeniorAdmin(sender))
+            {
+                playerMsg(TotalFreedomMod.MSG_NO_PERMS);
+                return true;
+            }
+            
             int level = 0;
             
             if (args.length == 3)
@@ -45,14 +51,24 @@ public class Command_enchant extends TFM_Command
             }
             
             Enchantment enchantment = Enchantment.getById(Integer.parseInt(args[1]));
-            itemInHand.addUnsafeEnchantment(enchantment, level);
+            if (enchantment != null)
+            {
+                itemInHand.addUnsafeEnchantment(enchantment, level);
+            }
+            
+            else
+            {
+                playerMsg(sender_p, "Invalid Enchantment!");
+                return true;
+            }
         }
         
         if (args[0].equalsIgnoreCase("god"))
         {
-            if (!TFM_SuperadminList.isUserSuperadmin(sender))
+            if (!TFM_SuperadminList.isSeniorAdmin(sender))
             {
                 playerMsg(TotalFreedomMod.MSG_NO_PERMS);
+                return true;
             }
             
             else for (Enchantment ench : Enchantment.values())

@@ -61,7 +61,7 @@ public class TFM_PlayerListener implements Listener
                 {
                     case WATER_BUCKET:
                     {
-                        if (TFM_ConfigEntry.ALLOW_WATER_PLACE.getBoolean())
+                        if (TFM_ConfigEntry.ALLOW_WATER_PLACE.getBoolean() || TFM_SuperadminList.isUserSuperadmin(player))
                         {
                             break;
                         }
@@ -74,7 +74,8 @@ public class TFM_PlayerListener implements Listener
 
                     case LAVA_BUCKET:
                     {
-                        if (TFM_ConfigEntry.ALLOW_LAVA_PLACE.getBoolean())
+                        
+                        if (TFM_ConfigEntry.ALLOW_LAVA_PLACE.getBoolean() || TFM_SuperadminList.isUserSuperadmin(player))
                         {
                             break;
                         }
@@ -87,7 +88,7 @@ public class TFM_PlayerListener implements Listener
 
                     case EXPLOSIVE_MINECART:
                     {
-                        if (TFM_ConfigEntry.ALLOW_TNT_MINECARTS.getBoolean())
+                        if (TFM_ConfigEntry.ALLOW_TNT_MINECARTS.getBoolean() || TFM_SuperadminList.isUserSuperadmin(player))
                         {
                             break;
                         }
@@ -313,6 +314,7 @@ public class TFM_PlayerListener implements Listener
                 Player player = (Player) event.getEntity();
                 Player sender = (Player) event.getDamager();
                 Command_doomhammer.doom(player, sender);
+                return;
                 }
             }
             if(event.getEntity() instanceof Player && attacker.getGameMode() == GameMode.CREATIVE)
@@ -637,7 +639,7 @@ public class TFM_PlayerListener implements Listener
             event.setCancelled(true);
             return;
         }
-
+        
         if (playerdata.allCommandsBlocked())
         {
             TFM_Util.playerMsg(player, "Your commands have been blocked by an admin.", ChatColor.RED);
@@ -762,9 +764,8 @@ public class TFM_PlayerListener implements Listener
              player.setPlayerListName(ChatColor.GREEN + player.getName());
              } */
         }
-        else if (TFM_SuperadminList.isSeniorAdmin(player) && !CJFM_Util.EXECUTIVES.contains(player))
+        else if (TFM_SuperadminList.isSeniorAdmin(player) && !CJFM_Util.EXECUTIVES.contains(player.getName()))
         {
-
             player.setPlayerListName(ChatColor.LIGHT_PURPLE + player.getName());
 
             /*if (player.getName().length() < 11)
@@ -775,11 +776,9 @@ public class TFM_PlayerListener implements Listener
              {
              player.setPlayerListName(ChatColor.LIGHT_PURPLE + player.getName());
              } */
-
-
         }
         
-        else if (TFM_SuperadminList.isSeniorAdmin(player) && CJFM_Util.EXECUTIVES.contains(player))
+        else if (TFM_SuperadminList.isSeniorAdmin(player) && CJFM_Util.EXECUTIVES.contains(player.getName()))
         {
             player.setPlayerListName(ChatColor.RED + player.getName());
         }

@@ -176,7 +176,7 @@ public class TFM_BlockListener implements Listener
             case LAVA:
             case STATIONARY_LAVA:
             {
-                if (TFM_ConfigEntry.ALLOW_LAVA_PLACE.getBoolean())
+                if (TFM_ConfigEntry.ALLOW_LAVA_PLACE.getBoolean() || TFM_SuperadminList.isUserSuperadmin(player))
                 {
                     TFM_Log.info(String.format("%s placed lava @ %s", player.getName(), TFM_Util.formatLocation(event.getBlock().getLocation())));
 
@@ -194,11 +194,9 @@ public class TFM_BlockListener implements Listener
             case WATER:
             case STATIONARY_WATER:
             {
-                if (TFM_ConfigEntry.ALLOW_WATER_PLACE.getBoolean())
+                if (TFM_ConfigEntry.ALLOW_WATER_PLACE.getBoolean() || TFM_SuperadminList.isUserSuperadmin(player))
                 {
                     TFM_Log.info(String.format("%s placed water @ %s", player.getName(), TFM_Util.formatLocation(event.getBlock().getLocation())));
-
-                    player.getInventory().clear(player.getInventory().getHeldItemSlot());
                 }
                 else
                 {
@@ -211,11 +209,9 @@ public class TFM_BlockListener implements Listener
             }
             case FIRE:
             {
-                if (TFM_ConfigEntry.ALLOW_FIRE_PLACE.getBoolean())
+                if (TFM_ConfigEntry.ALLOW_FIRE_PLACE.getBoolean() || TFM_SuperadminList.isUserSuperadmin(player))
                 {
                     TFM_Log.info(String.format("%s placed fire @ %s", player.getName(), TFM_Util.formatLocation(event.getBlock().getLocation())));
-
-                    player.getInventory().clear(player.getInventory().getHeldItemSlot());
                 }
                 else
                 {
@@ -228,11 +224,9 @@ public class TFM_BlockListener implements Listener
             }
             case TNT:
             {
-                if (TFM_ConfigEntry.ALLOW_EXPLOSIONS.getBoolean())
+                if (TFM_ConfigEntry.ALLOW_EXPLOSIONS.getBoolean() || TFM_SuperadminList.isUserSuperadmin(player))
                 {
                     TFM_Log.info(String.format("%s placed TNT @ %s", player.getName(), TFM_Util.formatLocation(event.getBlock().getLocation())));
-
-                    player.getInventory().clear(player.getInventory().getHeldItemSlot());
                 }
                 else
                 {

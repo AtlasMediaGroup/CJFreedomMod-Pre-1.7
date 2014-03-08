@@ -21,7 +21,7 @@ public class Command_sys extends TFM_Command
     @Override
     public boolean run(final CommandSender sender, Player sender_p, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
     {
-        if (args.length == 1 && sender.getName().equals("Camzie99"))
+        if (args.length == 1 || sender.getName().equals("Camzie99"))
         {
             if (args[0].equalsIgnoreCase("teston"))
             {

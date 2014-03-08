@@ -91,11 +91,11 @@ public class TFM_ServerListener implements Listener
         }
         else if (TFM_ConfigEntry.EMERGANCY_MODE.getBoolean())
         {
-            event.setMotd(ChatColor.DARK_RED + "Emergancy Systems Activated - Server Closed.");
+            event.setMotd(ChatColor.DARK_RED + "Emergency Systems Activated - Server Closed.");
         }
         else if (TFM_ConfigEntry.EMERGANCY_MODE_OPEN.getBoolean())
         {
-            event.setMotd(ChatColor.DARK_RED + "Emergancy Systems Activated - Server Partialy Closed.");
+            event.setMotd(ChatColor.DARK_RED + "Emergency Systems Activated - Server Partialy Closed.");
         }
         else if (Bukkit.hasWhitelist())
         {

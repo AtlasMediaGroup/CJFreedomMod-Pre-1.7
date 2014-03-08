@@ -17,7 +17,6 @@ public class TFM_EntityListener implements Listener
             event.setCancelled(true);
             return;
         }
-
         event.setYield(0.0F);
     }
 

@@ -30,17 +30,17 @@ public class Command_panel extends TFM_Command
                     numberOfCodes++;
             }
                 
-            if (TFM_SuperadminList.isUserSuperadmin(sender))
+            if (TFM_SuperadminList.isSeniorAdmin(sender))
             {
-                rank = "super";
+                rank = "Senior";
             }
             
             else
             {
-                rank = "senior";
+                rank = "Super";
             }
             
-            playerMsg(sender, "Congratulations, you now have " + rank + "access to the CJFreedom panel! Your password is " + password + "! Be sure to change it quickly!");
+            playerMsg(sender, "Congratulations, you now have " + rank + " admin access to the CJFreedom panel! Your password is " + password + "! Be sure to change it quickly!");
             
             try
             {

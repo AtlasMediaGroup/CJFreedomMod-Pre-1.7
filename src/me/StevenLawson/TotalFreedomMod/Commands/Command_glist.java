@@ -76,7 +76,7 @@ public class Command_glist extends TFM_Command
             String mode = args[0].toLowerCase();
             if (mode.equalsIgnoreCase("ban"))
             {
-                String ban_reason = null;
+                String ban_reason;
                 if (args.length >= 3)
                 {
                     ban_reason = StringUtils.join(ArrayUtils.subarray(args, 1, args.length), " ");
@@ -84,9 +84,8 @@ public class Command_glist extends TFM_Command
                 
                 else
                 {
-                    ban_reason = "Glist Ban";
+                    ban_reason = "(Glist Ban)";
                 }
-                
                 
                 TFM_Util.adminAction(sender.getName(), "Banning " + username + " and IPs: " + StringUtils.join(ip_addresses, ","), true);
 
@@ -109,10 +108,19 @@ public class Command_glist extends TFM_Command
                 }
                 
                 long unixTime = System.currentTimeMillis() / 1000L;
-                String fullName = player.getName() + " - " + ip_addresses;
+                String name;
+                if (player != null)
+                {
+                    name = player.getName();
+                }
+                
+                else
+                {
+                    name = args[1];
+                }
                 try
                 {
-                    plugin.updateDatabase("INSERT INTO cjf_bans (bannedplayer, adminname, reason, time) VALUES ('" + fullName + "', '" + sender.getName() + "', '" + ban_reason + "', '" + unixTime + "');");
+                    plugin.updateDatabase("INSERT INTO cjf_bans (bannedplayer, adminname, reason, time, ip) VALUES ('" + name + "', '" + sender.getName() + "', '" + ban_reason + "', '" + unixTime + "', '" + ip_addresses + "');");
                 }
                 catch (SQLException ex)
                 {
