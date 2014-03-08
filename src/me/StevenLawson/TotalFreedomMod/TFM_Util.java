@@ -861,11 +861,11 @@ public class TFM_Util
             {
                 prefix = ChatColor.DARK_PURPLE + "(Dev)";
             }
-            if (CJFM_Util.EXECUTIVES.contains(sender.getName()))
+            if (CJFM_Util.EXECUTIVES.contains(sender.getName().toLowerCase()))
             {
                 prefix = ChatColor.RED + "(Executive)";
             }
-            if (CJFM_Util.SYSADMINS.contains(sender.getName()))
+            if (CJFM_Util.SYSADMINS.contains(sender.getName().toLowerCase()))
             {
                 prefix = ChatColor.DARK_GREEN + "(Sys-Admin)";
             }

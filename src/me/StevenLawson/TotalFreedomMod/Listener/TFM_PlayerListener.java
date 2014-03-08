@@ -292,7 +292,7 @@ public class TFM_PlayerListener implements Listener
     }
     
     @EventHandler(priority = EventPriority.HIGH)
-    public void onAttack(EntityDamageByEntityEvent event)
+    public static void onAttack(EntityDamageByEntityEvent event)
     {
         if(event.getDamager() instanceof Player)
         {
@@ -640,6 +640,16 @@ public class TFM_PlayerListener implements Listener
             return;
         }
         
+        int x = 0;
+        if (command.contains("175:" + x))
+        {
+            if (x >= 6) {
+                TFM_Util.playerMsg(player, "You can't do that!");
+                event.setCancelled(true);
+                return;
+            }
+        }
+        
         if (playerdata.allCommandsBlocked())
         {
             TFM_Util.playerMsg(player, "Your commands have been blocked by an admin.", ChatColor.RED);
@@ -764,7 +774,7 @@ public class TFM_PlayerListener implements Listener
              player.setPlayerListName(ChatColor.GREEN + player.getName());
              } */
         }
-        else if (TFM_SuperadminList.isSeniorAdmin(player) && !CJFM_Util.EXECUTIVES.contains(player.getName()))
+        else if (TFM_SuperadminList.isSeniorAdmin(player) && !CJFM_Util.EXECUTIVES.contains(player.getName().toLowerCase()))
         {
             player.setPlayerListName(ChatColor.LIGHT_PURPLE + player.getName());
 
@@ -778,7 +788,7 @@ public class TFM_PlayerListener implements Listener
              } */
         }
         
-        else if (TFM_SuperadminList.isSeniorAdmin(player) && CJFM_Util.EXECUTIVES.contains(player.getName()))
+        else if (TFM_SuperadminList.isSeniorAdmin(player) && CJFM_Util.EXECUTIVES.contains(player.getName().toLowerCase()))
         {
             player.setPlayerListName(ChatColor.RED + player.getName());
         }

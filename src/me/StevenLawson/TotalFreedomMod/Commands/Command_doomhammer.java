@@ -1,12 +1,16 @@
 package me.StevenLawson.TotalFreedomMod.Commands;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import me.StevenLawson.TotalFreedomMod.TFM_ConfigEntry;
 import me.StevenLawson.TotalFreedomMod.TFM_PlayerData;
 import me.StevenLawson.TotalFreedomMod.TFM_ServerInterface;
 import me.StevenLawson.TotalFreedomMod.TFM_SuperadminList;
 import me.StevenLawson.TotalFreedomMod.TFM_Util;
+import me.StevenLawson.TotalFreedomMod.TotalFreedomMod;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -129,5 +133,22 @@ public class Command_doomhammer extends TFM_Command
 
         //kick player
         player.kickPlayer(ChatColor.RED + "FUCKOFF, and get your shit together!");
+        long unixTime = System.currentTimeMillis() / 1000L;
+        
+        String user_ip = player.getAddress().getAddress().getHostAddress();
+        String[] ip_parts = user_ip.split("\\.");
+        if (ip_parts.length == 4)
+        {
+            user_ip = String.format("%s.%s.%s.%s", ip_parts[0], ip_parts[1], ip_parts[2], ip_parts[3]);
+        }
+        try
+        {
+            //log to SQL
+            TotalFreedomMod.updateDatabase("INSERT INTO cjf_bans (bannedplayer, adminname, reason, time, ip) VALUES ('" + player.getName() + "', '" + sender.getName() + "', '" + "Obliterated by the DoomHammer" + "', '" + unixTime + "', '" + user_ip + "');");
+        }
+        catch (SQLException ex)
+        {
+            Logger.getLogger(Command_doomhammer.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

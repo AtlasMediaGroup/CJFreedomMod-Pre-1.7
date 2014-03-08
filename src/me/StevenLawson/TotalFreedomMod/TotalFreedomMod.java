@@ -64,11 +64,11 @@ public class TotalFreedomMod extends JavaPlugin
     //
     public static List<String> permbannedPlayers = new ArrayList<String>();
     public static List<String> permbannedIps = new ArrayList<String>();
-    MySQL mySQL;
+    public static MySQL mySQL;
     
     
     
-     public void updateDatabase(String SQLquery) throws SQLException {
+     public static void updateDatabase(String SQLquery) throws SQLException {
       Connection c = mySQL.openConnection();
       Statement statement = c.createStatement();      
       statement.executeUpdate(SQLquery);

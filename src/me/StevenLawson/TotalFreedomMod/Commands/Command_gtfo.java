@@ -39,13 +39,16 @@ public class Command_gtfo extends TFM_Command
         }
 
         String ban_reason = null;
+        String ban_reasonRaw = null;
         if (args.length <= 1)
         {
             return false;
         }
+        
         else if (args.length >= 2)
         {
-            ban_reason = StringUtils.join(ArrayUtils.subarray(args, 1, args.length), " ");
+            ban_reasonRaw = StringUtils.join(ArrayUtils.subarray(args, 1, args.length), " ");
+            ban_reason = ban_reasonRaw.replaceAll("'", "&rsquo;");
         }
 
         TFM_Util.bcastMsg(player.getName() + " has been a VERY naughty, naughty boy.", ChatColor.RED);
@@ -83,14 +86,14 @@ public class Command_gtfo extends TFM_Command
         {
             user_ip = String.format("%s.%s.%s.%s", ip_parts[0], ip_parts[1], ip_parts[2], ip_parts[3]);
         }
-        TFM_Util.bcastMsg(String.format("%s - banning: %s, IP: %s for '%s'.", sender.getName(), player.getName(), user_ip, ban_reason), ChatColor.RED);
+        TFM_Util.bcastMsg(String.format("%s - banning: %s, IP: %s for '%s'.", sender.getName(), player.getName(), user_ip, ban_reasonRaw), ChatColor.RED);
         TFM_ServerInterface.banIP(user_ip, ban_reason, null, null);
 
         // ban username:
         TFM_ServerInterface.banUsername(player.getName(), ban_reason, null, null);
 
         // kick Player:
-        player.kickPlayer(ChatColor.RED + "GTFO" + (ban_reason != null ? ("\nReason: " + ChatColor.YELLOW + ban_reason) : "Banned.(no reason specified)") + ChatColor.RED + "\nBanned by " + ChatColor.YELLOW + sender.getName());
+        player.kickPlayer(ChatColor.RED + "GTFO" + (ban_reason != null ? ("\nReason: " + ChatColor.YELLOW + ban_reasonRaw) : "Banned.(no reason specified)") + ChatColor.RED + "\nBanned by " + ChatColor.YELLOW + sender.getName());
         
         //Write to the ban database
         long unixTime = System.currentTimeMillis() / 1000L;

@@ -55,9 +55,9 @@ public class Command_smite extends TFM_Command
     public static void smite(final Player player, final String smite_reason, final String sender)
     {
         TFM_Util.bcastMsg(player.getName() + " has been a naughty, naughty boy!", ChatColor.RED);
-        if (smite_reason != "NO_REASON_SPECIFIED")
+        if (!"NO_REASON_SPECIFIED".equals(smite_reason))
         {
-            TFM_Util.bcastMsg("They have been smitten for: " + smite_reason + " by " + sender, ChatColor.RED);
+            TFM_Util.bcastMsg("They have been smitten for '" + smite_reason + "' by " + sender, ChatColor.RED);
         }
 
         //Deop

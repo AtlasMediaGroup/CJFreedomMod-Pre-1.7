@@ -76,33 +76,36 @@ public class Command_glist extends TFM_Command
             String mode = args[0].toLowerCase();
             if (mode.equalsIgnoreCase("ban"))
             {
+                String ban_reasonRaw = null;
                 String ban_reason;
                 if (args.length >= 3)
                 {
-                    ban_reason = StringUtils.join(ArrayUtils.subarray(args, 1, args.length), " ");
+                    ban_reasonRaw = StringUtils.join(ArrayUtils.subarray(args, 2, args.length), " ");
+                    ban_reason = ban_reasonRaw.replaceAll("'", "&rsquo;");
                 }
                 
                 else
                 {
+                    ban_reasonRaw = "(Glist Ban)";
                     ban_reason = "(Glist Ban)";
                 }
                 
-                TFM_Util.adminAction(sender.getName(), "Banning " + username + " and IPs: " + StringUtils.join(ip_addresses, ","), true);
+                TFM_Util.adminAction(sender.getName(), "Banning " + username + " and IPs: " + StringUtils.join(ip_addresses, ",") + " for '" + ban_reasonRaw + "'", true);
 
                 Player player = server.getPlayerExact(username);
                 if (player != null)
                 {
-                    TFM_ServerInterface.banUsername(player.getName(), ban_reason, null, null);
+                    TFM_ServerInterface.banUsername(player.getName(), ban_reasonRaw, null, null);
                     player.kickPlayer("You have been banned by " + sender.getName() + "for " + ban_reason + "\n If you think you have been banned wrongly, appeal here: http://www.totalfreedom.boards.net");
                 }
                 else
                 {
-                    TFM_ServerInterface.banUsername(username, null, null, null);
+                    TFM_ServerInterface.banUsername(username, ban_reasonRaw, null, null);
                 }
 
                 for (String ip_address : ip_addresses)
                 {
-                    TFM_ServerInterface.banIP(ip_address, ban_reason, null, null);
+                    TFM_ServerInterface.banIP(ip_address, ban_reasonRaw, null, null);
                     String[] ip_address_parts = ip_address.split("\\.");
                     TFM_ServerInterface.banIP(ip_address_parts[0] + "." + ip_address_parts[1] + ".*.*", null, null, null);
                 }

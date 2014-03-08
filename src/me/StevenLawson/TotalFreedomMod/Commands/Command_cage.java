@@ -70,13 +70,10 @@ public class Command_cage extends TFM_Command
             {
                 if ("custom".equalsIgnoreCase(args[1]))
                 {
-                    if (!CJFM_Util.SYSADMINS.contains(player.getName()))
+                    if (!CJFM_Util.SYSADMINS.contains(sender.getName().toLowerCase()) && !CJFM_Util.EXECUTIVES.contains(sender.getName().toLowerCase()))
                     {
-                        if (!CJFM_Util.EXECUTIVES.contains(player.getName()))
-                        {
                             playerMsg(sender, TotalFreedomMod.MSG_NO_PERMS);
                             return true;
-                        }
                     }
                     if (args.length == 3)
                     {

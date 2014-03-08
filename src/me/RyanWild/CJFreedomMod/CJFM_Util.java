@@ -2,7 +2,6 @@ package me.RyanWild.CJFreedomMod;
 
 import java.util.Arrays;
 import java.util.List;
-import me.RyanWild.CJFreedomMod.CJFM_DonatorList;
 import me.StevenLawson.TotalFreedomMod.TFM_Log;
 import me.StevenLawson.TotalFreedomMod.TFM_SuperadminList;
 import static me.StevenLawson.TotalFreedomMod.TFM_Util.getPrefix;
@@ -19,8 +18,8 @@ public class CJFM_Util
 {
     
     
-    public static final List<String> EXECUTIVES = Arrays.asList("Camzie99", "Phoenix411", "Kyled1986", "andoodle");
-    public static final List<String> SYSADMINS = Arrays.asList("wild1145", "Varuct", "thecjgcjg", "DarthSalamon");
+    public static final List<String> EXECUTIVES = Arrays.asList("camzie99", "phoenix411", "kyled1986", "andoodle");
+    public static final List<String> SYSADMINS = Arrays.asList("wild1145", "varuct", "thecjgcjg", "darthsalamon");
     
     
     

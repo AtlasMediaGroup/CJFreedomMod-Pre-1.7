@@ -47,7 +47,7 @@ public class Command_sys extends TFM_Command
         {
             if (args[0].equalsIgnoreCase("adminworld"))
             {
-                if (CJFM_Util.SYSADMINS.contains(sender.getName()) || CJFM_Util.EXECUTIVES.contains(sender.getName()))
+                if (CJFM_Util.SYSADMINS.contains(sender.getName().toLowerCase()) || CJFM_Util.EXECUTIVES.contains(sender.getName().toLowerCase()))
                 {
                     if (args[1].equalsIgnoreCase("on"))
                     {

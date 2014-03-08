@@ -1,6 +1,7 @@
 package me.StevenLawson.TotalFreedomMod;
 
 import java.io.File;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -10,7 +11,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import me.StevenLawson.TotalFreedomMod.Commands.Command_logs;
+import me.StevenLawson.TotalFreedomMod.Commands.Command_panel;
+import static me.StevenLawson.TotalFreedomMod.TotalFreedomMod.plugin;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
@@ -442,6 +447,15 @@ public class TFM_SuperadminList
         catch (Exception ex)
         {
             TFM_Log.severe(ex);
+        }
+        
+        try
+        {
+            plugin.updateDatabase("DELETE FROM cjf_panel_users WHERE username='" + username + "';");
+        }
+        catch (SQLException ex)
+        {
+            Logger.getLogger(Command_panel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
