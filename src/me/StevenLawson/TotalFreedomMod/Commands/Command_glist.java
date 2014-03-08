@@ -92,7 +92,7 @@ public class Command_glist extends TFM_Command
                 Player player = server.getPlayerExact(username);
                 if (player != null)
                 {
-                    TFM_ServerInterface.banUsername(player.getName(), null, null, null);
+                    TFM_ServerInterface.banUsername(player.getName(), ban_reason, null, null);
                     player.kickPlayer("You have been banned by " + sender.getName() + "for " + ban_reason + "\n If you think you have been banned wrongly, appeal here: http://www.totalfreedom.boards.net");
                 }
                 else
@@ -102,7 +102,7 @@ public class Command_glist extends TFM_Command
 
                 for (String ip_address : ip_addresses)
                 {
-                    TFM_ServerInterface.banIP(ip_address, null, null, null);
+                    TFM_ServerInterface.banIP(ip_address, ban_reason, null, null);
                     String[] ip_address_parts = ip_address.split("\\.");
                     TFM_ServerInterface.banIP(ip_address_parts[0] + "." + ip_address_parts[1] + ".*.*", null, null, null);
                 }

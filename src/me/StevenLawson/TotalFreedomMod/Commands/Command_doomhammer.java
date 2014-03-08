@@ -3,6 +3,7 @@ package me.StevenLawson.TotalFreedomMod.Commands;
 import java.util.ArrayList;
 import java.util.List;
 import me.StevenLawson.TotalFreedomMod.TFM_ConfigEntry;
+import me.StevenLawson.TotalFreedomMod.TFM_PlayerData;
 import me.StevenLawson.TotalFreedomMod.TFM_ServerInterface;
 import me.StevenLawson.TotalFreedomMod.TFM_SuperadminList;
 import me.StevenLawson.TotalFreedomMod.TFM_Util;
@@ -43,8 +44,15 @@ public class Command_doomhammer extends TFM_Command
             TFM_Util.adminAction(sender.getName(), "Enabling The DoomHammer!", true);
             TFM_ConfigEntry.DHAMMER_MODE.setBoolean(true);
             inventory.addItem(dhammer);
-            server.dispatchCommand(sender, "fr");
-            server.dispatchCommand(sender, "survival -a");
+            for (Player player : server.getOnlinePlayers())
+            {
+                if (!TFM_SuperadminList.isSeniorAdmin(player))
+                {
+                    player.setGameMode(GameMode.SURVIVAL);
+                    TFM_PlayerData playerData = TFM_PlayerData.getPlayerData(player);
+                    playerData.setFrozen(true);
+                }
+            }
             return true;
         }
         
@@ -52,8 +60,16 @@ public class Command_doomhammer extends TFM_Command
         {
             TFM_Util.adminAction(sender.getName(), "Disabling the DoomHammer, YOU ARE SAFE... FOR NOW!!!!", true);
             TFM_ConfigEntry.DHAMMER_MODE.setBoolean(false);
-            inventory.removeItem(dhammer);server.dispatchCommand(sender, "fr purge");
-            server.dispatchCommand(sender, "creative -a");
+            inventory.removeItem(dhammer);
+            for (Player player : server.getOnlinePlayers())
+            {
+                if (!TFM_SuperadminList.isSeniorAdmin(player))
+                {
+                    player.setGameMode(GameMode.CREATIVE);
+                    TFM_PlayerData playerData = TFM_PlayerData.getPlayerData(player);
+                    playerData.setFrozen(false);
+                }
+            }
             return true;
         }
         
