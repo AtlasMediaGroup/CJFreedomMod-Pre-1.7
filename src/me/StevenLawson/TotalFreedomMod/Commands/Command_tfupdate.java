@@ -1,6 +1,7 @@
 package me.StevenLawson.TotalFreedomMod.Commands;
 
 import java.io.File;
+import me.RyanWild.CJFreedomMod.CJFM_Util;
 import me.StevenLawson.TotalFreedomMod.TFM_Log;
 import me.StevenLawson.TotalFreedomMod.TFM_Util;
 import me.StevenLawson.TotalFreedomMod.TotalFreedomMod;
@@ -15,20 +16,19 @@ public class Command_tfupdate extends TFM_Command
 {
     public static final String[] FILES =
     {
-        "http://s3.madgeekonline.com/totalfreedom/BukkitHttpd.jar",
-        "http://s3.madgeekonline.com/totalfreedom/BukkitTelnet.jar",
-        "http://s3.madgeekonline.com/totalfreedom/DisguiseCraft.jar",
-        "http://s3.madgeekonline.com/totalfreedom/Essentials.jar",
-        "http://s3.madgeekonline.com/totalfreedom/EssentialsSpawn.jar",
-        "http://s3.madgeekonline.com/totalfreedom/TotalFreedomMod.jar",
-        "http://s3.madgeekonline.com/totalfreedom/craftbukkit.jar",
-        "http://s3.madgeekonline.com/totalfreedom/worldedit.jar"
+        "http://wildrepo.superior-networks.com.com/CJFreedom/BukkitHttpd.jar",
+        "http://wildrepo.superior-networks.com.com/CJFreedom/BukkitTelnet.jar",
+        "http://wildrepo.superior-networks.com.com/CJFreedom/Essentials.jar",
+        "http://wildrepo.superior-networks.com.com/CJFreedom/EssentialsSpawn.jar",
+        "http://wildrepo.superior-networks.com.com/CJFreedomTotalFreedomMod.jar",
+        "http://wildrepo.superior-networks.com.com/CJFreedom/craftbukkit.jar",
+        "http://wildrepo.superior-networks.com.com/CJFreedom/worldedit.jar"
     };
 
     @Override
     public boolean run(CommandSender sender, Player sender_p, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
     {
-        if (!sender.getName().equalsIgnoreCase("madgeek1450"))
+        if (TFM_Util.DEVELOPERS.contains(sender.getName()))
         {
             playerMsg(TotalFreedomMod.MSG_NO_PERMS);
             return true;
