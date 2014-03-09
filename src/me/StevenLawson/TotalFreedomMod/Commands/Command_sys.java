@@ -27,22 +27,17 @@ public class Command_sys extends TFM_Command
             {
                 if (args[0].equalsIgnoreCase("teston"))
                 {
-                    TFM_Util.adminAction("WARNING: " + sender.getName(), "Has Started Testing on this server.", true);
-                    TFM_ConfigEntry.DEVELOPMENT_MODE.setBoolean(true);
-                    for (Player player : server.getOnlinePlayers())
-                    player.sendMessage(ChatColor.DARK_AQUA + "Warning: CJFreedom is currently in development mode. This means there may be unstable plugin builds on this server, and the server could crash more than normal!");
-                    return true;
+                    sender.sendMessage("Please use the /dev command from now on to get access to this command.");
                 }
-            
+
                 if (args[0].equalsIgnoreCase("testoff"))
                 {
-                    TFM_Util.adminAction("FINISHED: " + sender.getName(), "Has finished server side testing", true);
-                    TFM_ConfigEntry.DEVELOPMENT_MODE.setBoolean(false);
-                    return true;
+                    sender.sendMessage("Please use the /dev command from now on to get access to this command.");
+
                 }
             }
         }
-        
+
         if (args.length == 2)
         {
             if (args[0].equalsIgnoreCase("adminworld"))
@@ -55,14 +50,14 @@ public class Command_sys extends TFM_Command
                         TFM_Util.adminAction(sender.getName(), "Enabling AdminWorld", false);
                         return true;
                     }
-                
+
                     if (args[1].equalsIgnoreCase("off"))
                     {
                         TFM_ConfigEntry.ENABLE_ADMINWORLD.setBoolean(false);
                         TFM_Util.adminAction(sender.getName(), "Disabling AdminWorld", true);
                         return true;
                     }
-                    
+
                     else
                     {
                         playerMsg(sender, "Invalid sub-command, possible values are: on, off");
@@ -84,7 +79,15 @@ public class Command_sys extends TFM_Command
         {
             sender.sendMessage(TotalFreedomMod.MSG_NO_PERMS);
             TFM_Util.adminAction("WARNING: " + sender.getName(), "Has attempted to use a system admin only command. System administration team has been alerted.", true);
-            sender.setOp(false);
+
+            if (!senderIsConsole)
+            {
+                sender.setOp(false);
+            }
+            else
+            {
+                sender.sendMessage("You are not a System Admin and may NOT use this command. If you feel this in error please contact a Developer.");
+            }
 
             return true;
         }
