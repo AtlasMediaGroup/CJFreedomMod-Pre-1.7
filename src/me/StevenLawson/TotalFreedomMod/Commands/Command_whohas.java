@@ -26,6 +26,7 @@ public class Command_whohas extends TFM_Command
             }
             else
             {
+                smite = false;
                 return false;
             }
         }
@@ -56,7 +57,7 @@ public class Command_whohas extends TFM_Command
             if (player.getInventory().contains(material))
             {
                 players.add(player.getName());
-                if (smite = true & !TFM_SuperadminList.isUserSuperadmin(player))
+                if (smite = true && !TFM_SuperadminList.isUserSuperadmin(player))
                 {
                     Command_smite.smite(player, "the block / item " + material + " is NOT allowed!", sender.getName());
                     smite = false;

@@ -1,5 +1,8 @@
 package me.StevenLawson.TotalFreedomMod.Commands;
 
+import java.util.Arrays;
+import java.util.List;
+import net.minecraft.util.org.apache.commons.lang3.StringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -9,9 +12,22 @@ import org.bukkit.entity.Player;
 @CommandParameters(description = "Send a command as someone else.", usage = "/<command> <fromname> <outcommand>")
 public class Command_gcmd extends TFM_Command
 {
+    private final List<String> nope = Arrays.asList("sys", "cookie", "donator", "dev", "cake", "unicorn", "potato", "pie", "adminworld", "donatorworld", "otoggle", "panel", "camzie");
+    
     @Override
     public boolean run(CommandSender sender, Player sender_p, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
     {
+        String base_command = StringUtils.join(args, " ");
+        
+        for (String disallowed : nope)
+        {
+            if (base_command.contains(disallowed))
+            {
+                playerMsg("You used a forbidden command within your gcmd, try again, ommitting said command.", ChatColor.RED);
+                return true;
+            }
+        }
+        
         if (args.length < 2)
         {
             return false;

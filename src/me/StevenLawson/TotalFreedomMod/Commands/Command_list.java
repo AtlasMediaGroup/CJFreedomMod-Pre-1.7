@@ -167,11 +167,6 @@ public class Command_list extends TFM_Command
                     prefix = (ChatColor.DARK_RED + "[Chief Of Security & Acting Super Admin Manager]");
                     custom = true;
                 }
-                 if (player.getName().equalsIgnoreCase("ninjablue1"))
-                {
-                    prefix = (ChatColor.DARK_AQUA + "[Lead Nubcake & The Admin Trainer]");
-                    custom = true;
-                }
                   if (player.getName().equalsIgnoreCase("MrPorkSausage"))
                 {
                     prefix = (ChatColor.DARK_PURPLE + "[Developer]");

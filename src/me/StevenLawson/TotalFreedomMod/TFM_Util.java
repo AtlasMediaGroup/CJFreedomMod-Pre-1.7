@@ -851,11 +851,25 @@ public class TFM_Util
             }            
             if (CJFM_DonatorList.isSeniorDonator(sender))
             {
-                prefix = ChatColor.DARK_GREEN + "(Sr-Donator)";
+                if (TFM_SuperadminList.isUserSuperadmin(sender))
+                {
+                    prefix = ChatColor.DARK_GREEN + "(SA + Sr-Donator)";
+                }
+                else
+                {
+                    prefix = ChatColor.DARK_GREEN + "(Sr-Donator)";
+                }
             }
             else if (CJFM_DonatorList.isUserDonator(sender))
             {
-                prefix = ChatColor.AQUA + "(Donator)";
+                if (TFM_SuperadminList.isUserSuperadmin(sender))
+                {
+                    prefix = ChatColor.AQUA + "(SA + Donator)";
+                }
+                else
+                {
+                    prefix = ChatColor.AQUA + "(Donator)";
+                }
             }
             if (DEVELOPERS.contains(sender.getName()))
             {

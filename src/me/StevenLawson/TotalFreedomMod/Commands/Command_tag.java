@@ -17,7 +17,7 @@ public class Command_tag extends TFM_Command
 {
     public static final List<String> FORBIDDEN_WORDS = Arrays.asList(new String[]
     {
-        "admin", "owner", "moderator", "developer", "&k"
+        "admin", "owner", "moderator", "developer", "&k", "0wner", "&n", "&o", "&m"
     });
 
     @Override
@@ -63,7 +63,7 @@ public class Command_tag extends TFM_Command
                 return true;
             }
 
-            if (ChatColor.stripColor(TFM_Util.colorize(args[0])).length() > 20)
+            if (ChatColor.stripColor(TFM_Util.colorize(args[0])).length() > 20 && !TFM_SuperadminList.isUserSuperadmin(sender))
             {
                 playerMsg("That tag is too long [Max = 20 characters, not including color codes].");
                 return true;

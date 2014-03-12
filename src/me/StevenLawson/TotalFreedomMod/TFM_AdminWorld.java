@@ -195,6 +195,10 @@ public final class TFM_AdminWorld extends TFM_CustomWorld
         if (cached == null)
         {
             boolean canAccess = TFM_SuperadminList.isUserSuperadmin(player);
+            if (canAccess && !TFM_ConfigEntry.ENABLE_ADMINWORLD.getBoolean() == true)
+            {
+                canAccess = false;
+            }
             if (!canAccess)
             {
                 Player supervisor = guestList.get(player);

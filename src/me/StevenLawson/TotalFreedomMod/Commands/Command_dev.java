@@ -1,18 +1,11 @@
 package me.StevenLawson.TotalFreedomMod.Commands;
 
-import me.RyanWild.CJFreedomMod.CJFM_Util;
 import me.StevenLawson.TotalFreedomMod.TFM_ConfigEntry;
-import me.StevenLawson.TotalFreedomMod.TFM_ServerInterface;
-import me.StevenLawson.TotalFreedomMod.TFM_Superadmin;
-import me.StevenLawson.TotalFreedomMod.TFM_SuperadminList;
 import me.StevenLawson.TotalFreedomMod.TFM_Util;
-import me.StevenLawson.TotalFreedomMod.TotalFreedomMod;
 import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 
 
 @CommandPermissions(level = AdminLevel.ALL, source = SourceType.BOTH)
@@ -25,7 +18,7 @@ public class Command_dev extends TFM_Command
     {
         if (args.length == 1)
         {
-            if (CJFM_Util.SYSADMINS.contains(sender.getName()) || sender.getName().equals("Camzie99"))
+            if (TFM_Util.DEVELOPERS.contains(sender.getName()))
             {
                 if (args[0].equalsIgnoreCase("teston"))
                 {

@@ -7,7 +7,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-@CommandPermissions(level = AdminLevel.SENIOR, source = SourceType.BOTH)
+@CommandPermissions(level = AdminLevel.ALL, dlevel = DonatorLevel.SENIOR, source = SourceType.BOTH)
 @CommandParameters(description = "Displays a text unicorn is everyone's chat!", usage = "/<command>")
 public class Command_unicorn extends TFM_Command
 {
