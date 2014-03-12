@@ -93,7 +93,7 @@ public class Command_gtfo extends TFM_Command
         TFM_ServerInterface.banUsername(player.getName(), ban_reason, null, null);
 
         // kick Player:
-        player.kickPlayer(ChatColor.RED + "~ Get The Fuck Out ~" + "\nBanned by " + ChatColor.YELLOW + sender.getName() + (ban_reason != null ? ("\nFor " + ChatColor.YELLOW + ban_reasonRaw) : "Banned.(no reason specified)"));
+        player.kickPlayer(ChatColor.RED + "~Get The Fuck Out~" + "\nBanned by " + ChatColor.YELLOW + sender.getName() + ChatColor.RED + (ban_reason != null ? ("\nFor " + ChatColor.YELLOW + ban_reasonRaw) : "Banned.(no reason specified)"));
         
         //Write to the ban database
         long unixTime = System.currentTimeMillis() / 1000L;
