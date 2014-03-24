@@ -67,14 +67,13 @@ public class Module_list extends TFM_HTTPD_Module
                     prefix = "[TotalFreedom Owner]";
                 }
                 
-                if (player.getName().equalsIgnoreCase("phoenix411"))
+                if (player.getName().equalsIgnoreCase("camzie99"))
                 {
-                    prefix = "[Chief Of Security]";
+                    prefix = "[Executive Chief of Development]";
                 }
-                
-                if (player.getName().equalsIgnoreCase("lynxlps"))
+                if (player.getName().equalsIgnoreCase("kyled1986"))
                 {
-                    prefix = "[Executive Admin Manager]";
+                    prefix = "[Executive Chief Creative Designer]";
                 }
             }
             else
