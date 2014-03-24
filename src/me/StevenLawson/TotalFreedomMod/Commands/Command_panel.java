@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static me.RyanWild.CJFreedomMod.CJFM_Util.SYSADMINS;
+import me.StevenLawson.TotalFreedomMod.TFM_SuperadminList;
 //Not needed yet - import me.StevenLawson.TotalFreedomMod.TFM_SuperadminList;
 import me.StevenLawson.TotalFreedomMod.TotalFreedomMod;
 import org.bukkit.command.Command;
@@ -20,7 +21,7 @@ public class Command_panel extends TFM_Command
         if (args.length == 1 && args[0].equalsIgnoreCase("addme"))
         {
             playerMsg(sender_p, "Sorry, this command is currently disabled");
-            /*String rank;
+            String rank = null;
             String chars = "abcdefghijklmnopqrstuvwxyz0123456789";
             int numberOfCodes = 0;
             String password = "";
@@ -36,7 +37,11 @@ public class Command_panel extends TFM_Command
                 rank = "Senior";
             }
             
-            else
+            else if (TFM_SuperadminList.isTelnetAdmin(sender))
+            {
+                rank = "Telnet";
+            }
+            else if (TFM_SuperadminList.isUserSuperadmin(sender))
             {
                 rank = "Super";
             }
@@ -45,7 +50,7 @@ public class Command_panel extends TFM_Command
             
             try
             {
-                plugin.updateDatabase("INSERT INTO cjf_panel_users (username, password, rank) VALUES ('" + sender.getName() + "', '" + password + "', '" + rank + "');");
+                TotalFreedomMod.updateDatabase("INSERT INTO cjf_panel_users (username, password, rank) VALUES ('" + sender.getName() + "', '" + password + "', '" + rank + "');");
             }
             catch (SQLException ex)
             {
@@ -54,7 +59,7 @@ public class Command_panel extends TFM_Command
             }
             
             return true;
-            */
+            
         }
         
         if (args.length == 2 && args[0].equalsIgnoreCase("admin"))
@@ -85,7 +90,7 @@ public class Command_panel extends TFM_Command
             {
                 try
                 {
-                    plugin.updateDatabase("DELETE FROM cjf_panel_users WHERE username='" + args[2] + "';");
+                    TotalFreedomMod.updateDatabase("DELETE FROM cjf_panel_users WHERE username='" + args[2] + "';");
                 }
                 catch (SQLException ex)
                 {
