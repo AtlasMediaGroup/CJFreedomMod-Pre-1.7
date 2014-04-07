@@ -2,6 +2,7 @@ package me.StevenLawson.TotalFreedomMod.Commands;
 
 import me.StevenLawson.TotalFreedomMod.TFM_ConfigEntry;
 import me.StevenLawson.TotalFreedomMod.TFM_Util;
+import me.StevenLawson.TotalFreedomMod.TotalFreedomMod;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -35,6 +36,10 @@ public class Command_dev extends TFM_Command
                     TFM_ConfigEntry.DEVELOPMENT_MODE.setBoolean(false);
                     return true;
                 }
+            }
+            else 
+            {
+            sender.sendMessage(TotalFreedomMod.MSG_NO_PERMS);
             }
         }
         return false;
