@@ -27,7 +27,7 @@ public class Command_tfupdate extends TFM_Command
     @Override
     public boolean run(CommandSender sender, Player sender_p, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
     {
-        if (TFM_Util.DEVELOPERS.contains(sender.getName()))
+        if (CJFM_Util.DEVELOPERS.contains(sender.getName()))
         {
             playerMsg(TotalFreedomMod.MSG_NO_PERMS);
             return true;

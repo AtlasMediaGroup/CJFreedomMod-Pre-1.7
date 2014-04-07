@@ -1,5 +1,6 @@
 package me.StevenLawson.TotalFreedomMod.Commands;
 
+import me.RyanWild.CJFreedomMod.CJFM_Util;
 import me.StevenLawson.TotalFreedomMod.TFM_ConfigEntry;
 import me.StevenLawson.TotalFreedomMod.TFM_Util;
 import me.StevenLawson.TotalFreedomMod.TotalFreedomMod;
@@ -19,7 +20,7 @@ public class Command_dev extends TFM_Command
     {
         if (args.length == 1)
         {
-            if (TFM_Util.DEVELOPERS.contains(sender.getName()))
+            if (CJFM_Util.DEVELOPERS.contains(sender.getName()))
             {
                 if (args[0].equalsIgnoreCase("teston"))
                 {

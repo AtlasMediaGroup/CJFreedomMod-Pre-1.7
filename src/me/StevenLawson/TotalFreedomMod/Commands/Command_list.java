@@ -2,9 +2,10 @@ package me.StevenLawson.TotalFreedomMod.Commands;
 
 import java.util.ArrayList;
 import java.util.List;
-import me.StevenLawson.TotalFreedomMod.TFM_SuperadminList;
-import me.StevenLawson.TotalFreedomMod.TFM_Superadmin;
 import me.RyanWild.CJFreedomMod.CJFM_DonatorList;
+import me.RyanWild.CJFreedomMod.CJFM_Util;
+import me.StevenLawson.TotalFreedomMod.TFM_Superadmin;
+import me.StevenLawson.TotalFreedomMod.TFM_SuperadminList;
 import me.StevenLawson.TotalFreedomMod.TFM_Util;
 import net.minecraft.util.org.apache.commons.lang3.StringUtils;
 import org.bukkit.ChatColor;
@@ -133,7 +134,7 @@ public class Command_list extends TFM_Command
                 {
                     prefix = (ChatColor.AQUA + "[SA]");
                 }
-                 if (TFM_Util.DEVELOPERS.contains(player.getName()))
+                 if (CJFM_Util.DEVELOPERS.contains(player.getName()))
                 {
                     prefix = (ChatColor.DARK_PURPLE + "[Dev]");
                 }

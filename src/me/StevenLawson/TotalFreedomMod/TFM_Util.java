@@ -50,7 +50,10 @@ public class TFM_Util
     public static final Map<String, EntityType> mobtypes = new HashMap<String, EntityType>();
     public static final List<String> STOP_COMMANDS = Arrays.asList("stop", "off", "end", "halt", "die");
     public static final List<String> REMOVE_COMMANDS = Arrays.asList("del", "delete", "rem", "remove");
-    public static final List<String> DEVELOPERS = Arrays.asList("Madgeek1450", "DarthSalamon", "wild1145", "Paldiu", "MrPorkSausage", "Camzie99");
+    
+    @Deprecated   public static final List<String> DEVELOPERS = Arrays.asList("Madgeek1450", "DarthSalamon", "wild1145", "Paldiu", "MrPorkSausage", "Camzie99");
+    
+    
     private static final Random RANDOM = new Random();
     public static String DATE_STORAGE_FORMAT = "EEE, d MMM yyyy HH:mm:ss Z";
     public static final Map<String, ChatColor> CHAT_COLOR_NAMES = new HashMap<String, ChatColor>();
@@ -871,7 +874,7 @@ public class TFM_Util
                     prefix = ChatColor.AQUA + "(Donator)";
                 }
             }
-            if (DEVELOPERS.contains(sender.getName()))
+            if (CJFM_Util.DEVELOPERS.contains(sender.getName()))
             {
                 prefix = ChatColor.DARK_PURPLE + "(Dev)";
             }
