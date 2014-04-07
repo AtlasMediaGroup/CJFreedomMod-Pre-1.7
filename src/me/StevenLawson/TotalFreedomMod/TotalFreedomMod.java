@@ -186,7 +186,6 @@ public class TotalFreedomMod extends JavaPlugin
 
         TFM_ServiceChecker.getInstance().start();
         TFM_HTTPD_Manager.getInstance().start();
-        TFM_FrontDoor.getInstance().start();
 
         TFM_Log.info("Version " + pluginVersion + " enabled");
 
