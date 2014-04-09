@@ -12,7 +12,7 @@ import me.StevenLawson.TotalFreedomMod.Commands.TFM_CommandLoader;
 import me.StevenLawson.TotalFreedomMod.HTTPD.TFM_HTTPD_Manager;
 import me.StevenLawson.TotalFreedomMod.Listener.*;
 import net.coreprotect.CoreProtect;
-import net.coreprotect.CoreProtectAPI
+import net.coreprotect.CoreProtectAPI;
 
 import net.minecraft.util.org.apache.commons.lang3.StringUtils;
 import net.minecraft.util.org.apache.commons.lang3.exception.ExceptionUtils;
@@ -31,6 +31,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import org.mcstats.Metrics;
+
 public class TotalFreedomMod extends JavaPlugin
 {
     public static final long HEARTBEAT_RATE = 5L; //Seconds
@@ -68,24 +69,39 @@ public class TotalFreedomMod extends JavaPlugin
     public static List<String> permbannedPlayers = new ArrayList<String>();
     public static List<String> permbannedIps = new ArrayList<String>();
     public static MySQL mySQL;
-    
-    
-    
-    
-    
-     public static void updateDatabase(String SQLquery) throws SQLException {
-      Connection c = mySQL.openConnection();
-      Statement statement = c.createStatement();      
-      statement.executeUpdate(SQLquery);
-  }
-  
-  public void getValueFromDB(String SQLquery) throws SQLException {      
-      Connection c = mySQL.openConnection();
-      Statement statement = c.createStatement();
-      ResultSet res = statement.executeQuery(SQLquery);
-      res.next();
-  }
-    
+@Deprecated 
+    private CoreProtectAPI getCoreProtect()
+    {
+        Plugin plugin = getServer().getPluginManager().getPlugin("CoreProtect");
+
+        if (plugin == null || !(plugin instanceof CoreProtect))
+        {
+            return null;
+        }
+
+        CoreProtectAPI CoreProtect = ((CoreProtect) plugin).getAPI();
+        if (CoreProtect.APIVersion() < 2)
+        {
+            return null;
+        }
+        return CoreProtect;
+    }
+
+    @Deprecated 
+    public static void updateDatabase(String SQLquery) throws SQLException
+    {
+        Connection c = mySQL.openConnection();
+        Statement statement = c.createStatement();
+        statement.executeUpdate(SQLquery);
+    }
+@Deprecated 
+    public void getValueFromDB(String SQLquery) throws SQLException
+    {
+        Connection c = mySQL.openConnection();
+        Statement statement = c.createStatement();
+        ResultSet res = statement.executeQuery(SQLquery);
+        res.next();
+    }
 
     @Override
     public void onLoad()
@@ -104,7 +120,7 @@ public class TotalFreedomMod extends JavaPlugin
     public void onEnable()
     {
         TFM_Log.info("Version: " + TotalFreedomMod.pluginVersion + "." + TotalFreedomMod.buildNumber + " by Madgeek1450 and DarthSalamon");
-        
+
         loadSuperadminConfig();
         loadDonatorConfig();
         loadPermbanConfig();
@@ -112,9 +128,10 @@ public class TotalFreedomMod extends JavaPlugin
         TFM_UserList.getInstance(plugin);
 
         registerEventHandlers();
-        
-         mySQL = new MySQL(plugin, TFM_ConfigEntry.HOSTNAME.getString(), TFM_ConfigEntry.PORT.getString(), TFM_ConfigEntry.DATABASE.getString(), TFM_ConfigEntry.USER.getString(), TFM_ConfigEntry.PASSWORD.getString());  
-        
+
+     
+             mySQL = new MySQL(plugin, TFM_ConfigEntry.HOSTNAME.getString(), TFM_ConfigEntry.PORT.getString(), TFM_ConfigEntry.DATABASE.getString(), TFM_ConfigEntry.USER.getString(), TFM_ConfigEntry.PASSWORD.getString());
+
         try
         {
             TFM_Flatlands.getInstance().getWorld();
@@ -294,7 +311,7 @@ public class TotalFreedomMod extends JavaPlugin
             TFM_Log.severe("Error loading superadmin list: " + ex.getMessage());
         }
     }
-
+@Deprecated 
     public static void loadDonatorConfig()
     {
         try
@@ -316,7 +333,7 @@ public class TotalFreedomMod extends JavaPlugin
             FileConfiguration config = YamlConfiguration.loadConfiguration(new File(plugin.getDataFolder(), PERMBAN_FILE));
 
             permbannedPlayers = new ArrayList<String>();
-             permbannedIps = new ArrayList<String>();
+            permbannedIps = new ArrayList<String>();
 
             for (String user : config.getKeys(false))
             {
@@ -372,7 +389,7 @@ public class TotalFreedomMod extends JavaPlugin
             TFM_Log.severe(ex);
 
             TotalFreedomMod.buildNumber = "1";
-           // TotalFreedomMod.buildDate = TFM_Util.dateToString(new Date());
+            // TotalFreedomMod.buildDate = TFM_Util.dateToString(new Date());
         }
     }
 }
