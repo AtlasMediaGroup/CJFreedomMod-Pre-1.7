@@ -11,8 +11,6 @@ import me.StevenLawson.TotalFreedomMod.Commands.TFM_Command;
 import me.StevenLawson.TotalFreedomMod.Commands.TFM_CommandLoader;
 import me.StevenLawson.TotalFreedomMod.HTTPD.TFM_HTTPD_Manager;
 import me.StevenLawson.TotalFreedomMod.Listener.*;
-import net.coreprotect.CoreProtect;
-import net.coreprotect.CoreProtectAPI;
 
 import net.minecraft.util.org.apache.commons.lang3.StringUtils;
 import net.minecraft.util.org.apache.commons.lang3.exception.ExceptionUtils;
@@ -69,32 +67,16 @@ public class TotalFreedomMod extends JavaPlugin
     public static List<String> permbannedPlayers = new ArrayList<String>();
     public static List<String> permbannedIps = new ArrayList<String>();
     public static MySQL mySQL;
-@Deprecated 
-    private CoreProtectAPI getCoreProtect()
-    {
-        Plugin plugin = getServer().getPluginManager().getPlugin("CoreProtect");
 
-        if (plugin == null || !(plugin instanceof CoreProtect))
-        {
-            return null;
-        }
-
-        CoreProtectAPI CoreProtect = ((CoreProtect) plugin).getAPI();
-        if (CoreProtect.APIVersion() < 2)
-        {
-            return null;
-        }
-        return CoreProtect;
-    }
-
-    @Deprecated 
+    @Deprecated
     public static void updateDatabase(String SQLquery) throws SQLException
     {
         Connection c = mySQL.openConnection();
         Statement statement = c.createStatement();
         statement.executeUpdate(SQLquery);
     }
-@Deprecated 
+
+    @Deprecated
     public void getValueFromDB(String SQLquery) throws SQLException
     {
         Connection c = mySQL.openConnection();
@@ -129,8 +111,7 @@ public class TotalFreedomMod extends JavaPlugin
 
         registerEventHandlers();
 
-     
-             mySQL = new MySQL(plugin, TFM_ConfigEntry.HOSTNAME.getString(), TFM_ConfigEntry.PORT.getString(), TFM_ConfigEntry.DATABASE.getString(), TFM_ConfigEntry.USER.getString(), TFM_ConfigEntry.PASSWORD.getString());
+        mySQL = new MySQL(plugin, TFM_ConfigEntry.HOSTNAME.getString(), TFM_ConfigEntry.PORT.getString(), TFM_ConfigEntry.DATABASE.getString(), TFM_ConfigEntry.USER.getString(), TFM_ConfigEntry.PASSWORD.getString());
 
         try
         {
@@ -311,7 +292,8 @@ public class TotalFreedomMod extends JavaPlugin
             TFM_Log.severe("Error loading superadmin list: " + ex.getMessage());
         }
     }
-@Deprecated 
+
+    @Deprecated
     public static void loadDonatorConfig()
     {
         try
