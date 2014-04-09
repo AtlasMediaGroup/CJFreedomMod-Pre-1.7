@@ -422,7 +422,7 @@ public class TFM_Util
                 String fullName = player.getName() + " - " + player.getAddress().getAddress().getHostAddress();
                 try
                 {
-                plugin.updateDatabase("INSERT INTO cjf_bans (bannedplayer, adminname, reason, time) VALUES ('" + fullName + "', '" + "Auto Eject" + "', '" + "Auto Eject" + "', '" + unixTime + "');");
+                TotalFreedomMod.updateDatabase("INSERT INTO cjf_bans (bannedplayer, adminname, reason, time) VALUES ('" + fullName + "', '" + "Auto Eject" + "', '" + "Auto Eject" + "', '" + unixTime + "');");
                 }
                 catch (SQLException ex)
                 {
